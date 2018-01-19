@@ -14,3 +14,5 @@ Read more: https://en.wikipedia.org/wiki/Huffman_coding
 [Specs](documentation/specification.md)
 
 [Week 1 report](documentation/weekly-reports/week1.md)
+
+[Working hours log](documentation/weekly-reports/log.md)
