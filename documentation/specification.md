@@ -9,10 +9,10 @@
 Exception handling must be good - in no situation will the program crash.
 
 ### Use cases
-![Use Case Diagram](documentation/Use-Case-Diagram.png)
+![Use Case Diagram](/documentation/Use-Case-Diagram.png)
 
 
 ## Project structure
 
 ### High level class diagram
-![High Level Class Diagram](documentation/High-level-class-diagram.png)
+![High Level Class Diagram](/documentation/High-level-class-diagram.png)
