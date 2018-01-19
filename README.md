@@ -9,4 +9,8 @@ A Huffman code is a particular type of optimal prefix code that is commonly used
 Read more: https://en.wikipedia.org/wiki/Huffman_coding
 
 
-[Documentation](documentation/specification.md)
+## Docs
+
+[Specs](documentation/specification.md)
+
+[Week 1 report](documentation/weekly-reports/week1.md)
