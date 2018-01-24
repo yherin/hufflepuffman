@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.tree;
+package com.js.huffman.model.structures.node.tree;
 
 /**
  *
  * @author jack
  */
-public class LeafNode extends Node {
-    
-    
+public class HuffmanCode {
+
+        
 }

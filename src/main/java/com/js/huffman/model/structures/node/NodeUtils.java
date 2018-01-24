@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.tree;
+package com.js.huffman.model.structures.node;
 
 /**
  *
  * @author jack
  */
-public abstract class Node {
+public class NodeUtils {
     
-    private Node left;
-    private Node right;
-       
-    private Integer freq;
     
-    public Node(){
-        this.left = null;
-        this.right = null;
+    public static void isLeaf(){
+        
     }
     
-    
+    public static void isBranch(){
+
+    }
+
+    public static void isRoot(){
+        
+    }
 }

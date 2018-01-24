@@ -1,6 +1,6 @@
 package com.js.huffman;
 
-import com.js.huffman.model.count.SymbolCounter;
+import com.js.huffman.model.count.HuffmanReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 
 public class FXMLController implements Initializable {
     
+    Runner r = new Runner();
+
     @FXML
     private Label label;
     
@@ -22,13 +24,7 @@ public class FXMLController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Count");
-        try {
-            SymbolCounter sc = new SymbolCounter(new File("src/main/resources/samples/text.txt"));
-            Map<Character,Integer> sym = sc.count();
-            System.out.println(sym);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        r.execute("src/main/resources/samples/text.txt");
         System.exit(0);
     }
     

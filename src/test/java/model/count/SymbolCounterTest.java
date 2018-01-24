@@ -5,7 +5,7 @@
  */
 package model.count;
 
-import com.js.huffman.model.count.SymbolCounter;
+import com.js.huffman.model.count.HuffmanReader;
 import com.sun.xml.internal.ws.util.StringUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -56,10 +56,10 @@ public class SymbolCounterTest {
         this.tenThousandCharacters = new File(test_dir + "large.txt");
     }
     
-    private SymbolCounter createCounter(File file){
-        SymbolCounter sc;
+    private HuffmanReader createCounter(File file){
+        HuffmanReader sc;
         try {
-            sc = new SymbolCounter(file);
+            sc = new HuffmanReader(file);
             return sc;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(SymbolCounterTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,7 +69,7 @@ public class SymbolCounterTest {
     
     @Test
     public void emptyFile(){
-        SymbolCounter sc = createCounter(this.empty);
+        HuffmanReader sc = createCounter(this.empty);
         HashMap<Character,Integer> map = sc.count();
         assertTrue("HashMap should be empty after counting empty file",map.isEmpty());
     }
@@ -77,7 +77,7 @@ public class SymbolCounterTest {
     
     @Test
     public void onlySymbols(){
-        SymbolCounter sc = createCounter(this.symbols);
+        HuffmanReader sc = createCounter(this.symbols);
         HashMap<Character,Integer> map = sc.count();
         Object[] chars =  map.keySet().toArray();
         for (Object c : chars){
@@ -88,7 +88,7 @@ public class SymbolCounterTest {
     
     @Test
     public void onlyNumbers(){
-        SymbolCounter sc = createCounter(this.numbers);
+        HuffmanReader sc = createCounter(this.numbers);
         HashMap<Character,Integer> map = sc.count();
         Object[] chars =  map.keySet().toArray();
         for (Object c : chars){

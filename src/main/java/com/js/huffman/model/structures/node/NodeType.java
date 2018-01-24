@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.tree;
+package com.js.huffman.model.structures.node;
 
 /**
  *
  * @author jack
  */
-public class EndNode extends Node{
-    
+public enum NodeType {
+    LEAF,BRANCH,UNPLACED
 }
