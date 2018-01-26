@@ -26,12 +26,13 @@ public class HuffmanTree {
     private void construct(PriorityQueue<Node> que) {
     
         while (que.size() >=2){
-        Node firstNode = que.poll();
-        Node secondNode = que.poll();
-        
-        Node joint = new Node(firstNode, secondNode);
-        que.add(joint);
+            Node firstNode = que.poll();
+            Node secondNode = que.poll();
+
+            Node joint = new Node(firstNode, secondNode);
+            que.add(joint);
         }
+        
         root = que.poll();
         Logger.getLogger(HuffmanTree.class.getName()).log(Level.INFO, root.toString());
     }

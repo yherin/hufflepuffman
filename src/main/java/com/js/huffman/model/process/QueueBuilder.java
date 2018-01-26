@@ -13,26 +13,32 @@ import java.util.PriorityQueue;
 import java.util.logging.Level;
 
 /**
+ * Class which builds PriorityQueue<Node>.
  *
  * @author jack
  */
 public class QueueBuilder {
-    
-    private PriorityQueue<Node> que;
-    
-    public QueueBuilder(){
+
+    private final PriorityQueue<Node> que;
+
+    public QueueBuilder() {
         que = new PriorityQueue<>(new NodePriorityComparator());
     }
-    
-    
-    public PriorityQueue<Node> buildAndReturnQueue(HashMap<Character, Integer> map){
-        map.forEach((k,v) -> buildNodeAndAddToQueue(k, v));
+
+    /**
+     * Constructs a PriorityQueue<Node> from HashMap<Character, Integer>.
+     *
+     * @param map the HashMap<K,V> of characters and their frequencies.
+     * @return PriorityQueue<Node> the created Queue.
+     */
+    public final PriorityQueue<Node> buildAndReturnQueue(final HashMap<Character, Integer> map) {
+        map.forEach((k, v) -> buildNodeAndAddToQueue(k, v));
         return this.que;
     }
 
-    private void buildNodeAndAddToQueue(Character key, Integer value){
-        Node n = new Node(key,value);
+    private void buildNodeAndAddToQueue(final Character key, final Integer value) {
+        final Node n = new Node(key, value);
         que.add(n);
     }
-    
+
 }

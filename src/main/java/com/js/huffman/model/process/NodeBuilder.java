@@ -6,7 +6,6 @@
 package com.js.huffman.model.process;
 
 import com.js.huffman.model.structures.node.Node;
-import java.util.HashMap;
 
 /**
  *
@@ -14,9 +13,21 @@ import java.util.HashMap;
  */
 public class NodeBuilder {
 
-    public static Node buildLeafNode(final Character c, final Integer i){
-        Node n = new Node(c,i);
+    /**
+     * Private constructor for utility class.
+     */
+    private NodeBuilder() {
+    }
+
+    /**
+     * Builds and returns a Node.
+     * @param c the character that the node represents.
+     * @param i the frequency of the character
+     * @return the created @Node.
+     */
+    public static Node buildLeafNode(final Character c, final Integer i) {
+        Node n = new Node(c, i);
         return n;
     }
-    
+
 }
