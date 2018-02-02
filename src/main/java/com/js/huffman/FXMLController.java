@@ -22,8 +22,8 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Count");
+        System.out.println("Init");
+        label.setText("Click me to start compressing the file.");
         
         
         r.execute();

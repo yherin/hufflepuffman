@@ -12,7 +12,8 @@ Read more: https://en.wikipedia.org/wiki/Huffman_coding
 
 Entry point is `src/main/java/com/js/huffman/Runner#execute()`.
 Preset files are specified for execution. To supply your own, simply give the file path as a String.
-Tested as working for 500mb file (~11 minute compression time).
+Clean & build. Then Run.
+Tested as working for 500mb file (~11 minute compression time) compressed to ~300mb. The is one of the worst cases (the alphabet is so large).
 
 
 ## Status
