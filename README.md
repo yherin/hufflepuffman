@@ -12,7 +12,8 @@ Read more: https://en.wikipedia.org/wiki/Huffman_coding
 ## Docs
 
 [Specs](documentation/specification.md)
+[Algorithm complexity](documentation/complexity.md)
 
 [Week 1 report](documentation/weekly-reports/week1.md)
-
+[Week 2 report](documentation/weekly-reports/week2.md)
 [Working hours log](documentation/weekly-reports/log.md)
