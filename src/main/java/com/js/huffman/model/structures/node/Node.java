@@ -47,6 +47,7 @@ public class Node implements Comparable<Node> {
         this.right.type = NodeType.LEAF;
         
         
+        
     }
  
     @Override
@@ -92,6 +93,37 @@ public class Node implements Comparable<Node> {
     public int compareTo(Node o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public Node getLeft() {
+        return left;
+    }
+
+    public Node getRight() {
+        return right;
+    }
     
+    public boolean hasLeft(){
+        return left != null;
+    }
+    
+    public boolean hasRight(){
+        return right != null;
+    }
+
+    public Character getSymbol() {
+        return symbol;
+    }
+
+    public NodeKey getKey() {
+        return key;
+    }
+ 
+    public boolean isLeaf(){
+        return this.type == NodeType.LEAF;
+    }
+    
+    public boolean isBranch(){
+        return this.type == NodeType.BRANCH;
+    }
     
 }

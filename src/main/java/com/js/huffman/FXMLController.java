@@ -1,6 +1,6 @@
 package com.js.huffman;
 
-import com.js.huffman.model.count.HuffmanReader;
+import com.js.huffman.model.count.SymbolReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -24,7 +24,9 @@ public class FXMLController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Count");
-        r.execute("src/main/resources/samples/text.txt");
+        
+        
+        r.execute();
         System.exit(0);
     }
     

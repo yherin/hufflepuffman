@@ -7,7 +7,6 @@ package com.js.huffman;
 
 import com.js.huffman.io.IOHandler;
 import java.io.File;
-import java.util.HashMap;
 
 /**
  *
@@ -22,10 +21,18 @@ public class Runner {
     }
     
     
-    public void execute(String filepath){
-        io.setFile(new File(filepath));
+    public void execute(){
+        String inputFilepath = "src/main/resources/samples/bible.txt";
+        String outputFilepath = "src/main/resources/samples/output";
+        long start = System.nanoTime();
+        io.setOutputFile(outputFilepath);
+        io.setInputFile(inputFilepath);
         io.encode();
-        
+        io.write();
+        System.out.println("Done.");
+        long end = System.nanoTime();
+        long elapsed = (end - start) / 1000000l;
+        System.out.println("Execution time: "+elapsed+"ms.");
     }
     
 }
