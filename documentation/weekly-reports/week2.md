@@ -1,4 +1,4 @@
-# Week 1
+# Week 2
 
 ## What have I done this week?
 - Implementation of basic data structure (Node).
