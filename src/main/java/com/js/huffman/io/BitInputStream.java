@@ -34,15 +34,22 @@ public class BitInputStream extends FileInputStream{
         super(file);
         inputSize = file.length();
     }
-    
-//    public Character decodeBits(){
-//        try {
-//            final byte readByte = (byte) super.read();
-//            NodeKey[] bitRepresentation = decodeBits(readByte);
-//        } catch (IOException ex) {
-//            Logger.getLogger(BitInputStream.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+
+    public NodeKey[] readByte(){
+        try {
+            int x = super.read();
+            if (x == -1){
+                logger.log(Level.INFO, "Input stream returned -1. EOF.");
+            } else {
+                return decodeBits((byte)x);
+            }
+            
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+        logger.log(Level.SEVERE, "readByte returning null. Something probably went wrong.");
+        return null;
+    }
     
     /**
      * Evaluate the bits in the given byte, returning an array representing a 

@@ -90,8 +90,7 @@
                         <param>com.js.huffman.io.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>com.js.huffman.model.*</param>
-                        <param>com.js.huffman.io.*</param>
+                        <param>com.js.huffman*</param>
                     </targetTests>
                 </configuration>
             </plugin>
