@@ -27,4 +27,5 @@ Currently only compression is implemented. The output file is binary. No way to 
 [Week 1 report](documentation/weekly-reports/week1.md)
 [Week 2 report](documentation/weekly-reports/week2.md)
 [Week 3 report](documentation/weekly-reports/week3.md)
+[Week 4 report](documentation/weekly-reports/week4.md)
 [Working hours log](documentation/weekly-reports/log.md)
