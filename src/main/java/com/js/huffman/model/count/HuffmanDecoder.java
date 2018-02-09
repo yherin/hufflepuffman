@@ -48,8 +48,8 @@ public class HuffmanDecoder {
                     if (this.decodeSuccessful) {
                         try {
                             char c = this.tree.getSymbol();
-                            String msg = "Writing "+c+" to decoded file.";
-                            logger.log(Level.INFO, msg);
+                     //       String msg = "Writing "+c+" to decoded file.";
+                     //       logger.log(Level.INFO, msg);
                             this.writer.write(c);
                             this.decodeSuccessful = false;
                         } catch (IOException ex) {

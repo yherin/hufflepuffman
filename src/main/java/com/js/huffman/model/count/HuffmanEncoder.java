@@ -60,7 +60,7 @@ public class HuffmanEncoder {
         final char c = line.charAt(i);
         final String encodedChar = converter.characterToHuffmanCode(c);
         String msg = "Encoding "+c+" as "+encodedChar;
-        logger.log(Level.INFO, msg);
+       // logger.log(Level.INFO, msg);
         this.stream.writeCode(encodedChar);
     }
     
