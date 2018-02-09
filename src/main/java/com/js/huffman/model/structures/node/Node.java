@@ -48,7 +48,7 @@ public class Node implements Comparable<Node> {
         this.freq = count;
         this.symbol = character;
         this.type = NodeType.LEAF;
-
+        assert (symbol != null);
     }
 
     /**
@@ -145,5 +145,11 @@ public class Node implements Comparable<Node> {
     public boolean isBranch(){
         return this.type == NodeType.BRANCH;
     }
+
+    public void setType(NodeType type) {
+        this.type = type;
+    }
+    
+    
     
 }

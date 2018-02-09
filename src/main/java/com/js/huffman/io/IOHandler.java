@@ -5,6 +5,7 @@
  */
 package com.js.huffman.io;
 
+import com.js.huffman.model.count.HuffmanDecoder;
 import com.js.huffman.model.count.HuffmanEncoder;
 import com.js.huffman.model.count.SymbolReader;
 import com.js.huffman.model.process.QueueBuilder;
@@ -12,9 +13,12 @@ import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import com.js.huffman.model.structures.node.tree.SymbolConverter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
@@ -32,14 +36,17 @@ public class IOHandler {
     private final QueueBuilder queueBuilder;
     private SymbolConverter converter;
     private HuffmanEncoder encoder;
+    private HuffmanDecoder decoder;
     private HuffmanTree puu;
     private final InputFileHandler inputHandler;
     private final OutputFileHandler outputHandler;
+    private final Logger logger = Logger.getLogger(IOHandler.class.getName());
 
     public IOHandler() {
         queueBuilder = new QueueBuilder();
         inputHandler = new InputFileHandler();
         outputHandler = new OutputFileHandler();
+
     }
 
     /**
@@ -50,14 +57,24 @@ public class IOHandler {
         try {
             encoder = new HuffmanEncoder(getBufferedReader(), converter);
             encoder.encodeBits();
-
+            logger.log(Level.INFO, "Encoding done.");
+            
+        } catch (FileNotFoundException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void readAndDecode(){
+        try {
+            int extraBits = encoder.getExtraBits();
+            decoder = new HuffmanDecoder(getBufferedWriter(), puu, new File("src/main/resources/samples/encoded_binary"), extraBits);
+            decoder.decode();
+            logger.log(Level.INFO, "Decoding done.");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-
-    
     /**
      * Encodes the c
      */
@@ -68,8 +85,8 @@ public class IOHandler {
         System.out.println(puu);
 
     }
-    
-        /**
+
+    /**
      * Read the symbols from a given file into a symbol HashMap for processing.
      *
      * @return HashMap<@Character,@Integer>
@@ -117,6 +134,19 @@ public class IOHandler {
             try {
                 return new BufferedReader(new FileReader(inputHandler.getFile()));
             } catch (FileNotFoundException ex) {
+                Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    private BufferedWriter getBufferedWriter() {
+        if (outputHandler.isReady()) {
+            try {
+                return new BufferedWriter(new FileWriter(outputHandler.getFile()));
+            } catch (IOException ex) {
                 Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }

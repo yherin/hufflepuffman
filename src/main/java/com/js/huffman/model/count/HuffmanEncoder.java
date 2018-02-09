@@ -30,7 +30,7 @@ public class HuffmanEncoder {
     public HuffmanEncoder(BufferedReader reader, SymbolConverter converter) throws FileNotFoundException {
         this.reader = reader;
         this.converter = converter;
-        this.stream = new BitOutputStream(new File("src/main/resources/samples/output"));
+        this.stream = new BitOutputStream(new File("src/main/resources/samples/encoded_binary"));
     }
 
     /**
@@ -60,6 +60,10 @@ public class HuffmanEncoder {
         final char c = line.charAt(i);
         final String encodedChar = converter.characterToHuffmanCode(c);
         this.stream.writeCode(encodedChar);
+    }
+    
+    public int getExtraBits(){
+        return stream.getExtraBits();
     }
     
 //    public void decodeBits(){

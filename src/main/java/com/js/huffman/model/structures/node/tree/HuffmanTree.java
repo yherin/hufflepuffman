@@ -70,22 +70,23 @@ public class HuffmanTree {
     /**
      * 
      * @param key
-     * @return true if the head was successfully moved to a child Node, false otherwise.
+     * @return true if after moving the head points a leaf node. Else false.
      */
     public boolean descend(NodeKey key){
+        navigateByKey(key);
         if (this.head.isLeaf()){
-            return false;
-        }
-        if (this.head.isBranch()){
-            navigateByKey(key);
             return true;
         }
-        else return false;
+        if (this.head.isBranch()){
+            return false;
+        }
+        else throw new IllegalStateException("Node was neither branch nor leaf");
     }
     
     public Character getSymbol(){
         Character symbol =  this.head.getSymbol();
         this.head = this.root;
+        assert (symbol != null);
         return symbol;        
     }
     

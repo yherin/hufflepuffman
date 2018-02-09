@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.process;
+package com.js.huffman.model.process;
 
 import com.js.huffman.model.process.QueueBuilder;
 import com.js.huffman.model.structures.node.Node;

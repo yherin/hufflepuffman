@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.count;
+package com.js.huffman.model.count;
 
 import com.js.huffman.model.count.SymbolReader;
 import com.sun.xml.internal.ws.util.StringUtils;

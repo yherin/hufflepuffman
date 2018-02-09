@@ -15,56 +15,79 @@ import java.util.logging.Logger;
 
 /**
  * Provides functionality for writing individual bits to a file.
+ *
  * @author jack
  */
-public class BitInputStream extends FileInputStream{
-    
-    static final Logger logger = Logger.getLogger(BitOutputStream.class.getName());
-    final long inputSize;
-    long totalBytes;
+public class BitInputStream extends FileInputStream {
+
+    static final Logger logger = Logger.getLogger(BitInputStream.class.getName());
+    final long totalBytes;
+    long remainingBytes;
     long readBytes;
-    
+    int emptyBits;
+
     /**
      * Creates a new BitInputStream, suitable for reading bits
+     *
      * @param file file to be read.
      * @param emptyBits expected 'dead/empty' bits at EOF.
-     * @throws FileNotFoundException 
+     * @throws FileNotFoundException
      */
     public BitInputStream(File file, int emptyBits) throws FileNotFoundException {
         super(file);
-        inputSize = file.length();
+        this.totalBytes = file.length();
+        this.readBytes = 0l;
+        this.remainingBytes = this.totalBytes;
     }
-    
-//    public Character decodeBits(){
-//        try {
-//            final byte readByte = (byte) super.read();
-//            NodeKey[] bitRepresentation = decodeBits(readByte);
-//        } catch (IOException ex) {
-//            Logger.getLogger(BitInputStream.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    
+
+    public NodeKey[] readByte() {
+        try {
+            int x = super.read();
+            if (x == -1) {
+                logger.log(Level.INFO, "Input stream returned -1. EOF.");
+                return null;
+            } else {
+                readBytes++;
+                remainingBytes--;
+                if (remainingBytes == 0) {
+                    return decodeBits((byte) x, emptyBits);
+                } else {
+                    return decodeBits((byte) x, 0);
+                }
+            }
+
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+        logger.log(Level.SEVERE, "readByte returning null at end of function. Something probably went wrong.");
+        return null;
+    }
+
     /**
-     * Evaluate the bits in the given byte, returning an array representing a 
+     * Evaluate the bits in the given byte, returning an array representing a
      * binary string version of the given byte.
+     *
      * @param readByte
-     * @return 
+     * @return
      */
-    private NodeKey[] decodeBits(byte readByte) {
+    private NodeKey[] decodeBits(byte readByte, int fakeBits) {
         NodeKey[] bits = new NodeKey[8];
-        for (int i = 0; i < 8; i++) {
+        if (fakeBits != 0) {
+            logger.log(Level.WARNING, "Discarding " + fakeBits + " fake bits. This message should only appear once.");
+        }
+        for (int i = 0; i < 8 - fakeBits; i++) {
             int result = (readByte & (byte) 0b1 << i);
-            if (result != 0){
+            if (result != 0) {
                 bits[i] = NodeKey.ONE;
-            } else if (result == 0){
+            } else if (result == 0) {
                 bits[i] = NodeKey.ZERO;
             } else {
-                logger.log(Level.SEVERE,"Non binary digit interpreted from byte.");
-                throw new NumberFormatException("Result should have been a binary digit, result was "+result);
+                logger.log(Level.SEVERE, "Non binary digit interpreted from byte.");
+                throw new NumberFormatException("Result should have been a binary digit, result was " + result);
             }
         }
         readBytes++;
         return bits;
     }
-    
+
 }

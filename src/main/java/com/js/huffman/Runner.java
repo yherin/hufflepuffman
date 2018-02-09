@@ -22,13 +22,14 @@ public class Runner {
     
     
     public void execute(){
-        String inputFilepath = "src/main/resources/samples/bible.txt";
-        String outputFilepath = "src/main/resources/samples/output";
+        String inputFilepath = "src/main/resources/samples/test/test1.txt";
+        String outputFilepath = "src/main/resources/samples/decoded_binary";
         long start = System.nanoTime();
         io.setOutputFile(outputFilepath);
         io.setInputFile(inputFilepath);
         io.encode();
         io.write();
+        io.readAndDecode();
         System.out.println("Done.");
         long end = System.nanoTime();
         long elapsed = (end - start) / 1000000l;
