@@ -35,6 +35,7 @@ public class BitInputStream extends FileInputStream {
      */
     public BitInputStream(File file, int emptyBits) throws FileNotFoundException {
         super(file);
+        
         this.totalBytes = file.length();
         this.readBytes = 0l;
         this.remainingBytes = this.totalBytes;
@@ -42,7 +43,8 @@ public class BitInputStream extends FileInputStream {
 
     public NodeKey[] readByte() {
         try {
-            int x = super.read();
+            
+            byte x = (byte) super.read();
             if (x == -1) {
                 logger.log(Level.INFO, "Input stream returned -1. EOF.");
                 return null;
@@ -75,15 +77,15 @@ public class BitInputStream extends FileInputStream {
         if (fakeBits != 0) {
             logger.log(Level.WARNING, "Discarding " + fakeBits + " fake bits. This message should only appear once.");
         }
-        for (int i = 0; i < 8 - fakeBits; i++) {
-            int result = (readByte & (byte) 0b1 << i);
-            if (result != 0) {
-                bits[i] = NodeKey.ONE;
-            } else if (result == 0) {
-                bits[i] = NodeKey.ZERO;
+        for (int i = 7-fakeBits; i >= 0; i--) {
+            /**
+             * If true, bit is 1
+             */
+            boolean isOne = (readByte & ((byte) 0b1 << i)) != 0;
+            if (isOne) {
+                bits[bits.length-1-i] = NodeKey.ONE;
             } else {
-                logger.log(Level.SEVERE, "Non binary digit interpreted from byte.");
-                throw new NumberFormatException("Result should have been a binary digit, result was " + result);
+                bits[bits.length-1-i] = NodeKey.ZERO;
             }
         }
         readBytes++;

@@ -41,11 +41,31 @@ public class IOHandler {
     private final InputFileHandler inputHandler;
     private final OutputFileHandler outputHandler;
     private final Logger logger = Logger.getLogger(IOHandler.class.getName());
-
+    private  BufferedReader reader;
+    private  BufferedWriter writer;
+    
     public IOHandler() {
         queueBuilder = new QueueBuilder();
         inputHandler = new InputFileHandler();
         outputHandler = new OutputFileHandler();
+    }
+
+    
+
+    public void initialiseInput() {
+        try {
+            this.reader = new BufferedReader(new FileReader(this.inputHandler.getFile()));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void initialiseOutput(){
+        try {
+            this.writer = new BufferedWriter(new FileWriter(this.outputHandler.getFile()));
+        } catch (IOException ex) {
+            Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -55,7 +75,7 @@ public class IOHandler {
     public void write() {
         converter = new SymbolConverter(puu.getCodes());
         try {
-            encoder = new HuffmanEncoder(getBufferedReader(), converter);
+            encoder = new HuffmanEncoder(this.reader, converter);
             encoder.encodeBits();
             logger.log(Level.INFO, "Encoding done.");
             
@@ -67,7 +87,7 @@ public class IOHandler {
     public void readAndDecode(){
         try {
             int extraBits = encoder.getExtraBits();
-            decoder = new HuffmanDecoder(getBufferedWriter(), puu, new File("src/main/resources/samples/encoded_binary"), extraBits);
+            decoder = new HuffmanDecoder(this.writer, puu, new File("src/main/resources/samples/encoded_binary"), extraBits);
             decoder.decode();
             logger.log(Level.INFO, "Decoding done.");
         } catch (FileNotFoundException ex) {
@@ -129,30 +149,13 @@ public class IOHandler {
      *
      * @return
      */
-    private BufferedReader getBufferedReader() {
-        if (inputHandler.isReady()) {
-            try {
-                return new BufferedReader(new FileReader(inputHandler.getFile()));
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
-                return null;
-            }
-        } else {
-            return null;
-        }
+
+
+
+    public HuffmanTree getPuu() {
+        return puu;
     }
 
-    private BufferedWriter getBufferedWriter() {
-        if (outputHandler.isReady()) {
-            try {
-                return new BufferedWriter(new FileWriter(outputHandler.getFile()));
-            } catch (IOException ex) {
-                Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
-
+    
+    
 }

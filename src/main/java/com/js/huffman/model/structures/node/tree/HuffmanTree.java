@@ -7,6 +7,7 @@ package com.js.huffman.model.structures.node.tree;
 
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
+import com.js.huffman.model.structures.node.NodeType;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
@@ -21,7 +22,8 @@ public class HuffmanTree {
     private Node root;
     private Node head;
     private final HashMap<Character, String> codes; //we want to use String and not a custom class, because String is immutable. This is really handy.
-
+    final Logger logger = Logger.getLogger(HuffmanTree.class.getName());
+    
     public HuffmanTree(PriorityQueue<Node> que) {
         
         this.codes = new HashMap<>(que.size());
@@ -41,7 +43,8 @@ public class HuffmanTree {
             que.add(joint);
         }
         root = que.poll();
-        Logger.getLogger(HuffmanTree.class.getName()).log(Level.INFO, "Built tree successfully");
+        
+        logger.log(Level.INFO, "Built tree successfully");
     }
 
 
@@ -73,7 +76,9 @@ public class HuffmanTree {
      * @return true if after moving the head points a leaf node. Else false.
      */
     public boolean descend(NodeKey key){
+        logger.log(Level.INFO, "Descend: "+key);
         navigateByKey(key);
+        logger.log(Level.INFO, "Head: "+this.head);
         if (this.head.isLeaf()){
             return true;
         }

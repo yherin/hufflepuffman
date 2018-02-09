@@ -22,13 +22,15 @@ public class Runner {
     
     
     public void execute(){
-        String inputFilepath = "src/main/resources/samples/test/test1.txt";
-        String outputFilepath = "src/main/resources/samples/decoded_binary";
+        String inputFilepath = "src/main/resources/samples/text.txt";
+        String outputFilepath = "src/main/resources/samples/decoded_binary.txt";
         long start = System.nanoTime();
         io.setOutputFile(outputFilepath);
         io.setInputFile(inputFilepath);
+        io.initialiseInput();        
         io.encode();
         io.write();
+        io.initialiseOutput();
         io.readAndDecode();
         System.out.println("Done.");
         long end = System.nanoTime();

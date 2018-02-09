@@ -30,6 +30,8 @@ public class IOHandlerTest {
         IOHandler instance = new IOHandler();
         instance.setInputFile(input);
         instance.setOutputFile(output);
+        instance.initialiseInput();
+        instance.initialiseOutput();
         out.delete();
         out.createNewFile();
         instance.encode();

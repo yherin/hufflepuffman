@@ -59,6 +59,8 @@ public class HuffmanEncoder {
     private void writeHuffmanCodeInBits(String line, int i) {
         final char c = line.charAt(i);
         final String encodedChar = converter.characterToHuffmanCode(c);
+        String msg = "Encoding "+c+" as "+encodedChar;
+        logger.log(Level.INFO, msg);
         this.stream.writeCode(encodedChar);
     }
     

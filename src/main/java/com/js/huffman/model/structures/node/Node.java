@@ -47,7 +47,7 @@ public class Node implements Comparable<Node> {
     public Node(final Character character, final Integer count) {
         this.freq = count;
         this.symbol = character;
-        this.type = NodeType.LEAF;
+        determineNodeType();
         assert (symbol != null);
     }
 
@@ -60,16 +60,16 @@ public class Node implements Comparable<Node> {
     public Node(final Node l, final Node r) {
         this.freq = l.freq + r.freq;
         this.symbol = null;
-        this.type = NodeType.BRANCH;
+        
 
         this.left = l;
         this.right = r;
-
+        determineNodeType();
         this.left.keyCode = NodeKey.ZERO;
         this.right.keyCode = NodeKey.ONE;
 
-        this.left.type = NodeType.LEAF;
-        this.right.type = NodeType.LEAF;
+        this.left.determineNodeType();
+        this.right.determineNodeType();
     }
 
     @Override
@@ -150,6 +150,12 @@ public class Node implements Comparable<Node> {
         this.type = type;
     }
     
-    
+    private void determineNodeType(){
+        if (this.symbol==null){
+            this.type=NodeType.BRANCH;
+        } else {
+            this.type=NodeType.LEAF;
+        }
+    }
     
 }

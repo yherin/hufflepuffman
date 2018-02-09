@@ -43,21 +43,29 @@ public class HuffmanDecoder {
             if (singleByte != null) {
                 while (this.bitPos < 8) {
                     NodeKey bit = singleByte[bitPos];
+                    logger.log(Level.INFO, "bit: "+bit);
                     traverseHuffmanTree(bit);
                     if (this.decodeSuccessful) {
                         try {
-                            String cs = "" + this.tree.getSymbol();
-                            String msg = "Writing "+cs+" to decoded file.";
+                            char c = this.tree.getSymbol();
+                            String msg = "Writing "+c+" to decoded file.";
                             logger.log(Level.INFO, msg);
-                            this.writer.write(cs);
+                            this.writer.write(c);
                             this.decodeSuccessful = false;
                         } catch (IOException ex) {
                             logger.log(Level.SEVERE, null, ex);
                         }
                     }
+                    this.bitPos++;
                 }
             } else {
-                break;
+                try {
+                    writer.flush();
+                    writer.close();
+                    break;
+                } catch (IOException ex) {
+                    Logger.getLogger(HuffmanDecoder.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
