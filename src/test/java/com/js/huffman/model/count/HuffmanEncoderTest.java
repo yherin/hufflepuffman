@@ -28,7 +28,7 @@ public class HuffmanEncoderTest {
     
     private final BufferedReader reader;
     private final SymbolConverter converter;
-    private final File out = new File("src/main/resources/samples/output");
+    private final File out = new File("src/main/resources/samples/encoded_binary");
 
     public HuffmanEncoderTest() throws FileNotFoundException {
        

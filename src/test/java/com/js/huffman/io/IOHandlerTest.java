@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  */
 public class IOHandlerTest {
 
-    final String output = "src/main/resources/samples/output";
+    final String output = "src/main/resources/samples/encoded_binary";
     final String input = "src/main/resources/samples/test/test1.txt";
     final File out = new File(output);
     final File in = new File(input);

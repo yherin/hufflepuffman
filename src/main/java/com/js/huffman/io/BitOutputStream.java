@@ -111,7 +111,12 @@ public class BitOutputStream extends FileOutputStream{
         logger.log(Level.INFO,msg);
         return extraBits;
     }
+
+    public int getExtraBits() {
+        return extraBits;
+    }
             
+    
     
     
     
