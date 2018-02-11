@@ -26,11 +26,13 @@ public class HuffmanEncoder {
     private final BufferedReader reader;
     private final SymbolConverter converter;
     private final BitOutputStream stream;
+    private final String newLineSep;
     
     public HuffmanEncoder(BufferedReader reader, SymbolConverter converter) throws FileNotFoundException {
         this.reader = reader;
         this.converter = converter;
         this.stream = new BitOutputStream(new File("src/main/resources/samples/encoded_binary"));
+        this.newLineSep = System.lineSeparator();
     }
 
     /**
@@ -44,9 +46,14 @@ public class HuffmanEncoder {
             String line = reader.readLine();
             while (line != null) {
                 for (int i = 0; i < line.length(); i++) {
-                    writeHuffmanCodeInBits(line, i);
-                    }                                               
+                    final char c = line.charAt(i);
+                    writeHuffmanCodeInBits(c);
+                    }
+                
                 line = reader.readLine();
+                if (line != null){
+                    writeNewLineSymbolInBits();
+                }
             }
             this.stream.flush();
             this.stream.close();
@@ -56,39 +63,23 @@ public class HuffmanEncoder {
         }
     }
 
-    private void writeHuffmanCodeInBits(String line, int i) {
-        final char c = line.charAt(i);
+    private void writeHuffmanCodeInBits(final Character c) {
         final String encodedChar = converter.characterToHuffmanCode(c);
-        String msg = "Encoding "+c+" as "+encodedChar;
+       // String msg = "Encoding "+c+" as "+encodedChar;
        // logger.log(Level.INFO, msg);
         this.stream.writeCode(encodedChar);
+    }
+    
+    private void writeNewLineSymbolInBits(){
+        for (int i = 0; i < newLineSep.length(); i++) {
+            final char c = this.newLineSep.charAt(i);
+            writeHuffmanCodeInBits(c);
+        }
     }
     
     public int getExtraBits(){
         return stream.getExtraBits();
     }
     
-//    public void decodeBits(){
-//        
-//        //WORK IN PROGRESS
-//        //NOT IN USE
-//         try {
-//            String line = reader.readLine();
-//            while (line != null) {
-//                for (int i = 0; i < line.length(); i++) {
-//                    final char c = line.charAt(i);
-//                    final String encodedChar = converter.characterToHuffmanCode(c);
-//                    this.stream.writeCode(encodedChar);
-//                    }
-//                                               
-//                line = reader.readLine();
-//            }
-//            this.stream.flush();
-//            this.stream.close();
-//            logger.log(Level.INFO,"Total "+this.stream.getCount()+" bytes written.");
-//        } catch (IOException ex) {
-//            logger.getLogger(HuffmanEncoder.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
 
 }

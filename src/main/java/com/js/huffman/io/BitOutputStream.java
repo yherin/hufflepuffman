@@ -92,6 +92,10 @@ public class BitOutputStream extends FileOutputStream{
             logger.log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void writeNewLine(){
+        
+    }
 
     public long getCount() {
         return count;

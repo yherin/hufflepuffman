@@ -22,7 +22,7 @@ public class Runner {
     
     
     public void execute(){
-        String inputFilepath = "src/main/resources/samples/bible.txt";
+        String inputFilepath = "src/main/resources/samples/linesetp";
         String outputFilepath = "src/main/resources/samples/decoded_binary.txt";
         long start = System.nanoTime();
         io.setOutputFile(outputFilepath);
