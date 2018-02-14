@@ -5,6 +5,7 @@
  */
 package com.js.huffman.model.count;
 
+import com.js.huffman.io.BitInputStream;
 import com.js.huffman.io.IOHandler;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,20 +26,21 @@ import static org.junit.Assert.*;
  */
 public class HuffmanDecoderTest {
     
-    private final File binary = new File("src/main/resources/samples/encoded_binary");
+    private final String binary = "src/main/resources/samples/encoded_binary";
     
     private final IOHandler io;
     public HuffmanDecoderTest() {
         io = new IOHandler();
-        io.setInputFile("src/main/resources/samples/test/test1.txt");
+        io.setTextInputFile("src/main/resources/samples/test/test1.txt");
         
     }
     
     @Before
     public void setUp() {
-        io.initialiseInput();
-        
+        io.initialiseTextInput();
         io.encode();
+        io.setBinaryOutputFile(binary);
+        io.initialiseBitOutput();
         io.write();
     }
     
@@ -53,7 +55,7 @@ public class HuffmanDecoderTest {
     public void testDecode() {
         try {
             System.out.println("decode");
-            HuffmanDecoder instance = new HuffmanDecoder(new BufferedWriter(new FileWriter(new File("src/main/resources/samples/decoded_binary.txt"))), io.getPuu(), binary, 0);
+            HuffmanDecoder instance = new HuffmanDecoder(new BufferedWriter(new FileWriter(new File("src/main/resources/samples/decoded_binary.txt"))), io.getPuu(),  0, new BitInputStream(new File(binary)));
             instance.decode();
             
         } catch (IOException ex) {

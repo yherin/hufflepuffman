@@ -16,10 +16,10 @@ import static org.junit.Assert.*;
  */
 public class IOHandlerTest {
 
-    final String output = "src/main/resources/samples/encoded_binary";
-    final String input = "src/main/resources/samples/test/test1.txt";
-    final File out = new File(output);
-    final File in = new File(input);
+        String inputFilepath = "src/main/resources/samples/test/test1.txt";
+        String outputFilepath = "src/main/resources/samples/decoded_binary.txt";
+        String binaryOut = inputFilepath + ".huff";
+        String binaryIn = binaryOut;
     
     public IOHandlerTest() {
     }
@@ -28,21 +28,23 @@ public class IOHandlerTest {
     public void testClass() throws IOException {
         System.out.println("encode");
         IOHandler instance = new IOHandler();
-        instance.setInputFile(input);
-        instance.setOutputFile(output);
-        instance.initialiseInput();
-        instance.initialiseOutput();
-        out.delete();
-        out.createNewFile();
+        instance.setTextInputFile(inputFilepath);
+        
+        instance.initialiseTextInput();
+        File outputFile = new File(binaryOut);
         instance.encode();
-        assertTrue("File should be empty before writing: "+out.length(), out.length()==0);
+        outputFile.delete();
+        outputFile.createNewFile();
+        assertTrue("File should be empty before writing: "+outputFile.length(), outputFile.length()==0);
+        instance.setBinaryOutputFile(binaryOut);
+        instance.initialiseBitOutput();
         instance.write();
         /**
          * Our test file has 4 symbols, and 10 times each symbol. Because we
          * have only 4 symbols, each symbol can be encoded in 2 bits. So 4 
          * symbols of 2 bits each is 8 bits == 1 byte, and 10 repetitions, so 10 bytes.
          */
-        assertTrue("File should be 15 bytes. Actual: "+out.length(), out.length()==10);
+        assertTrue("File should be 15 bytes. Actual: "+outputFile.length(), outputFile.length()==10);
     }
 
 }

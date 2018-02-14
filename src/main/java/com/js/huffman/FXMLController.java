@@ -24,8 +24,6 @@ public class FXMLController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         System.out.println("Init");
         label.setText("Click me to start compressing the file.");
-        
-        
         r.execute();
         System.exit(0);
     }

@@ -41,26 +41,32 @@ public class IOHandler {
     private final InputFileHandler inputHandler;
     private final OutputFileHandler outputHandler;
     private final Logger logger = Logger.getLogger(IOHandler.class.getName());
-    private  BufferedReader reader;
-    private  BufferedWriter writer;
-    
+
+    //IO
+    private BufferedReader reader;
+    private BufferedWriter writer;
+    private BitInputStream bitInputStream;
+    private BitOutputStream bitOutputStream;
+    private File binaryOutputFile;
+    private File binaryInputFile;
+    private int extraBits;
+
     public IOHandler() {
         queueBuilder = new QueueBuilder();
         inputHandler = new InputFileHandler();
         outputHandler = new OutputFileHandler();
+
     }
 
-    
-
-    public void initialiseInput() {
+    public void initialiseTextInput() {
         try {
             this.reader = new BufferedReader(new FileReader(this.inputHandler.getFile()));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void initialiseOutput(){
+
+    public void initialiseTextOutput() {
         try {
             this.writer = new BufferedWriter(new FileWriter(this.outputHandler.getFile()));
         } catch (IOException ex) {
@@ -69,25 +75,40 @@ public class IOHandler {
 
     }
 
+    public void initialiseBitOutput() {
+        try {
+            this.bitOutputStream = new BitOutputStream((this.binaryOutputFile));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void initialiseBitInput() {
+        try {
+            this.bitInputStream = new BitInputStream((this.binaryInputFile));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * Write the given file to a binary file, based on the create Huffman tree.
      */
     public void write() {
-        converter = new SymbolConverter(puu.getCodes());
         try {
-            encoder = new HuffmanEncoder(this.reader, converter);
+            converter = new SymbolConverter(puu.getCodes());
+            encoder = new HuffmanEncoder(this.reader, converter, this.bitOutputStream);
             encoder.encodeBits();
             logger.log(Level.INFO, "Encoding done.");
-            
         } catch (FileNotFoundException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void readAndDecode(){
+
+    public void readAndDecode() {
         try {
-            int extraBits = encoder.getExtraBits();
-            decoder = new HuffmanDecoder(this.writer, puu, new File("src/main/resources/samples/encoded_binary"), extraBits);
+            this.extraBits = encoder.getExtraBits();
+            decoder = new HuffmanDecoder(this.writer, puu, this.extraBits, this.bitInputStream);
             decoder.decode();
             logger.log(Level.INFO, "Decoding done.");
         } catch (FileNotFoundException ex) {
@@ -131,7 +152,7 @@ public class IOHandler {
      *
      * @param path
      */
-    public void setOutputFile(final String path) {
+    public void setTextOutputFile(final String path) {
         this.outputHandler.setFile(path);
     }
 
@@ -140,8 +161,16 @@ public class IOHandler {
      *
      * @param path
      */
-    public void setInputFile(final String path) {
+    public void setTextInputFile(final String path) {
         this.inputHandler.setFile(path);
+    }
+
+    public void setBinaryOutputFile(String path) {
+        this.binaryOutputFile = new File(path);
+    }
+
+    public void setBinaryInputFile(final String path) {
+        this.binaryInputFile = new File(path);
     }
 
     /**
@@ -149,13 +178,8 @@ public class IOHandler {
      *
      * @return
      */
-
-
-
     public HuffmanTree getPuu() {
         return puu;
     }
 
-    
-    
 }

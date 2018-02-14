@@ -28,10 +28,10 @@ public class HuffmanEncoder {
     private final BitOutputStream stream;
     private final String newLineSep;
     
-    public HuffmanEncoder(BufferedReader reader, SymbolConverter converter) throws FileNotFoundException {
+    public HuffmanEncoder(BufferedReader reader, SymbolConverter converter, BitOutputStream bitOutputStream) throws FileNotFoundException {
         this.reader = reader;
         this.converter = converter;
-        this.stream = new BitOutputStream(new File("src/main/resources/samples/encoded_binary"));
+        this.stream = bitOutputStream;
         this.newLineSep = System.lineSeparator();
     }
 

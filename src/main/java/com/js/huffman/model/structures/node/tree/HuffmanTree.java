@@ -76,9 +76,9 @@ public class HuffmanTree {
      * @return true if after moving the head points a leaf node. Else false.
      */
     public boolean descend(NodeKey key){
-        logger.log(Level.INFO, "Descend: "+key);
+      //  logger.log(Level.INFO, "Descend: "+key);
         navigateByKey(key);
-        logger.log(Level.INFO, "Head: "+this.head);
+      //  logger.log(Level.INFO, "Head: "+this.head);
         if (this.head.isLeaf()){
             return true;
         }

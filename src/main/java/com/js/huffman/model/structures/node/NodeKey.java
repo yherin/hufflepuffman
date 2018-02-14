@@ -13,11 +13,12 @@ public enum NodeKey {
     
     
     ZERO (0,0b0,"0"),
-    ONE  (1,0b1,"1");
+    ONE  (1,0b1,"1"),
+    FAKE (-1,-1,"-1");
     
-    private int numberRep;
-    private int binaryRep;
-    private String charRep;
+    private final int numberRep;
+    private final int binaryRep;
+    private final String charRep;
     
     
     NodeKey(int number, int binary, String cs){

@@ -34,7 +34,8 @@ public class BitInputStreamTest {
             * So the sequence of bit symbols must be 00111001
             *
          */
-        stream = new BitInputStream(new File("src/main/resources/samples/test/binary_abcd"), 0);
+        stream = new BitInputStream(new File("src/main/resources/samples/test/binary_abcd"));
+        stream.setEmptyBits(0);
     }
     
     public void testNodeKeySequence(){

@@ -85,7 +85,6 @@ public class BitOutputStream extends FileOutputStream{
                 logger.log(Level.INFO,message);
                 extraBits = fillFinalByte();
                 
-                // super.write(b);
             }
             super.flush();
         } catch (IOException ex) {

@@ -24,38 +24,42 @@ public class BitInputStream extends FileInputStream {
     final long totalBytes;
     long remainingBytes;
     long readBytes;
-    int emptyBits;
+    private int emptyBits;
 
     /**
      * Creates a new BitInputStream, suitable for reading bits
      *
      * @param file file to be read.
-     * @param emptyBits expected 'dead/empty' bits at EOF.
      * @throws FileNotFoundException
      */
-    public BitInputStream(File file, int emptyBits) throws FileNotFoundException {
+    public BitInputStream(File file) throws FileNotFoundException {
         super(file);
-        
         this.totalBytes = file.length();
         this.readBytes = 0l;
         this.remainingBytes = this.totalBytes;
+
     }
 
     public NodeKey[] readByte() {
         try {
-            
+
             byte x = (byte) super.read();
             if (x == -1) {
                 logger.log(Level.INFO, "Input stream returned -1. EOF.");
                 return null;
             } else {
+
                 readBytes++;
                 remainingBytes--;
+                String msg = "" + remainingBytes + " bytes left.";
+            //    logger.log(Level.INFO, msg);
                 if (remainingBytes == 0) {
-                    return decodeBits((byte) x, emptyBits);
+                    logger.log(Level.INFO, "Trying to handle " + emptyBits + " empty bits.");
+                    return decodeBits((byte) x, this.emptyBits);
                 } else {
                     return decodeBits((byte) x, 0);
                 }
+
             }
 
         } catch (IOException ex) {
@@ -77,19 +81,30 @@ public class BitInputStream extends FileInputStream {
         if (fakeBits != 0) {
             logger.log(Level.WARNING, "Discarding " + fakeBits + " fake bits. This message should only appear once.");
         }
-        for (int i = 7-fakeBits; i >= 0; i--) {
+        for (int i = 7; i >= 0; i--) {
             /**
              * If true, bit is 1
              */
-            boolean isOne = (readByte & ((byte) 0b1 << i)) != 0;
-            if (isOne) {
-                bits[bits.length-1-i] = NodeKey.ONE;
+            if (i< fakeBits) {
+                bits[bits.length - 1 -i] = NodeKey.FAKE;
             } else {
-                bits[bits.length-1-i] = NodeKey.ZERO;
+                boolean isOne = (readByte & ((byte) 0b1 << i)) != 0;
+                if (isOne) {
+                    bits[bits.length - 1 - i] = NodeKey.ONE;
+                } else {
+                    bits[bits.length - 1 - i] = NodeKey.ZERO;
+                }
             }
         }
+        //0 1 2 3 4 5 6 7
+        //              
+
         readBytes++;
         return bits;
+    }
+
+    public void setEmptyBits(int emptyBits) {
+        this.emptyBits = emptyBits;
     }
 
 }

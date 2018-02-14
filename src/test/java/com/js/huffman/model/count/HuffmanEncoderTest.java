@@ -5,6 +5,7 @@
  */
 package com.js.huffman.model.count;
 
+import com.js.huffman.io.BitOutputStream;
 import com.js.huffman.model.count.HuffmanEncoder;
 import com.js.huffman.model.structures.node.tree.SymbolConverter;
 import java.io.BufferedReader;
@@ -61,19 +62,12 @@ public class HuffmanEncoderTest {
      */
     @Test
     public void testEncodeBits() throws IOException {
-        try {
-            long expectedBytes = 15l; //see constructor for arbitrary number of bytes
-            System.out.println("encodeBits");
-            HuffmanEncoder instance = new HuffmanEncoder(this.textReader, this.converter);
-            instance.encodeBits();
-            
-            long size = out.length();
-            
-            assertTrue(""+size +"!="+expectedBytes, size == expectedBytes );
-        } catch (FileNotFoundException ex) {
-           
-            logger.log(Level.SEVERE, null, ex);
-        }
+        long expectedBytes = 15l; //see constructor for arbitrary number of bytes
+        System.out.println("encodeBits");
+        HuffmanEncoder instance = new HuffmanEncoder(this.textReader, this.converter, new BitOutputStream(out));
+        instance.encodeBits();
+        long size = out.length();
+        assertTrue(""+size +"!="+expectedBytes, size == expectedBytes );
         byte xB = (byte) this.binaryReader.read();
         byte yB = (byte) this.binaryReader.read();
         /**

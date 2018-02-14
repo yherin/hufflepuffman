@@ -29,31 +29,36 @@ public class HuffmanDecoder {
 
     private int bitPos;
 
-    public HuffmanDecoder(BufferedWriter writer, HuffmanTree tree, File inputFile, int extraBits) throws FileNotFoundException {
+    public HuffmanDecoder(BufferedWriter writer, HuffmanTree tree, int extraBits, BitInputStream bitInputStream) throws FileNotFoundException {
         this.writer = writer;
-        this.stream = new BitInputStream(inputFile, extraBits);
+        this.stream = bitInputStream;
         this.tree = tree;
         this.bitPos = 0;
+        this.stream.setEmptyBits(extraBits);
     }
 
     public void decode() {
-        while (true) {
+        boolean decode = true;
+        while (decode) {
             this.bitPos = 0;
             NodeKey[] singleByte = this.stream.readByte();
             if (singleByte != null) {
                 while (this.bitPos < 8) {
                     NodeKey bit = singleByte[bitPos];
-                    logger.log(Level.INFO, "bit: "+bit);
-                    traverseHuffmanTree(bit);
-                    if (this.decodeSuccessful) {
-                        try {
-                            char c = this.tree.getSymbol();
-                     //       String msg = "Writing "+c+" to decoded file.";
-                     //       logger.log(Level.INFO, msg);
-                            this.writer.write(c);
-                            this.decodeSuccessful = false;
-                        } catch (IOException ex) {
-                            logger.log(Level.SEVERE, null, ex);
+                   //  logger.log(Level.INFO, "bit: "+bit);
+                    if (bit != NodeKey.FAKE) {
+                        traverseHuffmanTree(bit);
+
+                        if (this.decodeSuccessful) {
+                            try {
+                                char c = this.tree.getSymbol();
+                                   //    String msg = "Writing "+c+" to decoded file.";
+                                   //    logger.log(Level.INFO, msg);
+                                this.writer.write(c);
+                                this.decodeSuccessful = false;
+                            } catch (IOException ex) {
+                                logger.log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                     this.bitPos++;
