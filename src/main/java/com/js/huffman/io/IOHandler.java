@@ -21,6 +21,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
@@ -78,6 +80,7 @@ public class IOHandler {
     public void initialiseBitOutput() {
         try {
             this.bitOutputStream = new BitOutputStream((this.binaryOutputFile));
+            this.bitOutputStream.setFileChannel();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }

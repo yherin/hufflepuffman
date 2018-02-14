@@ -34,6 +34,7 @@ public class BitOutputStreamTest {
             test_dir = "src/main/resources/samples/test/";
             this.file = new File(test_dir + "out");
             this.streamer = new BitOutputStream(file);
+            this.streamer.setFileChannel();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BitOutputStreamTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -50,8 +51,8 @@ public class BitOutputStreamTest {
         } catch (IOException ex) {
             Logger.getLogger(BitOutputStreamTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        assertTrue(this.file.length()==1);
-        
+        Long x = this.file.length();
+        assertTrue(x==1);        
     }
     
 }

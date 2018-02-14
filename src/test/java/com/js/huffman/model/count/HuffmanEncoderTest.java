@@ -64,7 +64,10 @@ public class HuffmanEncoderTest {
     public void testEncodeBits() throws IOException {
         long expectedBytes = 15l; //see constructor for arbitrary number of bytes
         System.out.println("encodeBits");
-        HuffmanEncoder instance = new HuffmanEncoder(this.textReader, this.converter, new BitOutputStream(out));
+        final BitOutputStream bitOutputStream = new BitOutputStream(out);
+        bitOutputStream.setFileChannel();
+        HuffmanEncoder instance = new HuffmanEncoder(this.textReader, this.converter, bitOutputStream);
+        
         instance.encodeBits();
         long size = out.length();
         assertTrue(""+size +"!="+expectedBytes, size == expectedBytes );

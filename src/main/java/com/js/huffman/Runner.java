@@ -13,16 +13,15 @@ import java.io.File;
  * @author jack
  */
 public class Runner {
-    
+
     private IOHandler io;
-    
-    public Runner(){
+
+    public Runner() {
         io = new IOHandler();
     }
-    
-    
-    public void execute(){
-        String inputFilepath = "src/main/resources/samples/bible-8mb.txt";
+
+    public void execute() {
+        String inputFilepath = "src/main/resources/samples/lineSetp";
         String outputFilepath = "src/main/resources/samples/decoded_binary.txt";
         String binaryOut = inputFilepath + ".huff";
         String binaryIn = binaryOut;
@@ -32,11 +31,13 @@ public class Runner {
         io.setBinaryInputFile(binaryIn);
         io.setBinaryOutputFile(binaryOut);
         io.initialiseTextInput();
-        long compressStart = System.nanoTime();
+        long buildDataStart = System.nanoTime();
         io.encode();
+        long buildDataEnd = System.nanoTime();
         io.initialiseBitOutput();
+        long writeDataStart = System.nanoTime();
         io.write();
-        long compressEnd = System.nanoTime();
+        long writeDataEnd = System.nanoTime();
         io.initialiseTextOutput();
         io.initialiseBitInput();
         long decompressStart = System.nanoTime();
@@ -44,13 +45,15 @@ public class Runner {
         long decompressEnd = System.nanoTime();
         System.out.println("Done.");
         long end = System.nanoTime();
-        long comp = (compressEnd - compressStart) / 1000000l;
+        long write = (writeDataEnd - writeDataStart) / 1000000l;
+        long comp = (buildDataEnd - buildDataStart) / 1000000l;
         long decomp = (decompressEnd - decompressStart) / 1000000l;
         long elapsed = (end - start) / 1000000l;
-        System.out.println("Compression time: "+comp+"ms.");
-        System.out.println("Decompression time: "+decomp+"ms.");
-        System.out.println("Execution time: "+elapsed+"ms.");
-        
+        System.out.println("Build data time: " + comp + "ms.");
+        System.out.println("Write data time: " + write + "ms.");
+        System.out.println("Decompression time: " + decomp + "ms.");
+        System.out.println("Execution time: " + elapsed + "ms.");
+
     }
-    
+
 }
