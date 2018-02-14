@@ -28,6 +28,7 @@ public class BitOutputStream extends FileOutputStream {
     final Logger logger = Logger.getLogger(BitOutputStream.class.getName());
     private FileChannel fc;
     private ByteBuffer buffer;
+    private static final int BUFFER_SIZE = 4096;
 
     /**
      * Create a new BitOutputStreams
@@ -37,7 +38,7 @@ public class BitOutputStream extends FileOutputStream {
      */
     public BitOutputStream(File file) throws FileNotFoundException {
         super(file);
-        this.buffer = ByteBuffer.allocate(1024);
+        this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
         
 
     }
@@ -94,7 +95,7 @@ public class BitOutputStream extends FileOutputStream {
                 this.buffer.flip();
                 this.fc.write(this.buffer);
             
-            this.buffer = ByteBuffer.allocate(1024);
+            this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
             this.buffer.put(x);
           //  logger.log(Level.INFO, "Added byte to buffer");
             } catch (IOException ex) {
