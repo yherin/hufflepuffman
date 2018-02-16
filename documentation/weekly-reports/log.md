@@ -9,3 +9,7 @@
 | Tues 23.1 | 3h| Unit test coverage.|
 | Sat 26.1  | 4h | Documentation and complexity analysis.|
 | Fri 2.2  | 10h | Implementation of compression and IO.|
+| week 4   | 9h  | ...|
+| Tues 12.2| 3h  | investigating and fixing bugs, planning and researching|
+| Thur 14.2 | 5h | IO improvements|
+| Fri 15.2 | 8h | Refactoring, Metadata encoding and decoding, documentation|
