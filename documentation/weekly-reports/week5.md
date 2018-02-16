@@ -1,4 +1,4 @@
-# Week 4
+# Week 5
 
 ## What have I done this week?
 - Refactored and improved the documentation of my code.
@@ -9,7 +9,7 @@
 ## How has the program progressed?
 - The IO refactoring and improvements that I did increased the speed of the algorithm by approximately 100 times. I'm now using ByteBuffer and FileChannel, which seems to be very efficient and nice to use.
 - The core, essential part of the algorithm now works completely, at least from my testing. I've used `cmp -b output input` (Unix terminal) which does a byte-by-byte value comparison across the files and compares them. I compressed and decompressed a 17.8mb text document to 9.9mb binary and back to text with no bugs at all, input and output completely identical, total time for both operations was 3 seconds (with some logging still on). I'm quite pleased with performance.
-- Metadata of the compression codes is now included in the header of the compressed file. This is the way to split the compression and decompression operations and is my next goal. Metadata takes the following form:
+- Metadata of the compression codes is now included in the header of the compressed file (but is not yet used in the algorithm). This is the way to split the compression and decompression operations and is my next goal. Metadata takes the following form:
  - First 4 bytes, int with the size of the metadata
  - Next 2 bytes, number of 'empty bits' in the tree encoding and EOF byte.
  - _n_ bytes of tree encoding (See binary array in log below at TreeBuilder <init>)
