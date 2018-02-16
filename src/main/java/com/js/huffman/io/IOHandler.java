@@ -184,5 +184,9 @@ public class IOHandler {
     public HuffmanTree getPuu() {
         return puu;
     }
+    
+    public int getEncodedMetaDataBytes(){
+        return this.bitOutputStream.getMetadataBytes();
+    }
 
 }

@@ -21,7 +21,7 @@ public class Runner {
     }
 
     public void execute() {
-        String inputFilepath = "src/main/resources/samples/lorem";
+        String inputFilepath = "src/main/resources/samples/bible-8mb.txt";
         String outputFilepath = "src/main/resources/samples/decoded_binary.txt";
         String binaryOut = inputFilepath + ".huff";
         String binaryIn = binaryOut;

@@ -39,12 +39,13 @@ public class IOHandlerTest {
         instance.setBinaryOutputFile(binaryOut);
         instance.initialiseBitOutput();
         instance.write();
+        int metadata = instance.getEncodedMetaDataBytes();
         /**
          * Our test file has 4 symbols, and 10 times each symbol. Because we
          * have only 4 symbols, each symbol can be encoded in 2 bits. So 4 
          * symbols of 2 bits each is 8 bits == 1 byte, and 10 repetitions, so 10 bytes.
          */
-        assertTrue("File should be 15 bytes. Actual: "+outputFile.length(), outputFile.length()==10);
+        assertTrue("File should be 15 bytes. Actual: "+outputFile.length(), outputFile.length()==10+metadata);
     }
 
 }

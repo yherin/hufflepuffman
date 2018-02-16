@@ -27,6 +27,7 @@ public class BitOutputStream extends FileOutputStream {
     private long count = 0l; //total number of bytes written
     private int endExtraBits;
     private int headerExtraBits;
+    private int metadataBytes;
     final Logger logger = Logger.getLogger(BitOutputStream.class.getName());
     private FileChannel fc;
     private ByteBuffer buffer;
@@ -41,6 +42,8 @@ public class BitOutputStream extends FileOutputStream {
     public BitOutputStream(final File file) throws FileNotFoundException {
         super(file);
         this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
+        
+        
 
     }
 
@@ -62,48 +65,20 @@ public class BitOutputStream extends FileOutputStream {
         }
     }
 
-    public void writeHuffmanTree(final String treeRep, final String symbols) {
-        writeMetadata(treeRep, symbols);
-        writeTreeRep(treeRep);
-        writeSymbols(symbols);
 
-    }
-
-    private void writeSymbols(final String symbols) {
-        for (int i = 0; i < symbols.length(); i++) {
-            writeSymbol(symbols.charAt(i));
-        }
-    }
-
-    private void writeTreeRep(final String treeRep) {
-        for (int i = 0; i < treeRep.length(); i++) {
-            addSingleBit(treeRep.charAt(i));
-        }
-    }
-
-    private void writeMetadata(final String treeRep, final String symbols) {
-        final int metadataSize = calculateMetadatSize(treeRep, symbols);
-        logger.log(Level.INFO, "Metadata: "+metadataSize);
-        buffer.putInt(metadataSize);
-        buffer.put((byte)this.headerExtraBits);
-    }
-
-    private int calculateMetadatSize(final String treeRep, final String symbols) {
-        int metadataSize = 0;
-        this.headerExtraBits = treeRep.length() % 8;
-        logger.log(Level.INFO, "Tree rep bytes: "+treeRep.length()/8);
-        logger.log(Level.INFO, "Symbol bytes: "+(symbols.length()*2));
+    public void writeMetadata(final byte[] treeRep, final String symbols, final byte emptyTreeBits, final byte emptyEOFBits) {
+        final ByteBuffer metadata = MetadataBuilder.buildMetadata(treeRep, symbols, emptyTreeBits, emptyEOFBits);
+        this.buffer.put(metadata);
+        this.buffer.flip();
+        this.metadataBytes = metadata.limit();
         try {
-            metadataSize = 1 + (treeRep.length() / 8) + (symbols.getBytes("UTF-8").length);
-        } catch (UnsupportedEncodingException ex) {
+            this.fc.write(this.buffer);
+        } catch (IOException ex) {
             Logger.getLogger(BitOutputStream.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return metadataSize;
+        this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
     }
 
-    private void writeSymbol(final Character c) {
-        buffer.putChar(c);
-    }
 
     /**
      * 'Add' a bit to our byte, writing the byte to file if it is a full byte.
@@ -210,4 +185,9 @@ public class BitOutputStream extends FileOutputStream {
         return endExtraBits;
     }
 
+    public int getMetadataBytes() {
+        return metadataBytes;
+    }
+
+    
 }

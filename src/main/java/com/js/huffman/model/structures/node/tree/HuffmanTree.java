@@ -25,6 +25,7 @@ public class HuffmanTree {
     private final HashMap<Character, String> codes; //we want to use String and not a custom class, because String is immutable. This is really handy.
     final Logger logger = Logger.getLogger(HuffmanTree.class.getName());
     private final String[] treeStringRep;
+    private int emptyBitsTreeRep;
 
     public HuffmanTree(PriorityQueue<Node> que) {
 
@@ -34,8 +35,8 @@ public class HuffmanTree {
         this.treeStringRep[0] = "";
         this.treeStringRep[1] = "";
         buildCodes(root, "", this.treeStringRep);
-    //    logger.log(Level.INFO, "total symbols:" + this.codes.size());
-    //    logger.log(Level.INFO, Arrays.toString(this.treeStringRep));
+        //    logger.log(Level.INFO, "total symbols:" + this.codes.size());
+        //    logger.log(Level.INFO, Arrays.toString(this.treeStringRep));
         this.head = root;
     }
 
@@ -60,7 +61,7 @@ public class HuffmanTree {
             huffTreeRep[0] += '1'; //leaf
 
         } else {
-            if (!x.isRoot()){
+            if (!x.isRoot()) {
                 huffTreeRep[0] += '0';
             }
 
@@ -138,5 +139,49 @@ public class HuffmanTree {
         return treeStringRep;
     }
 
-    
+    public byte[] encodeTreeRepInBytes() {
+        final String rep = this.treeStringRep[0];
+        logger.log(Level.INFO, "Tree rep: {0}", rep);
+
+        int bytesNeeded = calculateRequiredBytes(rep);
+        this.emptyBitsTreeRep = rep.length() % 8;
+        logger.log(Level.INFO, "Empty bits{0}", this.emptyBitsTreeRep);
+        int index = 0;
+
+        final byte[] treeBytes = new byte[bytesNeeded];
+        encodeTreeRepInBytes(rep, treeBytes, index);
+        return treeBytes;
+    }
+
+    private void encodeTreeRepInBytes(final String rep, final byte[] treeBytes, int index) {
+        for (int i = 0; i < rep.length(); i++) {
+            logger.log(Level.INFO, Arrays.toString(treeBytes));
+
+            char bit = rep.charAt(i);
+            if (bit == '0') {
+                treeBytes[index] = (byte) (treeBytes[index] << 1); //Shift the bit sequence left by 1 place. So 0001 becomes 0010
+            } else {
+                treeBytes[index] = (byte) ((byte) (treeBytes[index] << 1) | 1); //Shift the bit sequence left by 1 place and insert a 1. So 0001 becomes 0011
+            }
+
+            if ((i % 8 == 0) && i != 0) { //full byte
+                index++;
+            }
+        }
+    }
+
+    private int calculateRequiredBytes(final String rep) {
+        int bytesNeeded = 0;
+        if (rep.length() <= 8) {
+            bytesNeeded = 1;
+        } else {
+            if (rep.length() % 8 == 0) {
+                bytesNeeded = (rep.length() / 8);
+            } else {
+                bytesNeeded = (rep.length() / 8)+1;
+            }
+        }
+        return bytesNeeded;
+    }
+
 }
