@@ -42,13 +42,12 @@ public class BitInputStream extends FileInputStream {
 
     public NodeKey[] readByte() {
         try {
-
-            byte x = (byte) super.read();
-            if (x == -1) {
+            int result = super.read();
+            if (result == -1) {
                 logger.log(Level.INFO, "Input stream returned -1. EOF.");
                 return null;
             } else {
-
+                byte x = (byte) result;
                 readBytes++;
                 remainingBytes--;
                 String msg = "" + remainingBytes + " bytes left.";
@@ -99,7 +98,6 @@ public class BitInputStream extends FileInputStream {
         //0 1 2 3 4 5 6 7
         //              
 
-        readBytes++;
         return bits;
     }
 

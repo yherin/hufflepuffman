@@ -15,6 +15,7 @@ public class Node implements Comparable<Node> {
 
     private final Integer freq;
     private final Character symbol;
+    private boolean isRoot;
     /**
      * This node's parent node.
      */
@@ -156,6 +157,15 @@ public class Node implements Comparable<Node> {
         } else {
             this.type=NodeType.LEAF;
         }
+    }
+    
+    public boolean isRoot(){
+        return this.isRoot;
+    }
+    
+    public void setRoot(){
+        this.isRoot = true;
+        assert this.type != NodeType.LEAF;
     }
     
 }

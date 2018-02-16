@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.logging.Level;
@@ -24,7 +25,8 @@ public class BitOutputStream extends FileOutputStream {
     private byte b = 0b0; //initial byte is empty
     private int n = 0; //the number of bits currently in our byte
     private long count = 0l; //total number of bytes written
-    private int extraBits;
+    private int endExtraBits;
+    private int headerExtraBits;
     final Logger logger = Logger.getLogger(BitOutputStream.class.getName());
     private FileChannel fc;
     private ByteBuffer buffer;
@@ -36,10 +38,9 @@ public class BitOutputStream extends FileOutputStream {
      * @param file the file to which output is written.
      * @throws FileNotFoundException
      */
-    public BitOutputStream(File file) throws FileNotFoundException {
+    public BitOutputStream(final File file) throws FileNotFoundException {
         super(file);
         this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
-        
 
     }
 
@@ -55,11 +56,53 @@ public class BitOutputStream extends FileOutputStream {
      *
      * @param code
      */
-    public void writeCode(String code) {
+    public void writeHuffmanCode(final String code) {
         for (int i = 0; i < code.length(); i++) {
             addSingleBit(code.charAt(i));
-
         }
+    }
+
+    public void writeHuffmanTree(final String treeRep, final String symbols) {
+        writeMetadata(treeRep, symbols);
+        writeTreeRep(treeRep);
+        writeSymbols(symbols);
+
+    }
+
+    private void writeSymbols(final String symbols) {
+        for (int i = 0; i < symbols.length(); i++) {
+            writeSymbol(symbols.charAt(i));
+        }
+    }
+
+    private void writeTreeRep(final String treeRep) {
+        for (int i = 0; i < treeRep.length(); i++) {
+            addSingleBit(treeRep.charAt(i));
+        }
+    }
+
+    private void writeMetadata(final String treeRep, final String symbols) {
+        final int metadataSize = calculateMetadatSize(treeRep, symbols);
+        logger.log(Level.INFO, "Metadata: "+metadataSize);
+        buffer.putInt(metadataSize);
+        buffer.put((byte)this.headerExtraBits);
+    }
+
+    private int calculateMetadatSize(final String treeRep, final String symbols) {
+        int metadataSize = 0;
+        this.headerExtraBits = treeRep.length() % 8;
+        logger.log(Level.INFO, "Tree rep bytes: "+treeRep.length()/8);
+        logger.log(Level.INFO, "Symbol bytes: "+(symbols.length()*2));
+        try {
+            metadataSize = 1 + (treeRep.length() / 8) + (symbols.getBytes("UTF-8").length);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(BitOutputStream.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return metadataSize;
+    }
+
+    private void writeSymbol(final Character c) {
+        buffer.putChar(c);
     }
 
     /**
@@ -87,17 +130,17 @@ public class BitOutputStream extends FileOutputStream {
 
     private void addByte(final byte x) {
         if (this.buffer.hasRemaining()) {
-         //   logger.log(Level.INFO, "Added byte to buffer");
+       //        logger.log(Level.INFO, "Added byte to buffer");
             this.buffer.put(x);
         } else {
-         //   logger.log(Level.INFO, "Writing buffer to file");
+               logger.log(Level.INFO, "Writing buffer to file");
             try {
                 this.buffer.flip();
                 this.fc.write(this.buffer);
-            
-            this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
-            this.buffer.put(x);
-          //  logger.log(Level.INFO, "Added byte to buffer");
+
+                this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
+                this.buffer.put(x);
+                //  logger.log(Level.INFO, "Added byte to buffer");
             } catch (IOException ex) {
                 Logger.getLogger(BitOutputStream.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -107,10 +150,10 @@ public class BitOutputStream extends FileOutputStream {
     private void forceWriteBuffer() {
         if (this.buffer.limit() != this.buffer.remaining()) {
             try {
-                logger.log(Level.INFO, "Forcing buffer to file");
+                logger.log(Level.INFO, "Forcing buffer to file with "+buffer.position()+" bytes");
                 this.buffer.flip();
                 this.fc.write(this.buffer);
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(BitOutputStream.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -130,7 +173,7 @@ public class BitOutputStream extends FileOutputStream {
             if (n > 0 && n < 8) {
                 String message = "" + (8 - n) + " bits to be written in final byte.";
                 logger.log(Level.INFO, message);
-                extraBits = fillFinalByte();
+                endExtraBits = fillFinalByte();
 
             } else {
                 forceWriteBuffer();
@@ -153,18 +196,18 @@ public class BitOutputStream extends FileOutputStream {
      */
     private int fillFinalByte() {
 
-        extraBits = 8 - n;
-        for (int i = 0; i < extraBits; i++) {
+        endExtraBits = 8 - n;
+        for (int i = 0; i < endExtraBits; i++) {
             addSingleBit('0');
         }
-        String msg = "" + extraBits + " extra 0 bits written to byte at EOF.";
+        String msg = "" + endExtraBits + " extra 0 bits written to byte at EOF.";
         logger.log(Level.INFO, msg);
         forceWriteBuffer();
-        return extraBits;
+        return endExtraBits;
     }
 
-    public int getExtraBits() {
-        return extraBits;
+    public int getEndExtraBits() {
+        return endExtraBits;
     }
 
 }

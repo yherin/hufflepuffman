@@ -45,7 +45,7 @@ public class BitOutputStreamTest {
     public void bitStreamerWritesCorrectly(){
         try {
             String code = "10010110"; //1 byte
-            streamer.writeCode(code);
+            streamer.writeHuffmanCode(code);
             streamer.flush();
             streamer.close();
         } catch (IOException ex) {

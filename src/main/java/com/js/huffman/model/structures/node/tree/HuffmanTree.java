@@ -8,6 +8,7 @@ package com.js.huffman.model.structures.node.tree;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.NodeType;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
@@ -23,13 +24,18 @@ public class HuffmanTree {
     private Node head;
     private final HashMap<Character, String> codes; //we want to use String and not a custom class, because String is immutable. This is really handy.
     final Logger logger = Logger.getLogger(HuffmanTree.class.getName());
-    
+    private final String[] treeStringRep;
+
     public HuffmanTree(PriorityQueue<Node> que) {
-        
+
         this.codes = new HashMap<>(que.size());
         buildTree(que);
-        buildCodes(root,"");
-        System.out.println("total symbols:" + this.codes.size());
+        this.treeStringRep = new String[2]; //[0] bit reps, [1] chars
+        this.treeStringRep[0] = "";
+        this.treeStringRep[1] = "";
+        buildCodes(root, "", this.treeStringRep);
+    //    logger.log(Level.INFO, "total symbols:" + this.codes.size());
+    //    logger.log(Level.INFO, Arrays.toString(this.treeStringRep));
         this.head = root;
     }
 
@@ -43,63 +49,73 @@ public class HuffmanTree {
             que.add(joint);
         }
         root = que.poll();
-        
+        root.setRoot();
         logger.log(Level.INFO, "Built tree successfully");
     }
 
-
-    private void buildCodes(Node x, String huffCode) {
+    //00011 Öæ
+    private void buildCodes(Node x, String huffCode, String[] huffTreeRep) {
         if (!x.hasLeft() && !x.hasRight()) {
-            buildNodesBaseCase(x, huffCode);
-        }
-        if (x.hasLeft()){
+            buildNodesBaseCase(x, huffCode, huffTreeRep);
+            huffTreeRep[0] += '1'; //leaf
+
+        } else {
+            if (!x.isRoot()){
+                huffTreeRep[0] += '0';
+            }
+
+            //   }
+            //   if (x.hasLeft()) {
             String leftHuffCode = huffCode + x.getLeft().getKey().toString();
-            buildCodes(x.getLeft(),leftHuffCode);
-        }
-        if (x.hasRight()){
+            buildCodes(x.getLeft(), leftHuffCode, huffTreeRep);
+            // }
+            // if (x.hasRight()) {
             String rightHuffCode = huffCode + x.getRight().getKey().toString();
-            buildCodes(x.getRight(), rightHuffCode);
+
+            buildCodes(x.getRight(), rightHuffCode, huffTreeRep);
         }
 
     }
 
-    private void buildNodesBaseCase(Node x, String huffCode) {
+    private void buildNodesBaseCase(Node x, String huffCode, String[] huffTreeRep) {
         Character symbol = x.getSymbol();
+        huffTreeRep[1] += symbol;
         assert symbol != null;
         Object expectNull = this.codes.put(symbol, huffCode);
         assert expectNull == null;
     }
-    
+
     /**
-     * 
+     *
      * @param key
      * @return true if after moving the head points a leaf node. Else false.
      */
-    public boolean descend(NodeKey key){
-      //  logger.log(Level.INFO, "Descend: "+key);
+    public boolean descend(NodeKey key) {
+        //  logger.log(Level.INFO, "Descend: "+key);
         navigateByKey(key);
-      //  logger.log(Level.INFO, "Head: "+this.head);
-        if (this.head.isLeaf()){
+        //  logger.log(Level.INFO, "Head: "+this.head);
+        if (this.head.isLeaf()) {
             return true;
         }
-        if (this.head.isBranch()){
+        if (this.head.isBranch()) {
             return false;
+        } else {
+            throw new IllegalStateException("Node was neither branch nor leaf");
         }
-        else throw new IllegalStateException("Node was neither branch nor leaf");
     }
-    
-    public Character getSymbol(){
-        Character symbol =  this.head.getSymbol();
+
+    public Character getSymbol() {
+        Character symbol = this.head.getSymbol();
         this.head = this.root;
         assert (symbol != null);
-        return symbol;        
+        return symbol;
     }
-    
-    private void navigateByKey(NodeKey key){
-        if (key == NodeKey.ZERO){
+
+    private void navigateByKey(NodeKey key) {
+        if (key == NodeKey.ZERO) {
             Node newHead = this.head.getLeft();
             this.head = newHead;
-        } else if (key == NodeKey.ONE){
+        } else if (key == NodeKey.ONE) {
             Node newHead = this.head.getRight();
             this.head = newHead;
         }
@@ -110,13 +126,17 @@ public class HuffmanTree {
     }
 
     @Override
-    public String toString(){
-       return codes.toString();
+    public String toString() {
+        return codes.toString();
     }
 
     public HashMap<Character, String> getCodes() {
         return codes;
     }
-    
+
+    public String[] getTreeStringRep() {
+        return treeStringRep;
+    }
+
     
 }

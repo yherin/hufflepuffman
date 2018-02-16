@@ -100,7 +100,7 @@ public class IOHandler {
     public void write() {
         try {
             converter = new SymbolConverter(puu.getCodes());
-            encoder = new HuffmanEncoder(this.reader, converter, this.bitOutputStream);
+            encoder = new HuffmanEncoder(this.reader, converter, this.bitOutputStream, this.puu);
             encoder.encodeBits();
             logger.log(Level.INFO, "Encoding done.");
         } catch (FileNotFoundException ex) {

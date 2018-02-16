@@ -65,6 +65,7 @@ public class HuffmanDecoder {
                 }
             } else {
                 try {
+                    writer.newLine();
                     writer.flush();
                     writer.close();
                     break;
