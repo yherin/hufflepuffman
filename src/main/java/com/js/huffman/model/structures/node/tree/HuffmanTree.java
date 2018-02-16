@@ -25,7 +25,7 @@ public class HuffmanTree {
     private final HashMap<Character, String> codes; //we want to use String and not a custom class, because String is immutable. This is really handy.
     final Logger logger = Logger.getLogger(HuffmanTree.class.getName());
     private final String[] treeStringRep;
-    private int emptyBitsTreeRep;
+    private byte emptyBitsTreeRep;
 
     public HuffmanTree(PriorityQueue<Node> que) {
 
@@ -39,7 +39,7 @@ public class HuffmanTree {
         //    logger.log(Level.INFO, Arrays.toString(this.treeStringRep));
         this.head = root;
     }
-
+    
     private void buildTree(PriorityQueue<Node> que) {
 
         while (que.size() >= 2) {
@@ -144,7 +144,7 @@ public class HuffmanTree {
         logger.log(Level.INFO, "Tree rep: {0}", rep);
 
         int bytesNeeded = calculateRequiredBytes(rep);
-        this.emptyBitsTreeRep = rep.length() % 8;
+        this.emptyBitsTreeRep = (byte) (rep.length() % 8);
         logger.log(Level.INFO, "Empty bits{0}", this.emptyBitsTreeRep);
         int index = 0;
 
@@ -184,4 +184,9 @@ public class HuffmanTree {
         return bytesNeeded;
     }
 
+    public byte getEmptyBitsTreeRep() {
+        return emptyBitsTreeRep;
+    }
+
+    
 }

@@ -114,6 +114,7 @@ public class IOHandler {
             decoder = new HuffmanDecoder(this.writer, puu, this.extraBits, this.bitInputStream);
             decoder.decode();
             logger.log(Level.INFO, "Decoding done.");
+            decoder.buildTree();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }

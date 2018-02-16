@@ -11,23 +11,22 @@ import java.util.Objects;
  *
  * @author jack
  */
-public class Node implements Comparable<Node> {
+public class ReconstructedNode {
 
-    private final Integer freq;
-    private final Character symbol;
+    private Character symbol;
     private boolean isRoot;
     /**
      * This node's parent node.
      */
-    private Node parent;
+    private ReconstructedNode parent;
     /**
      * This node's left child.
      */
-    private Node left;
+    private ReconstructedNode left;
     /**
      * This node's right child.
      */
-    private Node right;
+    private ReconstructedNode right;
 
     /**
      * NodeType of this node.
@@ -45,10 +44,8 @@ public class Node implements Comparable<Node> {
      * @param character the character represented by this node.
      * @param count the frequency of this symbol.
      */
-    public Node(final Character character, final Integer count) {
-        this.freq = count;
+    public ReconstructedNode(final Character character) {
         this.symbol = character;
-        determineNodeType();
         assert (symbol != null);
     }
 
@@ -58,19 +55,12 @@ public class Node implements Comparable<Node> {
      * @param l the node which will be the left child of the new node.
      * @param r the node which will be the right child of the new node.
      */
-    public Node(final Node l, final Node r) {
-        this.freq = l.freq + r.freq;
-        this.symbol = null;
-        
+    public ReconstructedNode(final ReconstructedNode l, final ReconstructedNode r) {
+        this.symbol = ' ';
 
         this.left = l;
         this.right = r;
-        determineNodeType();
-        this.left.keyCode = NodeKey.ZERO;
-        this.right.keyCode = NodeKey.ONE;
 
-        this.left.determineNodeType();
-        this.right.determineNodeType();
     }
 
     @Override
@@ -85,49 +75,32 @@ public class Node implements Comparable<Node> {
 
         Node n = (Node) o;
 
-        if (n.freq == null) {
-            return false;
-        }
-
         return this.hashCode() == n.hashCode();
 
     }
 
     @Override
-    public final int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.freq);
-        hash = 67 * hash + Objects.hashCode(this.symbol);
-        return hash;
-    }
-
-    @Override
     public final String toString() {
-        return "(" + this.symbol + ", " + this.freq + ")" + "L:"+this.left.toString() + "R:"+this.right.toString();
+        if (this.hasLeft() && this.hasRight()) {
+            return "(" + this.symbol + ", " + "L:" + this.left.toString() + "R:" + this.right.toString();
+        } else {
+            return "(" + this.symbol + "}";
+        }
     }
 
-    public final Integer getFreq() {
-        return freq;
-    }
-
-    @Override
-    public int compareTo(Node o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Node getLeft() {
+    public ReconstructedNode getLeft() {
         return left;
     }
 
-    public Node getRight() {
+    public ReconstructedNode getRight() {
         return right;
     }
-    
-    public boolean hasLeft(){
+
+    public boolean hasLeft() {
         return left != null;
     }
-    
-    public boolean hasRight(){
+
+    public boolean hasRight() {
         return right != null;
     }
 
@@ -138,34 +111,33 @@ public class Node implements Comparable<Node> {
     public NodeKey getKey() {
         return keyCode;
     }
- 
-    public boolean isLeaf(){
+
+    public boolean isLeaf() {
         return this.type == NodeType.LEAF;
     }
-    
-    public boolean isBranch(){
+
+    public boolean isBranch() {
         return this.type == NodeType.BRANCH;
     }
 
     public void setType(NodeType type) {
         this.type = type;
     }
-    
-    private void determineNodeType(){
-        if (this.symbol==null){
-            this.type=NodeType.BRANCH;
+
+    private void determineNodeType() {
+        if (this.symbol == null) {
+            this.type = NodeType.BRANCH;
         } else {
-            this.type=NodeType.LEAF;
+            this.type = NodeType.LEAF;
         }
     }
-    
-    public boolean isRoot(){
+
+    public boolean isRoot() {
         return this.isRoot;
     }
-    
-    public void setRoot(){
+
+    public void setRoot() {
         this.isRoot = true;
         assert this.type != NodeType.LEAF;
     }
-    
 }

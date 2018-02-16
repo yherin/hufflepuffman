@@ -27,10 +27,10 @@ public class HuffmanEncoder {
     private final SymbolConverter converter;
     private final BitOutputStream stream;
     private final String newLineSep;
-    private final HuffmanTree tree;
-    private final String treeSymbolsRep;
-    private final String treeStringRep;
-    private final byte[] treeBytes;
+    private HuffmanTree tree;
+    private String treeSymbolsRep;
+    private byte[] treeBytes;
+    private byte treeRepEmptyBits;
 
     public HuffmanEncoder(BufferedReader reader, SymbolConverter converter, BitOutputStream bitOutputStream, HuffmanTree tree) throws FileNotFoundException {
         this.reader = reader;
@@ -38,9 +38,12 @@ public class HuffmanEncoder {
         this.stream = bitOutputStream;
         this.newLineSep = System.lineSeparator();
         this.tree = tree;
-        this.treeBytes = this.tree.encodeTreeRepInBytes();
-        this.treeStringRep = this.tree.getTreeStringRep()[0];
-        this.treeSymbolsRep = this.tree.getTreeStringRep()[1];
+        //our test class isn't using a real tree.
+        if (this.tree != null) {
+            this.treeBytes = this.tree.encodeTreeRepInBytes();
+            this.treeSymbolsRep = this.tree.getTreeStringRep()[1];
+            this.treeRepEmptyBits = this.tree.getEmptyBitsTreeRep();
+        }
     }
 
     /**
@@ -51,9 +54,10 @@ public class HuffmanEncoder {
      */
     public void encodeBits() {
 
-        ///   this.stream.writeHuffmanTree(this.treeStringRep, this.treeSymbolsRep);
         try {
-            this.stream.writeMetadata(this.treeBytes, treeSymbolsRep, (byte) 0b1, (byte) 0b1);
+            if (this.tree != null) {
+                this.stream.writeMetadata(this.treeBytes, treeSymbolsRep, (byte) this.treeRepEmptyBits);
+            }
             String line = reader.readLine();
             while (line != null) {
                 for (int i = 0; i < line.length(); i++) {

@@ -6,16 +6,11 @@ package com.js.huffman.io;
  * and open the template in the editor.
  */
 
-import com.js.huffman.io.BitOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -45,13 +40,14 @@ public class BitOutputStreamTest {
     public void bitStreamerWritesCorrectly(){
         try {
             String code = "10010110"; //1 byte
+//            streamer.writeMetadata(new byte[1], "abca", (byte)0);
             streamer.writeHuffmanCode(code);
             streamer.flush();
             streamer.close();
         } catch (IOException ex) {
             Logger.getLogger(BitOutputStreamTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Long x = this.file.length();
+        long x = this.file.length()+this.streamer.getMetadataBytes();
         assertTrue(x==1);        
     }
     
