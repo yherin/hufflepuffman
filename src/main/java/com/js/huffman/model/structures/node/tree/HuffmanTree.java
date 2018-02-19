@@ -39,7 +39,7 @@ public class HuffmanTree {
         //    logger.log(Level.INFO, Arrays.toString(this.treeStringRep));
         this.head = root;
     }
-    
+
     private void buildTree(PriorityQueue<Node> que) {
 
         while (que.size() >= 2) {
@@ -144,8 +144,8 @@ public class HuffmanTree {
         logger.log(Level.INFO, "Tree rep: {0}", rep);
 
         int bytesNeeded = calculateRequiredBytes(rep);
-        this.emptyBitsTreeRep = (byte) (rep.length() % 8);
-        logger.log(Level.INFO, "Empty bits{0}", this.emptyBitsTreeRep);
+        this.emptyBitsTreeRep = calculateEmptyBitsInFinalTreeByte(rep);
+        logger.log(Level.INFO, "Tree rep empty bits{0}", this.emptyBitsTreeRep);
         int index = 0;
 
         final byte[] treeBytes = new byte[bytesNeeded];
@@ -153,21 +153,46 @@ public class HuffmanTree {
         return treeBytes;
     }
 
-    private void encodeTreeRepInBytes(final String rep, final byte[] treeBytes, int index) {
-        for (int i = 0; i < rep.length(); i++) {
-            logger.log(Level.INFO, Arrays.toString(treeBytes));
+    private static byte calculateEmptyBitsInFinalTreeByte(final String rep) {
+        if (rep.length() % 8 == 0) {
+            return (byte) 0;
+        } else {
+            return (byte) (8 - (rep.length() % 8));
+        }
+    }
 
+    private void encodeTreeRepInBytes(final String rep, final byte[] treeBytes, int index) {
+        final int repSize = rep.length();
+        final boolean padBits = (repSize % 8 != 0);
+        for (int i = 0; i < repSize; i++) {
+            /*
+            If we have written 8 bits to our byte, move to the next byte.
+            */
+            if ((i % 8 == 0) && i != 0) { //full byte
+                index++;
+            }
             char bit = rep.charAt(i);
             if (bit == '0') {
-                treeBytes[index] = (byte) (treeBytes[index] << 1); //Shift the bit sequence left by 1 place. So 0001 becomes 0010
+                    treeBytes[index] = (byte) (treeBytes[index] << 1);
             } else {
                 treeBytes[index] = (byte) ((byte) (treeBytes[index] << 1) | 1); //Shift the bit sequence left by 1 place and insert a 1. So 0001 becomes 0011
             }
 
-            if ((i % 8 == 0) && i != 0) { //full byte
-                index++;
-            }
+            logger.log(Level.INFO, Arrays.toString(treeBytes));
+           
+
         }
+        /* If we have excess bits, pad the bits to make a full byte.
+         * E.g. our tree rep is 10 characters, each character corresponding
+        to 1 bit. We need 2 bytes, but only 10 bits. So 8 bits in the final byte
+        are 'fake'/'empty'
+         */
+        if (padBits) {
+            final int bitsToPad = 8 - (repSize % 8);
+            final int byteIndex = treeBytes.length - 1;
+            treeBytes[byteIndex] = (byte) (treeBytes[index] << bitsToPad);
+        }
+
     }
 
     private int calculateRequiredBytes(final String rep) {
@@ -178,7 +203,7 @@ public class HuffmanTree {
             if (rep.length() % 8 == 0) {
                 bytesNeeded = (rep.length() / 8);
             } else {
-                bytesNeeded = (rep.length() / 8)+1;
+                bytesNeeded = (rep.length() / 8) + 1;
             }
         }
         return bytesNeeded;
@@ -188,5 +213,4 @@ public class HuffmanTree {
         return emptyBitsTreeRep;
     }
 
-    
 }

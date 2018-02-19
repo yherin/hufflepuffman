@@ -5,7 +5,6 @@
  */
 package com.js.huffman.model.structures.node;
 
-import java.util.Objects;
 
 /**
  *
@@ -52,16 +51,11 @@ public class ReconstructedNode {
     /**
      * Creates a Node representing a branch node in the tree.
      *
-     * @param l the node which will be the left child of the new node.
-     * @param r the node which will be the right child of the new node.
+     * @param keycode
      */
-    public ReconstructedNode(final ReconstructedNode l, final ReconstructedNode r) {
-        this.symbol = ' ';
-
-        this.left = l;
-        this.right = r;
-
-    }
+   public ReconstructedNode(final NodeKey keycode){
+       this.keyCode = keycode;
+   }
 
     @Override
     public final boolean equals(final Object o) {
@@ -140,4 +134,18 @@ public class ReconstructedNode {
         this.isRoot = true;
         assert this.type != NodeType.LEAF;
     }
+
+    public void setParent(ReconstructedNode parent) {
+        this.parent = parent;
+    }
+
+    public void setLeft(ReconstructedNode left) {
+        this.left = left;
+    }
+
+    public void setRight(ReconstructedNode right) {
+        this.right = right;
+    }
+    
+    
 }
