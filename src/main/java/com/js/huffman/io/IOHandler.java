@@ -109,8 +109,8 @@ public class IOHandler {
 
     public void readAndDecode() {
         try {
-            this.extraBits = encoder.getExtraBits();
             Metadata md = fetchMetadata();
+            this.extraBits = md.getFakeBitsEOF();
             DecodingTreeBuilder dtb = new DecodingTreeBuilder(md);
             this.decoded_tree = dtb.buildTree();
             decoder = new HuffmanDecoder(this.writer, this.decoded_tree, this.extraBits, this.bitInputStream);
