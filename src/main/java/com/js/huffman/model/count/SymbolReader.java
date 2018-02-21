@@ -5,7 +5,7 @@
  */
 package com.js.huffman.model.count;
 
-import com.js.huffman.model.structures.node.Node;
+import com.js.huffman.model.structures.node.BuiltNode;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

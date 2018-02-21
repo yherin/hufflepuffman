@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.js.huffman.model.structures.node.tree;
+package com.js.huffman.model.process;
 
-import com.js.huffman.model.process.BitUtils;
-import com.js.huffman.model.process.EncodingTreeBuilder;
-import com.js.huffman.model.process.EncodingTreeBuilderTest;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.NodePriorityComparator;
+import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import java.util.PriorityQueue;
 import org.junit.After;
 import org.junit.Before;
@@ -22,13 +20,14 @@ import static org.junit.Assert.*;
  *
  * @author jack
  */
-public class HuffmanTreeTest {
+public class EncodingTreeBuilderTest {
 
-    PriorityQueue<Node> nodes;
-    NodePriorityComparator comp;
-    HuffmanTree x;
+    private final NodePriorityComparator comp;
+    private final PriorityQueue<Node> nodes;
+    private final HuffmanTree x;
 
-    public HuffmanTreeTest() {
+    public EncodingTreeBuilderTest() {
+
         comp = new NodePriorityComparator();
         nodes = new PriorityQueue<>(comp);
         nodes.add(new BuiltNode('a', 30));
@@ -64,13 +63,13 @@ public class HuffmanTreeTest {
 
     @Test
     public void treeRepIsEncodedCorrectlyInBytes() {
-        NodeKey[] expectedRep = new NodeKey[]{ NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE, NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE,NodeKey.FAKE, NodeKey.FAKE};
+        NodeKey[] expectedRep = new NodeKey[]{NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE, NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE, NodeKey.FAKE, NodeKey.FAKE};
         byte a = x.getTreeByteRep()[0];
         int fake = x.getEmptyBitsTreeByteRep();
         NodeKey[] actualRep = BitUtils.decodeBits(a, fake);
         assertTrue(expectedRep.length == actualRep.length);
         for (int i = 0; i < expectedRep.length; i++) {
-            assertEquals(expectedRep[i],actualRep[i]);
+            assertEquals(expectedRep[i], actualRep[i]);
         }
     }
 }

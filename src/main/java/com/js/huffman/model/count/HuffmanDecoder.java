@@ -6,12 +6,9 @@
 package com.js.huffman.model.count;
 
 import com.js.huffman.io.BitInputStream;
-import com.js.huffman.io.Metadata;
-import com.js.huffman.model.process.TreeBuilder;
 import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -87,11 +84,7 @@ public class HuffmanDecoder {
      * the decoded file's metadata.
      * NOT YET IMPLEMENTED FULLY.
      */
-    public void buildTree(){
-        Metadata md = this.stream.getData();
-        TreeBuilder tb = new TreeBuilder(md);
-        
-    }
+
 
     private void traverseHuffmanTree(NodeKey bit) {
         this.decodeSuccessful = this.tree.descend(bit);

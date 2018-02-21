@@ -5,12 +5,11 @@
  */
 package com.js.huffman.model.process;
 
+import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodePriorityComparator;
-import com.sun.istack.internal.logging.Logger;
 import java.util.HashMap;
 import java.util.PriorityQueue;
-import java.util.logging.Level;
 
 /**
  * Class which builds PriorityQueue<Node>.
@@ -37,7 +36,7 @@ public class QueueBuilder {
     }
 
     private void buildNodeAndAddToQueue(final Character key, final Integer value) {
-        final Node n = new Node(key, value);
+        final Node n = new BuiltNode(key, value);
         que.add(n);
     }
 

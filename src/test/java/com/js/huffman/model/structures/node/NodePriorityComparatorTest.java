@@ -39,9 +39,9 @@ public class NodePriorityComparatorTest {
 
     @Test
     public void lowestCountFirst(){
-        nodes.add(new Node('a', 1));
-        nodes.add(new Node('b',2));
-        nodes.add(new Node('x',312));
+        nodes.add(new BuiltNode('a', 1));
+        nodes.add(new BuiltNode('b',2));
+        nodes.add(new BuiltNode('x',312));
         Node x = nodes.poll();
         Node y = nodes.poll();
         assertTrue("Comparator sorted the order of nodes incorrectly", x.getFreq() <= y.getFreq());

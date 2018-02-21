@@ -14,11 +14,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -51,16 +48,16 @@ public class HuffmanDecoderTest {
     /**
      * Test of decode method, of class HuffmanDecoder.
      */
-    @Test
-    public void testDecode() {
-        try {
-            System.out.println("decode");
-            HuffmanDecoder instance = new HuffmanDecoder(new BufferedWriter(new FileWriter(new File("src/main/resources/samples/decoded_binary.txt"))), io.getPuu(),  0, new BitInputStream(new File(binary)));
-            instance.decode();
-            
-        } catch (IOException ex) {
-            Logger.getLogger(HuffmanDecoderTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    @Test
+//    public void testDecode() {
+//        try {
+//            System.out.println("decode");
+//            HuffmanDecoder instance = new HuffmanDecoder(new BufferedWriter(new FileWriter(new File("src/main/resources/samples/decoded_binary.txt"))), io.getDecoded_tree(),  0, new BitInputStream(new File(binary)));
+//            instance.decode();
+//            
+//        } catch (IOException ex) {
+//            Logger.getLogger(HuffmanDecoderTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
 }

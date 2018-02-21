@@ -5,15 +5,11 @@
  */
 package com.js.huffman.model.process;
 
-import com.js.huffman.model.process.QueueBuilder;
+import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
-import com.js.huffman.model.structures.node.NodePriorityComparator;
 import java.util.HashMap;
 import java.util.PriorityQueue;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -52,7 +48,7 @@ public class QueueBuilderTest {
     }
     
     private void inQueue(Character k, Integer v){
-        assertTrue(this.q.contains(new Node(k,v)));
+        assertTrue(this.q.contains(new BuiltNode(k,v)));
     }
     
     

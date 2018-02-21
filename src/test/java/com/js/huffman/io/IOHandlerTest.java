@@ -7,6 +7,7 @@ package com.js.huffman.io;
 
 import java.io.File;
 import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,11 +17,11 @@ import static org.junit.Assert.*;
  */
 public class IOHandlerTest {
 
-        String inputFilepath = "src/main/resources/samples/test/test1.txt";
-        String outputFilepath = "src/main/resources/samples/decoded_binary.txt";
-        String binaryOut = inputFilepath + ".huff";
-        String binaryIn = binaryOut;
-    
+    String inputFilepath = "src/main/resources/samples/lorem";
+    String outputFilepath = "src/main/resources/samples/decoded_binary.txt";
+    String binaryOut = inputFilepath + ".huff";
+    String binaryIn = binaryOut;
+
     public IOHandlerTest() {
     }
 
@@ -29,23 +30,33 @@ public class IOHandlerTest {
         System.out.println("encode");
         IOHandler instance = new IOHandler();
         instance.setTextInputFile(inputFilepath);
-        
+
         instance.initialiseTextInput();
-        File outputFile = new File(binaryOut);
+        File binaryOutputFile = new File(binaryOut);
         instance.encode();
-        outputFile.delete();
-        outputFile.createNewFile();
-        assertTrue("File should be empty before writing: "+outputFile.length(), outputFile.length()==0);
+        binaryOutputFile.delete();
+        binaryOutputFile.createNewFile();
+        assertTrue("File should be empty before writing: " + binaryOutputFile.length(), binaryOutputFile.length() == 0);
         instance.setBinaryOutputFile(binaryOut);
         instance.initialiseBitOutput();
         instance.write();
-        int metadata = instance.getEncodedMetaDataBytes();
+        File textOutputFile = new File(outputFilepath);
+        textOutputFile.delete();
+        textOutputFile.createNewFile();
+        instance.setBinaryInputFile(binaryIn);
+        instance.setTextOutputFile(outputFilepath);
+        assertTrue("File should be empty before writing: " + textOutputFile.length(), textOutputFile.length() == 0);
+        assertFalse(FileUtils.contentEquals(instance.getOriginalFile(), instance.getDecompressedFile()));
+        instance.initialiseBitInput();
+        instance.initialiseTextOutput();
         /**
          * Our test file has 4 symbols, and 10 times each symbol. Because we
-         * have only 4 symbols, each symbol can be encoded in 2 bits. So 4 
-         * symbols of 2 bits each is 8 bits == 1 byte, and 10 repetitions, so 10 bytes.
+         * have only 4 symbols, each symbol can be encoded in 2 bits. So 4
+         * symbols of 2 bits each is 8 bits == 1 byte, and 10 repetitions, so 10
+         * bytes.
          */
-        assertTrue("File should be 15 bytes. Actual: "+outputFile.length(), outputFile.length()==10+metadata);
+        instance.readAndDecode();
+        assertTrue(FileUtils.contentEquals(instance.getOriginalFile(), instance.getDecompressedFile()));
     }
 
 }

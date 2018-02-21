@@ -6,6 +6,7 @@
 package com.js.huffman.model.process;
 
 import com.js.huffman.model.process.NodeBuilder;
+import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,12 +28,12 @@ public class NodeBuilderTest {
     @Test
     public void nodeBuilderReturnsValidNode(){
        Node a = NodeBuilder.buildLeafNode('@', 1);
-       doAssertions(a, new Node ('@',1));
+       doAssertions(a, new BuiltNode ('@',1));
     }
     
     private void doAssertions(Node x, Node node){
         assertNotNull(x);
-        assertTrue(x.getClass() == Node.class);
+        assertTrue(x instanceof Node);
         assertEquals(x, node);
     }
 }

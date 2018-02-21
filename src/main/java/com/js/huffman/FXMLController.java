@@ -1,10 +1,15 @@
 package com.js.huffman;
 
 import com.js.huffman.model.count.SymbolReader;
+import com.js.huffman.model.structures.node.BuiltNode;
+import com.js.huffman.model.structures.node.Node;
+import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 public class FXMLController implements Initializable {
+
     
     Runner r = new Runner();
 
@@ -32,4 +38,5 @@ public class FXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
 }

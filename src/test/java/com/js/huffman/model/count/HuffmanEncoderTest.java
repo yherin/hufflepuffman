@@ -7,7 +7,7 @@ package com.js.huffman.model.count;
 
 import com.js.huffman.io.BitOutputStream;
 import com.js.huffman.model.count.HuffmanEncoder;
-import com.js.huffman.model.structures.node.Node;
+import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import com.js.huffman.model.structures.node.tree.SymbolConverter;
 import java.io.BufferedReader;
@@ -38,7 +38,7 @@ public class HuffmanEncoderTest {
     private final SymbolConverter converter;
     private final File out = new File("src/main/resources/samples/encoded_binary");
     private final Logger logger = Logger.getLogger(HuffmanEncoderTest.class.getName());
-    private PriorityQueue<Node> nodes;
+    private PriorityQueue<BuiltNode> nodes;
     
     public HuffmanEncoderTest() throws FileNotFoundException {
        

@@ -9,10 +9,8 @@ import com.js.huffman.io.BitOutputStream;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import com.js.huffman.model.structures.node.tree.SymbolConverter;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,9 +38,9 @@ public class HuffmanEncoder {
         this.tree = tree;
         //our test class isn't using a real tree.
         if (this.tree != null) {
-            this.treeBytes = this.tree.encodeTreeRepInBytes();
-            this.treeSymbolsRep = this.tree.getTreeStringRep()[1];
-            this.treeRepEmptyBits = this.tree.getEmptyBitsTreeRep();
+            this.treeBytes = this.tree.getTreeByteRep();
+            this.treeSymbolsRep = this.tree.getTreeSymbolsString();
+            this.treeRepEmptyBits = this.tree.getEmptyBitsTreeByteRep();
         }
     }
 

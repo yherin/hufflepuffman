@@ -5,6 +5,7 @@
  */
 package com.js.huffman.model.process;
 
+import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 
 /**
@@ -26,7 +27,7 @@ public class NodeBuilder {
      * @return the created @Node.
      */
     public static Node buildLeafNode(final Character c, final Integer i) {
-        Node n = new Node(c, i);
+        Node n = new BuiltNode(c, i);
         return n;
     }
 

@@ -27,10 +27,10 @@ public class MetadataBuilder {
      * - The 5th byte contains the number of 'empty bits' in the final byte of
      * the tree representation
      * - The 6th byte contains the number of 'empty bits' in the final byte of this file
-     * - The 7-10th byts are an @int, telling the total length of the string (in bytes)
+     * - The 7-11th bytes are an @int, telling the total length of the string (in bytes)
      * which represents the huffman tree.
      * -The remaining bytes are the symbols used by the huffman tree, where each symbol
-     * is encoded in UTF-8 and therefore occupies 2 bytes.
+     * is encoded in UTF-8 and therefore may occupy between 1 and 4 bytes.
      * 
      * The maximum size of the metadata is currently 4096 bytes.
      * @see Metadata

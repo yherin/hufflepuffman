@@ -9,11 +9,11 @@ import com.js.huffman.io.Metadata;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.ReconstructedNode;
+import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.rmi.runtime.Log;
 
 /**
  * Build a HuffmanTree based on the metadata of the decoded binary file.
@@ -24,17 +24,17 @@ import sun.rmi.runtime.Log;
  *
  * @author jack
  */
-public class TreeBuilder {
+public class DecodingTreeBuilder implements TreeBuilder {
 
     private final Metadata data;
     private final String decoded_symbols;
     private final NodeKey[] nodeKeys;
-    private final ReconstructedNode root;
-    private static final Logger LOG = Logger.getLogger(TreeBuilder.class.getName());
+    private static final Logger LOG = Logger.getLogger(DecodingTreeBuilder.class.getName());
     private int nodeKeyIndex;
     private int symbolsIndex;
+    private Node root;
 
-    public TreeBuilder(final Metadata data) {
+    public DecodingTreeBuilder(final Metadata data) {
         this.nodeKeyIndex = 0;
         this.symbolsIndex = 0;
         this.data = data;
@@ -42,10 +42,25 @@ public class TreeBuilder {
         LOG.log(Level.INFO, (this.decoded_symbols));
         this.nodeKeys = convertBitsToNodeKeys();
         LOG.log(Level.INFO, (Arrays.toString(this.nodeKeys)));
-    //    this.root = new ReconstructedNode(NodeKey.FAKE);
-    //    go(root, nodeKeys, decoded_symbols, 0, 0);
-        this.root = buildFromRoot();
+        //    this.root = new ReconstructedNode(NodeKey.FAKE);
+        //    go(root, nodeKeys, decoded_symbols, 0, 0);
+    }
+
+    @Override
+    public HuffmanTree buildTree() {
+            this.root = buildTreeAndReturnRoot();
+            HuffmanTree tree = new HuffmanTree(root, null, this.decoded_symbols, this.data.getTreeRep(), this.data.getFakeBitsTree());
+            return tree;
+    }
+
+    private Node buildTreeAndReturnRoot() {
+        final Node node = new ReconstructedNode(NodeKey.FAKE);
+        node.setLeft(build());
+        ReconstructedNode right = build();
+        node.setRight(right);
+        node.setRoot();
         LOG.log(Level.INFO, "Reconstructured tree");
+        return node;
     }
 
     /**
@@ -58,7 +73,7 @@ public class TreeBuilder {
         try {
             return new String(this.data.getSymbolBytes(), "UTF-8");
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(TreeBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DecodingTreeBuilder.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -90,84 +105,34 @@ public class TreeBuilder {
         return keys;
     }
 
-    private void go(ReconstructedNode head, final NodeKey[] bits, final String symbols, Integer i, Integer j) {
-        final NodeKey cmd = bits[i];
-        boolean noLeft = head.getLeft() == null;
-        boolean noRight = head.getRight() == null;
-        if (noLeft) {
-            if (cmd == NodeKey.ZERO) {
-                LOG.log(Level.INFO, "Creating BRANCH node with parent {0}", head.toString());
-                head.setLeft(new ReconstructedNode(NodeKey.ZERO));
-                i++;
-                ReconstructedNode left = head.getLeft();
-                left.setParent(head);
-                go(left, bits, symbols, i, j);
-            } else if (cmd == NodeKey.ONE) {
-
-                head.setLeft(new ReconstructedNode(symbols.charAt(j)));
-                i++;
-                j++;
-                ReconstructedNode left = head.getLeft();
-                LOG.log(Level.INFO, "Creating LEAF node" + left.toString() + " with parent {0}", head.toString());
-                left.setParent(head);
-                go(head, bits, symbols, i, j);
-            }
-        }
-        if (noRight) {
-            if (cmd == NodeKey.ZERO) {
-                LOG.log(Level.INFO, "Creating BRANCH node with parent {0}", head.toString());
-
-                head.setRight(new ReconstructedNode(NodeKey.ONE));
-                i++;
-                ReconstructedNode right = head.getRight();
-                right.setParent(head);
-                go(right, bits, symbols, i, j);
-            } else if (cmd == NodeKey.ONE) {
-                head.setRight(new ReconstructedNode(symbols.charAt(j)));
-                i++;
-                j++;
-                ReconstructedNode right = head.getRight();
-                LOG.log(Level.INFO, "Creating LEAF node" + right.toString() + " with parent {0}", head.toString());
-
-                right.setParent(head);
-                go(head, bits, symbols, i, j);
-            }
-        }
-    }
-    
-    private ReconstructedNode buildFromRoot(){
-        final ReconstructedNode root = new ReconstructedNode(NodeKey.FAKE);
-        root.setLeft(build());
-        ReconstructedNode right = build();
-        root.setRight(right);
-        return root;
-    }
-    
-    private  ReconstructedNode build(){
+    private ReconstructedNode build() {
         NodeKey k = getNextKey();
-        if ( k== NodeKey.ONE){
+        if (k == NodeKey.ONE) {
             return new ReconstructedNode(getNextSymbol());
-        } else if (k == NodeKey.ZERO){
+        } else if (k == NodeKey.ZERO) {
             ReconstructedNode c = new ReconstructedNode(NodeKey.ZERO);
             ReconstructedNode l = build();
             ReconstructedNode r = build();
             c.setLeft(l);
             c.setRight(r);
             return c;
+        } else {
+            return null;
         }
-        else return null;
     }
-    
-    private NodeKey getNextKey(){
+
+    private NodeKey getNextKey() {
+        if (this.nodeKeyIndex < this.nodeKeys.length){
         NodeKey x = this.nodeKeys[this.nodeKeyIndex];
         this.nodeKeyIndex++;
         return x;
+        } else return null;
     }
-    
-    private Character getNextSymbol(){
-        Character c =  this.decoded_symbols.charAt(this.symbolsIndex);
+
+    private Character getNextSymbol() {
+        Character c = this.decoded_symbols.charAt(this.symbolsIndex);
         this.symbolsIndex++;
         return c;
     }
-    
+
 }
