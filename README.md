@@ -10,19 +10,16 @@ Read more: https://en.wikipedia.org/wiki/Huffman_coding
 
 ## Usage
 
-Entry point is `src/main/java/com/js/huffman/Runner#execute()`.
-Preset file is `lorem`, which is 1kb of lorem ipsum. To supply your own, simply give the file path as a String in the entry point above.
-Clean & build. Then Run.
-
-
+Clean & build, then run. Basic GUI where you can specify a file to compress or decompress. Only _absolute_ file paths are accepted. The program outputs in the following way: compressed binary gets `.huff` file extension. Decompressed files get  `originalFileName_decomp.txt`.
 
 ## Status
-Compression and decompression is performed in one operation, when clicking the button in the UI.
 - To inspect the compressed binary, use `hexdump inputFileName.huff`
 - To compare the input file and decoded binary, use `cmp -b inputFileName decoded_binary.txt`
  - No output indicates that the files are identical. To test, modify the files, so that one is different, and then re-execute the command.
  - Use `ls -al` to inspect the sizes of the files.
 
+## Known issues
+- Fails to write new line at EOF when decompressing.
 
 ## Docs
 
@@ -40,4 +37,8 @@ Compression and decompression is performed in one operation, when clicking the b
 
 [Week 5 report](documentation/weekly-reports/week5.md)
 
+[Week 6 report](documentation/weekly-reports/week6.md)
+
 [Working hours log](documentation/weekly-reports/log.md)
+
+[Implementation document](huffman-impl.pdf)
