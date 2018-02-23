@@ -22,6 +22,7 @@ public class NodeBuilder {
 
     /**
      * Builds and returns a Node.
+     *
      * @param c the character that the node represents.
      * @param i the frequency of the character
      * @return the created @Node.

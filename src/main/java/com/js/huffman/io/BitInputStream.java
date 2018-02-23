@@ -52,17 +52,18 @@ public class BitInputStream extends FileInputStream {
     }
 
     /**
-     * Get the metadata from our file. Our metadata consists of the following structure:
-     * - The FIRST 4 bytes of metadata are an @int, telling the total bytes of the metadata.
-     * - The 5th byte contains the number of 'empty bits' in the final byte of
-     * the tree representation
-     * - The 6th byte contains the number of 'empty bits' in the final byte of this file
-     * - The 7-10th byts are an @int, telling the total length of the string (in bytes)
-     * which represents the huffman tree.
-     * -The remaining bytes are the symbols used by the huffman tree, where each symbol
-     * is encoded in UTF-8 and therefore occupies 2 bytes.
-     * 
+     * Get the metadata from our file. Our metadata consists of the following
+     * structure: - The FIRST 4 bytes of metadata are an @int, telling the total
+     * bytes of the metadata. - The 5th byte contains the number of 'empty bits'
+     * in the final byte of the tree representation - The 6th byte contains the
+     * number of 'empty bits' in the final byte of this file - The 7-10th byts
+     * are an @int, telling the total length of the string (in bytes) which
+     * represents the huffman tree. -The remaining bytes are the symbols used by
+     * the huffman tree, where each symbol is encoded in UTF-8 and therefore
+     * occupies 2 bytes.
+     *
      * The maximum size of the metadata is currently 4096 bytes.
+     *
      * @see MetadataBuilder
      * @see Metadata
      */
@@ -72,8 +73,8 @@ public class BitInputStream extends FileInputStream {
             this.fc.read(buffer);
             this.buffer.flip();
             final int MD_SIZE = this.buffer.getInt() - 4; //we read 4 bytes.
-            this.readBytes += MD_SIZE+4;
-            this.remainingBytes -= MD_SIZE+4;
+            this.readBytes += MD_SIZE + 4;
+            this.remainingBytes -= MD_SIZE + 4;
             this.buffer = ByteBuffer.allocate(MD_SIZE);
             this.fc.read(buffer);
             this.buffer.flip();
@@ -90,9 +91,11 @@ public class BitInputStream extends FileInputStream {
         }
 
     }
+
     /**
      * Read a byte contained in this ByteBuffer.
-     * @return a NodeKey[] representing the bits in this byte, or null if no 
+     *
+     * @return a NodeKey[] representing the bits in this byte, or null if no
      * bytes are available to read.
      */
     public NodeKey[] readByte() {
@@ -115,14 +118,16 @@ public class BitInputStream extends FileInputStream {
     }
 
     /**
-     * Read a single byte, incrementing counters and detemining if this is the final byte.
+     * Read a single byte, incrementing counters and detemining if this is the
+     * final byte.
+     *
      * @return NodeKey[] representing the bits in this byte.
      */
     private NodeKey[] readSingleByte() {
         byte x = this.buffer.get();
         readBytes++;
         remainingBytes--;
-       // logger.log(Level.INFO, "remaning bytes: {0}", remainingBytes);
+        // logger.log(Level.INFO, "remaning bytes: {0}", remainingBytes);
         if (remainingBytes == 0) {
             logger.log(Level.INFO, "FINAL BIT");
             return BitUtils.decodeBits(x, this.emptyBits);
@@ -132,7 +137,7 @@ public class BitInputStream extends FileInputStream {
     }
 
     /**
-     * 
+     *
      * @return the number of byts successfully read, -1 if EOF.
      */
     private int readBytesToBuffer() {
@@ -162,5 +167,4 @@ public class BitInputStream extends FileInputStream {
         return data;
     }
 
-    
 }

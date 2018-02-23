@@ -64,13 +64,13 @@ public class HuffmanTreeTest {
 
     @Test
     public void treeRepIsEncodedCorrectlyInBytes() {
-        NodeKey[] expectedRep = new NodeKey[]{ NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE, NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE,NodeKey.FAKE, NodeKey.FAKE};
+        NodeKey[] expectedRep = new NodeKey[]{NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE, NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE, NodeKey.FAKE, NodeKey.FAKE};
         byte a = x.getTreeByteRep()[0];
         int fake = x.getEmptyBitsTreeByteRep();
         NodeKey[] actualRep = BitUtils.decodeBits(a, fake);
         assertTrue(expectedRep.length == actualRep.length);
         for (int i = 0; i < expectedRep.length; i++) {
-            assertEquals(expectedRep[i],actualRep[i]);
+            assertEquals(expectedRep[i], actualRep[i]);
         }
     }
 }

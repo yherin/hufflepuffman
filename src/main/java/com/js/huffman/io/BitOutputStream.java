@@ -42,8 +42,6 @@ public class BitOutputStream extends FileOutputStream {
     public BitOutputStream(final File file) throws FileNotFoundException {
         super(file);
         this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
-        
-        
 
     }
 
@@ -67,6 +65,7 @@ public class BitOutputStream extends FileOutputStream {
 
     /**
      * Write our metadata to our binary file before the encoded data.
+     *
      * @param treeRep byte representation of our huffman tree
      * @param symbols String of all symbols in the huffman tree.
      * @param emptyTreeBits no. of empty bits in the final byte of @treeRep
@@ -83,29 +82,28 @@ public class BitOutputStream extends FileOutputStream {
             Logger.getLogger(BitOutputStream.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
-        
+
     }
-    
+
     /**
      * Not yet in use. Seems to cause NPE. Needs more debugging.
      */
-    private void writeNumberOfEmptyEOFBitsToMetaData(){
+    private void writeNumberOfEmptyEOFBitsToMetaData() {
         try {
             final long pos = this.fc.position();
             this.fc.position(0x5); //5th byte contains this data
             logger.log(Level.INFO, "Trying to write {0} to byte at index {1}", new Object[]{this.endExtraBits, 0x5});
             ByteBuffer bits = ByteBuffer.allocate(1);
-            assert this.endExtraBits<8;
-            bits.put((byte)this.endExtraBits);
+            assert this.endExtraBits < 8;
+            bits.put((byte) this.endExtraBits);
             bits.flip();
             this.fc.write(bits);
             this.fc.position(pos);
         } catch (IOException ex) {
             Logger.getLogger(BitOutputStream.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
 
+    }
 
     /**
      * 'Add' a bit to our byte, writing the byte to file if it is a full byte.
@@ -132,7 +130,7 @@ public class BitOutputStream extends FileOutputStream {
 
     private void addByte(final byte x) {
         if (this.buffer.hasRemaining()) {
-       //        logger.log(Level.INFO, "Added byte to buffer");
+            //        logger.log(Level.INFO, "Added byte to buffer");
             this.buffer.put(x);
         } else {
             //   logger.log(Level.INFO, "Writing buffer to file");
@@ -152,7 +150,7 @@ public class BitOutputStream extends FileOutputStream {
     private void forceWriteBuffer() {
         if (this.buffer.limit() != this.buffer.remaining()) {
             try {
-                logger.log(Level.INFO, "Forcing buffer to file with "+buffer.position()+" bytes");
+                logger.log(Level.INFO, "Forcing buffer to file with " + buffer.position() + " bytes");
                 this.buffer.flip();
                 this.fc.write(this.buffer);
 
@@ -217,5 +215,4 @@ public class BitOutputStream extends FileOutputStream {
         return metadataBytes;
     }
 
-    
 }

@@ -200,12 +200,12 @@ public class IOHandler {
         Metadata md = this.bitInputStream.getData();
         return md;
     }
-    
-    public File getOriginalFile(){
+
+    public File getOriginalFile() {
         return this.inputHandler.getFile();
     }
-    
-    public File getDecompressedFile(){
+
+    public File getDecompressedFile() {
         return this.outputHandler.getFile();
     }
 

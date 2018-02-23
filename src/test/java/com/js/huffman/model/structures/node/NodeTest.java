@@ -13,18 +13,16 @@ import static org.junit.Assert.*;
  * @author jack
  */
 public class NodeTest {
-    
-   
-    
+
     @Test
-    public void testNodeType(){
+    public void testNodeType() {
         Node n = new BuiltNode('a', 10);
         n.determineNodeType();
-        assertTrue(n.type==NodeType.LEAF);
+        assertTrue(n.type == NodeType.LEAF);
         Node m = new ReconstructedNode(NodeKey.ONE);
         m.determineNodeType();
-        assertTrue(m.type==NodeType.BRANCH);
-        
+        assertTrue(m.type == NodeType.BRANCH);
+
     }
-    
+
 }

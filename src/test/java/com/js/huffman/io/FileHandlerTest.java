@@ -19,39 +19,33 @@ import static org.junit.Assert.*;
  * @author jack
  */
 public class FileHandlerTest {
-    
+
     InputFileHandler inputFileHandler;
     OutputFileHandler outputFileHandler;
-    
+
     public FileHandlerTest() {
     }
-    
-    
+
     @Test
-    public void inputFileNotReadyWhenFileNotSet(){
+    public void inputFileNotReadyWhenFileNotSet() {
         inputFileHandler = new InputFileHandler();
         assertFalse(inputFileHandler.isReady());
-        
+
     }
-    
+
     @Test
-    public void inputFileHandlerNotReadyWhenFileDoesNotExist(){
+    public void inputFileHandlerNotReadyWhenFileDoesNotExist() {
         inputFileHandler = new InputFileHandler();
         inputFileHandler.setFile("~/thisfiledoesnotexistonmyfilesystem.eze");
         assertFalse(inputFileHandler.isReady());
     }
-    
-    
-    
+
     @Test
-    public void outputFileNotReadyWhenFileNotSet(){
+    public void outputFileNotReadyWhenFileNotSet() {
         outputFileHandler = new OutputFileHandler();
         assertFalse(outputFileHandler.isReady());
         outputFileHandler.setFile("~/output.txt");
         assertTrue(outputFileHandler.isReady());
     }
-    
-    
-
 
 }

@@ -15,19 +15,19 @@ import java.util.logging.Logger;
  * @param <K>
  * @param <V>
  */
-public class EntryImpl<K extends Object, V extends Object>  implements Map.Entry {
+public class EntryImpl<K extends Object, V extends Object> implements Map.Entry {
 
     private static final Logger LOG = Logger.getLogger(EntryImpl.class.getName());
-    private EntryImpl<K,V> next;
+    private EntryImpl<K, V> next;
     private K key;
     private V value;
-    
-    public EntryImpl(final K key, V value){
+
+    public EntryImpl(final K key, V value) {
         this.next = null;
         this.key = key;
         this.value = value;
     }
-    
+
     @Override
     public K getKey() {
         return this.key;
@@ -35,14 +35,14 @@ public class EntryImpl<K extends Object, V extends Object>  implements Map.Entry
 
     @Override
     public V getValue() {
-       return this.value;
+        return this.value;
     }
 
     @Override
     public V setValue(Object v) {
         try {
             this.value = (V) v;
-        } catch (ClassCastException e){
+        } catch (ClassCastException e) {
             LOG.log(Level.SEVERE, "Set value failed to cast", e);
             return null;
         }
@@ -57,10 +57,8 @@ public class EntryImpl<K extends Object, V extends Object>  implements Map.Entry
         this.next = next;
     }
 
-    public final boolean hasNext(){
+    public final boolean hasNext() {
         return this.next != null;
     }
-    
-     
-    
+
 }

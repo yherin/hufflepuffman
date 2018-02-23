@@ -19,25 +19,24 @@ import java.util.logging.Logger;
  *
  * @author jack
  */
-public class EncodingTreeBuilder implements TreeBuilder{
+public class EncodingTreeBuilder implements TreeBuilder {
 
     Node root;
     private static final Logger LOG = Logger.getLogger(EncodingTreeBuilder.class.getName());
     private byte emptyBitsTreeRep;
-    private final HashMap<Character,String> codes;
+    private final HashMap<Character, String> codes;
     private final PriorityQueue<Node> que;
-    private String treeStringRep; 
+    private String treeStringRep;
     private String treeSymbols;
     private byte[] treeByteRep;
-    
-    public EncodingTreeBuilder(PriorityQueue<Node> que){
+
+    public EncodingTreeBuilder(PriorityQueue<Node> que) {
         codes = new HashMap<>();
         this.que = que;
         this.treeStringRep = "";
         this.treeSymbols = "";
     }
-    
-    
+
     @Override
     public HuffmanTree buildTree() {
         this.root = buildTreeStructure(que);
@@ -48,9 +47,7 @@ public class EncodingTreeBuilder implements TreeBuilder{
         HuffmanTree tree = new HuffmanTree(root, codes, treeSymbols, treeByteRep, emptyBitsTreeRep);
         return tree;
     }
-    
 
-    
     private static byte calculateEmptyBitsInFinalTreeByte(final String rep) {
         if (rep.length() % 8 == 0) {
             return (byte) 0;
@@ -58,8 +55,7 @@ public class EncodingTreeBuilder implements TreeBuilder{
             return (byte) (8 - (rep.length() % 8));
         }
     }
-    
-    
+
     //    public HuffmanTree(final Node root){
     //        this.root = root;
     //        this.head = root;
@@ -120,7 +116,7 @@ public class EncodingTreeBuilder implements TreeBuilder{
     }
 
     private byte[] encodeTreeBytes(final String rep) {
-       
+
 //        LOG.log(Level.INFO, "Tree rep: {0}", rep);
         int bytesNeeded = calculateRequiredBytes(rep);
         this.emptyBitsTreeRep = calculateEmptyBitsInFinalTreeByte(rep);
@@ -161,6 +157,5 @@ public class EncodingTreeBuilder implements TreeBuilder{
             treeBytes[byteIndex] = (byte) (treeBytes[index] << bitsToPad);
         }
     }
-
 
 }

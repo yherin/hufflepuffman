@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @author jack
  */
 public class Metadata {
-    
+
     private final int METADATA_SIZE;
     private final byte[] symbolBytes;
     private final byte fakeBitsTree;
@@ -20,7 +20,6 @@ public class Metadata {
     private final byte[] treeRep;
     private static final Logger LOG = Logger.getLogger(Metadata.class.getName());
 
-    
     public Metadata(int METADATA_SIZE, byte[] symbolBytes, byte fakeBitsTree, byte fakeBitsEOF, byte[] treeRep) {
         this.METADATA_SIZE = METADATA_SIZE;
         this.symbolBytes = symbolBytes;
@@ -48,9 +47,5 @@ public class Metadata {
     public byte[] getTreeRep() {
         return treeRep;
     }
-    
-    
-    
-    
-    
+
 }

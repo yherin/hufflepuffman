@@ -20,18 +20,17 @@ import static org.junit.Assert.*;
  * @author jack
  */
 public class NodeBuilderTest {
-    
+
     public NodeBuilderTest() {
     }
-    
 
     @Test
-    public void nodeBuilderReturnsValidNode(){
-       Node a = NodeBuilder.buildLeafNode('@', 1);
-       doAssertions(a, new BuiltNode ('@',1));
+    public void nodeBuilderReturnsValidNode() {
+        Node a = NodeBuilder.buildLeafNode('@', 1);
+        doAssertions(a, new BuiltNode('@', 1));
     }
-    
-    private void doAssertions(Node x, Node node){
+
+    private void doAssertions(Node x, Node node) {
         assertNotNull(x);
         assertTrue(x instanceof Node);
         assertEquals(x, node);

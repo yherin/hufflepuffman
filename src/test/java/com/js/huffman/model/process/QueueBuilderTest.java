@@ -22,7 +22,7 @@ public class QueueBuilderTest {
     HashMap<Character, Integer> map;
     PriorityQueue<Node> q;
     QueueBuilder qb;
-    
+
     @Before
     public void setup() {
         map = new HashMap();
@@ -34,22 +34,21 @@ public class QueueBuilderTest {
         map.put('f', 6);
         qb = new QueueBuilder();
         q = qb.buildAndReturnQueue(map);
-        
+
     }
 
     @Test
     public void queueIsCorrectLength() {
         assertTrue(this.map.size() == this.q.size());
     }
-    
+
     @Test
-    public void allKeyValuePairsInQueue(){
-        map.forEach((k,v) -> inQueue(k,v));
+    public void allKeyValuePairsInQueue() {
+        map.forEach((k, v) -> inQueue(k, v));
     }
-    
-    private void inQueue(Character k, Integer v){
-        assertTrue(this.q.contains(new BuiltNode(k,v)));
+
+    private void inQueue(Character k, Integer v) {
+        assertTrue(this.q.contains(new BuiltNode(k, v)));
     }
-    
-    
+
 }

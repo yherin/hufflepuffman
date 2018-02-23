@@ -10,5 +10,5 @@ package com.js.huffman.model.structures.node;
  * @author jack
  */
 public enum NodeType {
-    LEAF,BRANCH,UNPLACED
+    LEAF, BRANCH, UNPLACED
 }

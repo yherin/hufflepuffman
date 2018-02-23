@@ -12,7 +12,7 @@ import com.js.huffman.model.structures.node.tree.HuffmanTree;
  * @author jack
  */
 public interface TreeBuilder {
-    
-public abstract HuffmanTree buildTree();
-    
+
+    public abstract HuffmanTree buildTree();
+
 }

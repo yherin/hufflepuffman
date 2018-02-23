@@ -20,34 +20,32 @@ import static org.junit.Assert.*;
  * @author jack
  */
 public class NodePriorityComparatorTest {
-    
+
     PriorityQueue<Node> nodes;
-    
+
     public NodePriorityComparatorTest() {
         this.nodes = new PriorityQueue<>(new NodePriorityComparator());
     }
-    
-    
+
     @Before
     public void setUp() {
-    
+
     }
-    
+
     @After
     public void tearDown() {
     }
 
     @Test
-    public void lowestCountFirst(){
+    public void lowestCountFirst() {
         nodes.add(new BuiltNode('a', 1));
-        nodes.add(new BuiltNode('b',2));
-        nodes.add(new BuiltNode('x',312));
+        nodes.add(new BuiltNode('b', 2));
+        nodes.add(new BuiltNode('x', 312));
         Node x = nodes.poll();
         Node y = nodes.poll();
         assertTrue("Comparator sorted the order of nodes incorrectly", x.getFreq() <= y.getFreq());
-        assertTrue(x.getFreq()==1);
-        assertTrue(y.getFreq()==2);
+        assertTrue(x.getFreq() == 1);
+        assertTrue(y.getFreq() == 2);
     }
-    
 
 }

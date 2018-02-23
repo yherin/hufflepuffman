@@ -22,16 +22,17 @@ import org.junit.Test;
  * @author jack
  */
 public class HuffmanDecoderTest {
-    
+
     private final String binary = "src/main/resources/samples/encoded_binary";
-    
+
     private final IOHandler io;
+
     public HuffmanDecoderTest() {
         io = new IOHandler();
         io.setTextInputFile("src/main/resources/samples/test/test1.txt");
-        
+
     }
-    
+
     @Before
     public void setUp() {
         io.initialiseTextInput();
@@ -40,7 +41,7 @@ public class HuffmanDecoderTest {
         io.initialiseBitOutput();
         io.write();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -59,5 +60,4 @@ public class HuffmanDecoderTest {
 //            Logger.getLogger(HuffmanDecoderTest.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-    
 }

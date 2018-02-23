@@ -48,9 +48,9 @@ public class DecodingTreeBuilder implements TreeBuilder {
 
     @Override
     public HuffmanTree buildTree() {
-            this.root = buildTreeAndReturnRoot();
-            HuffmanTree tree = new HuffmanTree(root, null, this.decoded_symbols, this.data.getTreeRep(), this.data.getFakeBitsTree());
-            return tree;
+        this.root = buildTreeAndReturnRoot();
+        HuffmanTree tree = new HuffmanTree(root, null, this.decoded_symbols, this.data.getTreeRep(), this.data.getFakeBitsTree());
+        return tree;
     }
 
     private Node buildTreeAndReturnRoot() {
@@ -122,11 +122,13 @@ public class DecodingTreeBuilder implements TreeBuilder {
     }
 
     private NodeKey getNextKey() {
-        if (this.nodeKeyIndex < this.nodeKeys.length){
-        NodeKey x = this.nodeKeys[this.nodeKeyIndex];
-        this.nodeKeyIndex++;
-        return x;
-        } else return null;
+        if (this.nodeKeyIndex < this.nodeKeys.length) {
+            NodeKey x = this.nodeKeys[this.nodeKeyIndex];
+            this.nodeKeyIndex++;
+            return x;
+        } else {
+            return null;
+        }
     }
 
     private Character getNextSymbol() {

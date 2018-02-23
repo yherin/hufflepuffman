@@ -5,7 +5,6 @@ package com.js.huffman.io;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,11 +18,11 @@ import static org.junit.Assert.*;
  * @author jack
  */
 public class BitOutputStreamTest {
-    
+
     BitOutputStream streamer;
     String test_dir;
     File file;
-    
+
     public BitOutputStreamTest() {
         try {
             test_dir = "src/main/resources/samples/test/";
@@ -34,10 +33,9 @@ public class BitOutputStreamTest {
             Logger.getLogger(BitOutputStreamTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     @Test
-    public void bitStreamerWritesCorrectly(){
+    public void bitStreamerWritesCorrectly() {
         try {
             String code = "10010110"; //1 byte
 //            streamer.writeMetadata(new byte[1], "abca", (byte)0);
@@ -47,8 +45,8 @@ public class BitOutputStreamTest {
         } catch (IOException ex) {
             Logger.getLogger(BitOutputStreamTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        long x = this.file.length()+this.streamer.getMetadataBytes();
-        assertTrue(x==1);        
+        long x = this.file.length() + this.streamer.getMetadataBytes();
+        assertTrue(x == 1);
     }
-    
+
 }

@@ -131,13 +131,11 @@ public abstract class Node {
     }
 
     public final void setKeyCode(NodeKey keyCode) {
-        if (keyCode != NodeKey.FAKE){
+        if (keyCode != NodeKey.FAKE) {
             IllegalArgumentException e = new IllegalArgumentException("Not allowed to set non fake node keys.");
             throw e;
         }
         this.keyCode = keyCode;
     }
-    
-    
-    
+
 }

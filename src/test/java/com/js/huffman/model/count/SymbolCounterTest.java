@@ -26,27 +26,27 @@ import static org.junit.Assert.*;
  * @author jack
  */
 public class SymbolCounterTest {
-    
+
     private final String test_dir;
-   
+
     private File empty;
     private File numbers;
     private File spaces;
     private File symbols;
     private File tenThousandCharacters;
-    
+
     public SymbolCounterTest() {
         this.test_dir = "src/main/resources/samples/test/";
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         this.empty = new File(test_dir + "testEmpty.txt");
@@ -55,8 +55,8 @@ public class SymbolCounterTest {
         this.symbols = new File(test_dir + "symbols");
         this.tenThousandCharacters = new File(test_dir + "large.txt");
     }
-    
-    private SymbolReader createCounter(File file){
+
+    private SymbolReader createCounter(File file) {
         SymbolReader sc;
         try {
             sc = new SymbolReader(file);
@@ -66,35 +66,34 @@ public class SymbolCounterTest {
         }
         throw new UnsupportedOperationException("Failed to create a symbol counter");
     }
-    
+
     @Test
-    public void emptyFile(){
+    public void emptyFile() {
         SymbolReader sc = createCounter(this.empty);
-        HashMap<Character,Integer> map = sc.count();
-        assertTrue("HashMap should be empty after counting empty file",map.isEmpty());
+        HashMap<Character, Integer> map = sc.count();
+        assertTrue("HashMap should be empty after counting empty file", map.isEmpty());
     }
-    
-    
+
     @Test
-    public void onlySymbols(){
+    public void onlySymbols() {
         SymbolReader sc = createCounter(this.symbols);
-        HashMap<Character,Integer> map = sc.count();
-        Object[] chars =  map.keySet().toArray();
-        for (Object c : chars){
-           String s = c.toString();
-           assertTrue("Only symbols should be present in the map",s.matches("[^a-zA-Z0-9]"));
+        HashMap<Character, Integer> map = sc.count();
+        Object[] chars = map.keySet().toArray();
+        for (Object c : chars) {
+            String s = c.toString();
+            assertTrue("Only symbols should be present in the map", s.matches("[^a-zA-Z0-9]"));
         }
     }
-    
+
     @Test
-    public void onlyNumbers(){
+    public void onlyNumbers() {
         SymbolReader sc = createCounter(this.numbers);
-        HashMap<Character,Integer> map = sc.count();
-        Object[] chars =  map.keySet().toArray();
-        for (Object c : chars){
-           String s = c.toString();
-           assertTrue("Only numbers should be present in the map",s.matches("\\d"));
+        HashMap<Character, Integer> map = sc.count();
+        Object[] chars = map.keySet().toArray();
+        for (Object c : chars) {
+            String s = c.toString();
+            assertTrue("Only numbers should be present in the map", s.matches("\\d"));
         }
     }
-     
+
 }

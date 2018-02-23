@@ -22,19 +22,17 @@ public class HuffmanTree {
     static final Logger LOG = Logger.getLogger(HuffmanTree.class.getName());
     private final String treeSymbolsRep;
     private final byte[] treeByteRep;
-    private final  byte emptyBitsTreeByteRep;
+    private final byte emptyBitsTreeByteRep;
 
-    
-    public HuffmanTree(final Node root, final HashMap<Character, String> codes, final String treeSymbolsRep, final byte[] treeByteRep, final byte emptyBitsTreeByteRep){
+    public HuffmanTree(final Node root, final HashMap<Character, String> codes, final String treeSymbolsRep, final byte[] treeByteRep, final byte emptyBitsTreeByteRep) {
         this.root = root;
         this.head = root;
         this.codes = codes;
         this.treeSymbolsRep = treeSymbolsRep;
         this.treeByteRep = treeByteRep;
         this.emptyBitsTreeByteRep = emptyBitsTreeByteRep;
-        
+
     }
-    
 
     /**
      *
@@ -89,7 +87,6 @@ public class HuffmanTree {
         return treeSymbolsRep;
     }
 
-
     public byte[] getTreeByteRep() {
         return treeByteRep;
     }
@@ -97,7 +94,5 @@ public class HuffmanTree {
     public byte getEmptyBitsTreeByteRep() {
         return emptyBitsTreeByteRep;
     }
-    
-    
 
 }

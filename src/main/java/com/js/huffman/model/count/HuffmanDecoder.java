@@ -25,7 +25,7 @@ public class HuffmanDecoder {
     private final HuffmanTree tree;
     private boolean decodeSuccessful;
     final Logger logger = Logger.getLogger(HuffmanDecoder.class.getName());
-    
+
     private int bitPos;
 
     public HuffmanDecoder(BufferedWriter writer, HuffmanTree tree, int extraBits, BitInputStream bitInputStream) throws FileNotFoundException {
@@ -36,10 +36,12 @@ public class HuffmanDecoder {
         this.stream.setEmptyBits(extraBits);
 
     }
+
     /**
      * Decode the binary file, writing to the output file specified in the
-     * @BufferedWriter given in this class' constructor.
-     * The method is too long and will be refactored later.
+     *
+     * @BufferedWriter given in this class' constructor. The method is too long
+     * and will be refactored later.
      */
     public void decode() {
         boolean decode = true;
@@ -49,7 +51,7 @@ public class HuffmanDecoder {
             if (singleByte != null) {
                 while (this.bitPos < 8) {
                     NodeKey bit = singleByte[bitPos];
-                  //   logger.log(Level.INFO, "bit: "+bit);
+                    //   logger.log(Level.INFO, "bit: "+bit);
                     if (bit != NodeKey.FAKE) {
                         traverseHuffmanTree(bit);
 
@@ -57,7 +59,7 @@ public class HuffmanDecoder {
                             try {
                                 char c = this.tree.getSymbol();
                                 //       String msg = "Writing "+c+" to decoded file.";
-                                   //    logger.log(Level.INFO, msg);
+                                //    logger.log(Level.INFO, msg);
                                 this.writer.write(c);
                                 this.decodeSuccessful = false;
                             } catch (IOException ex) {
@@ -78,14 +80,11 @@ public class HuffmanDecoder {
             }
         }
     }
-    
+
     /**
      * Attempt to reconstruct a huffman tree based on the information encoded in
-     * the decoded file's metadata.
-     * NOT YET IMPLEMENTED FULLY.
+     * the decoded file's metadata. NOT YET IMPLEMENTED FULLY.
      */
-
-
     private void traverseHuffmanTree(NodeKey bit) {
         this.decodeSuccessful = this.tree.descend(bit);
 

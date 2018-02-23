@@ -11,15 +11,15 @@ import java.io.File;
  *
  * @author jack
  */
-public class OutputFileHandler extends FileHandler{
+public class OutputFileHandler extends FileHandler {
 
-   private File file;
+    private File file;
 
     @Override
     public boolean isReady() {
 
-        if (!this.hasFileSet()){
-            return false; 
+        if (!this.hasFileSet()) {
+            return false;
         }
         return true;
     }

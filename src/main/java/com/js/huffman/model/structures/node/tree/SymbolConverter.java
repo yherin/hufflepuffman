@@ -12,16 +12,15 @@ import java.util.HashMap;
  * @author jack
  */
 public class SymbolConverter {
- 
+
     private final HashMap<Character, String> codes;
-    
-    public SymbolConverter(final HashMap<Character, String> codes){
+
+    public SymbolConverter(final HashMap<Character, String> codes) {
         this.codes = codes;
     }
-    
-    public String characterToHuffmanCode(final Character c){
+
+    public String characterToHuffmanCode(final Character c) {
         return this.codes.get(c);
-              
-        
+
     }
 }

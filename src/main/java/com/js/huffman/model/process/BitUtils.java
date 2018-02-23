@@ -18,8 +18,6 @@ public class BitUtils {
 
     private static final Logger LOG = Logger.getLogger(BitUtils.class.getName());
 
-    
-    
     /**
      * Evaluate the bits in the given byte, returning an array representing a
      * binary string version of the given byte.
@@ -52,6 +50,5 @@ public class BitUtils {
         //
         return bits;
     }
-    
-    
+
 }

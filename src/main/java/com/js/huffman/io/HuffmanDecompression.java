@@ -9,7 +9,7 @@ package com.js.huffman.io;
  *
  * @author jack
  */
-public class HuffmanDecompression implements Runnable{
+public class HuffmanDecompression implements Runnable {
 
     private final IOHandler io;
     private final String outputFilepath;

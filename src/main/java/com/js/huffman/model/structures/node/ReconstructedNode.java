@@ -5,12 +5,11 @@
  */
 package com.js.huffman.model.structures.node;
 
-
 /**
  *
  * @author jack
  */
-public class ReconstructedNode extends Node{
+public class ReconstructedNode extends Node {
 
     /**
      * Creates a Node representing a leaf node in the tree.
@@ -19,7 +18,7 @@ public class ReconstructedNode extends Node{
      * @param count the frequency of this symbol.
      */
     public ReconstructedNode(final Character symbol) {
-        super(symbol,null);
+        super(symbol, null);
         assert (symbol != null);
         super.determineNodeType();
     }
@@ -29,11 +28,11 @@ public class ReconstructedNode extends Node{
      *
      * @param keycode
      */
-   public ReconstructedNode(final NodeKey keycode){
-       super(null,null);
-       this.keyCode = keycode;
-       super.determineNodeType();
-   }
+    public ReconstructedNode(final NodeKey keycode) {
+        super(null, null);
+        this.keyCode = keycode;
+        super.determineNodeType();
+    }
 
     @Override
     public final String toString() {
@@ -44,5 +43,4 @@ public class ReconstructedNode extends Node{
         }
     }
 
-    
 }
