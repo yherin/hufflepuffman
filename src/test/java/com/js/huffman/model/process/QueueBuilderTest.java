@@ -9,7 +9,6 @@ import com.js.huffman.model.structures.map.EntryImpl;
 import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
-import java.util.HashMap;
 import java.util.PriorityQueue;
 import org.junit.Before;
 import org.junit.Test;
