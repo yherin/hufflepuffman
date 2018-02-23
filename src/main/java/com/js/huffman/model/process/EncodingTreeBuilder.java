@@ -10,6 +10,7 @@ import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.NodeType;
+import com.js.huffman.model.structures.node.heap.NodeHeap;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
@@ -25,12 +26,12 @@ public class EncodingTreeBuilder implements TreeBuilder {
     private static final Logger LOG = Logger.getLogger(EncodingTreeBuilder.class.getName());
     private byte emptyBitsTreeRep;
     private final HuffmanHashMap<Character, String> codes;
-    private final PriorityQueue<Node> que;
+    private final NodeHeap que;
     private String treeStringRep;
     private String treeSymbols;
     private byte[] treeByteRep;
 
-    public EncodingTreeBuilder(PriorityQueue<Node> que) {
+    public EncodingTreeBuilder(NodeHeap que) {
         codes = new HuffmanHashMap<>();
         this.que = que;
         this.treeStringRep = "";
@@ -60,8 +61,8 @@ public class EncodingTreeBuilder implements TreeBuilder {
     //        this.root = root;
     //        this.head = root;
     //    }
-    private Node buildTreeStructure(PriorityQueue<Node> que) {
-        while (que.size() >= 2) {
+    private Node buildTreeStructure(NodeHeap que) {
+        while (que.getSize()>= 2) {
             Node firstNode = que.poll();
             Node secondNode = que.poll();
             Node joint = new BuiltNode(firstNode, secondNode);

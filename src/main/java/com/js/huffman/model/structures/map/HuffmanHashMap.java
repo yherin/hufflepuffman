@@ -21,6 +21,7 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
     int capacity;
     final double loadFactor = 0.75f;
     long count;
+    private int keyIndex;
 
     public HuffmanHashMap() {
         this.initialCapacity = 4096;
@@ -166,9 +167,6 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         this.buckets = new EntryImpl[initialCapacity];
     }
 
-    
-
-
     @Override
     public Collection<V> values() {
         throw new UnsupportedOperationException("Not supported.");
@@ -186,7 +184,7 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         } else {
             keyHash = key.hashCode();
         }
-        final int hash = keyHash % this.initialCapacity;
+        final int hash = Math.floorMod(keyHash, this.initialCapacity);
         return hash;
     }
 
@@ -222,20 +220,35 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
     public Set<K> keySet() {
         throw new UnsupportedOperationException("Not supported. Use #keyArray instead."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public final EntryImpl[] keyArray() {
         LOG.log(Level.WARNING, "EXPENSIVE OPERATION - keyArray()");
         final int amountOfKeys = Math.min(Integer.MAX_VALUE, (int) count);
-        int keyIndex = 0;
+        keyIndex = 0;
         final EntryImpl[] keys = new EntryImpl[amountOfKeys];
         for (int i = 0; i < buckets.length; i++) {
             final EntryImpl entry = buckets[i];
-            if (entry != null){
+            if (entry != null) {
                 keys[keyIndex] = entry;
-                keyIndex++;
+                incrementKeyIndex();
+                addChainedKeys(entry, keys);
             }
         }
         return keys;
+    }
+
+    private void addChainedKeys(final EntryImpl entry, final EntryImpl[] keys) {
+        if (!entry.hasNext()) {
+            return;
+        } else {
+            keys[keyIndex] = entry.getNext();
+            incrementKeyIndex();
+            addChainedKeys(entry.getNext(), keys);
+        }
+    }
+
+    private void incrementKeyIndex() {
+        this.keyIndex++;
     }
 
 }

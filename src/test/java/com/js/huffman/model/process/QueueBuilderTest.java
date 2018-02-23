@@ -9,6 +9,7 @@ import com.js.huffman.model.structures.map.EntryImpl;
 import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
+import com.js.huffman.model.structures.node.heap.NodeHeap;
 import java.util.PriorityQueue;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +22,7 @@ import static org.junit.Assert.*;
 public class QueueBuilderTest {
 
     HuffmanHashMap<Character, Integer> map;
-    PriorityQueue<Node> q;
+    NodeHeap q;
     QueueBuilder qb;
 
     @Before
@@ -40,7 +41,7 @@ public class QueueBuilderTest {
 
     @Test
     public void queueIsCorrectLength() {
-        assertTrue(this.map.size() == this.q.size());
+        assertTrue(this.map.size() == this.q.getSize());
     }
 
     @Test

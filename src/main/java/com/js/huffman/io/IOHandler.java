@@ -13,6 +13,7 @@ import com.js.huffman.model.process.EncodingTreeBuilder;
 import com.js.huffman.model.process.QueueBuilder;
 import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.Node;
+import com.js.huffman.model.structures.node.heap.NodeHeap;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import com.js.huffman.model.structures.node.tree.SymbolConverter;
 import java.io.BufferedReader;
@@ -126,7 +127,7 @@ public class IOHandler {
      */
     public void encode() {
         HuffmanHashMap<Character, Integer> map = read();
-        PriorityQueue<Node> nodes = queueBuilder.buildAndReturnQueue(map);
+        NodeHeap nodes = queueBuilder.buildAndReturnQueue(map);
         EncodingTreeBuilder etb = new EncodingTreeBuilder(nodes);
         this.encoded_tree = etb.buildTree();
         System.out.println(encoded_tree);

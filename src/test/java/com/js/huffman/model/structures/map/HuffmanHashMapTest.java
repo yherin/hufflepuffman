@@ -5,6 +5,7 @@
  */
 package com.js.huffman.model.structures.map;
 
+import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -108,6 +109,43 @@ public class HuffmanHashMapTest {
         instance1.put(1, 0);
         boolean shouldBeTrue = instance1.containsKey(1);
         assertTrue(shouldBeTrue);
+    }
+
+    @Test
+    public void testKeyArraySimple() {
+        HuffmanHashMap<String, Integer> map = new HuffmanHashMap<>();
+        map.put("10", 10);
+        Object[] keys = map.keyArray();
+        assertEquals(1, keys.length);
+        EntryImpl en = (EntryImpl) keys[0];
+        assertEquals(10, en.getValue());
+    }
+
+    @Test
+    public void testKeyArrayMany() {
+        HuffmanHashMap<String, Integer> map = new HuffmanHashMap<>();
+        Random rand = new Random();
+        int q = 1500;
+        for (int i = 0; i < q; i++) {
+            int n = rand.nextInt();
+            map.put(Integer.toString(n), n);
+        }
+        Object[] keys = map.keyArray();
+        assertEquals(q, keys.length);
+        for (int i = 0; i < q; i++) {
+            EntryImpl en = (EntryImpl) keys[i];
+            if (en == null){
+                fail();
+            }
+            if (en.getKey() == null){
+                fail();
+            }
+            Object result = map.get((String) en.getKey());
+            if (result == null){
+                fail();
+            }
+            assertEquals(en.getValue(), map.get((String) en.getKey()));
+        }
     }
 
 }

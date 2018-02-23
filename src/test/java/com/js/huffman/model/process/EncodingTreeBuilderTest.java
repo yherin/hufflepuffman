@@ -9,6 +9,7 @@ import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.NodePriorityComparator;
+import com.js.huffman.model.structures.node.heap.NodeHeap;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import java.util.PriorityQueue;
 import org.junit.After;
@@ -23,13 +24,13 @@ import static org.junit.Assert.*;
 public class EncodingTreeBuilderTest {
 
     private final NodePriorityComparator comp;
-    private final PriorityQueue<Node> nodes;
+    private final NodeHeap nodes;
     private final HuffmanTree x;
 
     public EncodingTreeBuilderTest() {
 
         comp = new NodePriorityComparator();
-        nodes = new PriorityQueue<>(comp);
+        nodes = new NodeHeap(comp,4);
         nodes.add(new BuiltNode('a', 30));
         nodes.add(new BuiltNode('b', 30));
         nodes.add(new BuiltNode('c', 30));
@@ -43,10 +44,10 @@ public class EncodingTreeBuilderTest {
 
     }
 
-    @After
-    public void tearDown() {
-        nodes.clear();
-    }
+//    @After
+//    public void tearDown() {
+//        nodes.clear();
+//    }
 
     @Test
     public void rootFrequencyEqualsTotalFrequency() {

@@ -22,7 +22,7 @@ public class NodeHeap {
 
     public NodeHeap(final NodePriorityComparator npc, final int numberOfNodes) {
         this.npc = npc;
-        this.capacity = (numberOfNodes + 1); //index starting at 1, possible 2 children for a node
+        this.capacity = (numberOfNodes * 2)+1; //index starting at 1, possible 2 children for a node
         this.heap = new Node[this.capacity];
         this.size = 0;
     }
@@ -30,6 +30,7 @@ public class NodeHeap {
     public final Node poll() {
         final Node polling = heap[TOP];
         heap[TOP] = heap[size];
+        heap[size] = null;
         this.size--;
         if (size > 1) {
             heapify(TOP);
@@ -128,5 +129,20 @@ public class NodeHeap {
 
     public int getSize() {
         return this.size;
+    }
+
+    public boolean contains(Object o) {
+        try {
+            Node x = (Node) o;
+            for (int i = 1; i < this.size; i++) {
+                if (heap[i].equals(x)){
+                    return true;
+                }
+            }
+            return false;
+        } catch (ClassCastException e) {
+            return false;
+        }
+
     }
 }
