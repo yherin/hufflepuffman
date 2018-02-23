@@ -5,6 +5,8 @@
  */
 package com.js.huffman.model.process;
 
+import com.js.huffman.model.structures.map.EntryImpl;
+import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodePriorityComparator;
@@ -30,8 +32,11 @@ public class QueueBuilder {
      * @param map the HashMap<K,V> of characters and their frequencies.
      * @return PriorityQueue<Node> the created Queue.
      */
-    public final PriorityQueue<Node> buildAndReturnQueue(final HashMap<Character, Integer> map) {
-        map.forEach((k, v) -> buildNodeAndAddToQueue(k, v));
+    public final PriorityQueue<Node> buildAndReturnQueue(final HuffmanHashMap<Character, Integer> map) {
+        final EntryImpl[] entries = map.keyArray();
+        for (EntryImpl entry : entries) {
+            buildNodeAndAddToQueue((Character) entry.getKey(), (Integer) entry.getValue());
+        }
         return this.que;
     }
 

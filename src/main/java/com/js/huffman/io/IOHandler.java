@@ -11,6 +11,7 @@ import com.js.huffman.model.count.SymbolReader;
 import com.js.huffman.model.process.DecodingTreeBuilder;
 import com.js.huffman.model.process.EncodingTreeBuilder;
 import com.js.huffman.model.process.QueueBuilder;
+import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import com.js.huffman.model.structures.node.tree.SymbolConverter;
@@ -125,7 +126,7 @@ public class IOHandler {
      * Encodes the c
      */
     public void encode() {
-        HashMap<Character, Integer> map = read();
+        HuffmanHashMap<Character, Integer> map = read();
         PriorityQueue<Node> nodes = queueBuilder.buildAndReturnQueue(map);
         EncodingTreeBuilder etb = new EncodingTreeBuilder(nodes);
         this.encoded_tree = etb.buildTree();
@@ -138,7 +139,7 @@ public class IOHandler {
      *
      * @return HashMap<@Character,@Integer>
      */
-    private HashMap<Character, Integer> read() {
+    private HuffmanHashMap<Character, Integer> read() {
         if (!inputHandler.isReady()) {
             throw new UnsupportedOperationException("Define a file to be read before attempting to read.");
         }

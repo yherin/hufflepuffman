@@ -5,6 +5,7 @@
  */
 package com.js.huffman.model.structures.node.tree;
 
+import com.js.huffman.model.structures.map.HuffmanHashMap;
 import java.util.HashMap;
 
 /**
@@ -13,9 +14,9 @@ import java.util.HashMap;
  */
 public class SymbolConverter {
 
-    private final HashMap<Character, String> codes;
+    private final HuffmanHashMap<Character, String> codes;
 
-    public SymbolConverter(final HashMap<Character, String> codes) {
+    public SymbolConverter(final HuffmanHashMap<Character, String> codes) {
         this.codes = codes;
     }
 

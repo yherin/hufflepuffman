@@ -7,6 +7,7 @@ package com.js.huffman.model.count;
 
 import com.js.huffman.io.BitOutputStream;
 import com.js.huffman.model.count.HuffmanEncoder;
+import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import com.js.huffman.model.structures.node.tree.SymbolConverter;
@@ -48,9 +49,9 @@ public class HuffmanEncoderTest {
         this.nodes = new PriorityQueue<>();
     }
 
-    private HashMap<Character, String> buildCodes() {
+    private HuffmanHashMap<Character, String> buildCodes() {
         //the write to be encoded will contain 10 of each character
-        HashMap<Character, String> hashMap = new HashMap<>();
+        HuffmanHashMap<Character, String> hashMap = new HuffmanHashMap<>();
         hashMap.put('a', "10"); //2 bits
         hashMap.put('b', "01"); // 2 bits
         hashMap.put('c', "110"); // 3 bits

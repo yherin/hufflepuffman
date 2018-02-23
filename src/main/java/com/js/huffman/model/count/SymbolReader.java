@@ -5,6 +5,7 @@
  */
 package com.js.huffman.model.count;
 
+import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.BuiltNode;
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +26,7 @@ public class SymbolReader {
 
     private final File file;
     private final BufferedReader reader;
-    private final HashMap<Character, Integer> symbols;
+    private final HuffmanHashMap<Character, Integer> symbols;
     private final String newLineSep;
 
     public SymbolReader(final File file) throws FileNotFoundException {
@@ -37,7 +39,7 @@ public class SymbolReader {
          */
         this.file = file;
         this.reader = new BufferedReader(new FileReader(this.file));
-        this.symbols = new HashMap<>();
+        this.symbols = new HuffmanHashMap<>();
         this.newLineSep = System.lineSeparator();
     }
 
@@ -47,7 +49,7 @@ public class SymbolReader {
      * @return HashMap<Character,Integer> all the characters in this file (k),
      * each key's frequency (v).
      */
-    public HashMap<Character, Integer> count() {
+    public HuffmanHashMap<Character, Integer> count() {
         try {
 
             String readLine = reader.readLine();

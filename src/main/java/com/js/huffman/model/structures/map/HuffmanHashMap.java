@@ -83,6 +83,7 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         } else {
             return (int) count;
         }
+
     }
 
     @Override
@@ -165,10 +166,8 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         this.buckets = new EntryImpl[initialCapacity];
     }
 
-    @Override
-    public Set<K> keySet() {
-        throw new UnsupportedOperationException("Not supported");
-    }
+    
+
 
     @Override
     public Collection<V> values() {
@@ -217,6 +216,26 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
             return chainGet(entry.getNext(), key);
         }
         return null;
+    }
+
+    @Override
+    public Set<K> keySet() {
+        throw new UnsupportedOperationException("Not supported. Use #keyArray instead."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public final EntryImpl[] keyArray() {
+        LOG.log(Level.WARNING, "EXPENSIVE OPERATION - keyArray()");
+        final int amountOfKeys = Math.min(Integer.MAX_VALUE, (int) count);
+        int keyIndex = 0;
+        final EntryImpl[] keys = new EntryImpl[amountOfKeys];
+        for (int i = 0; i < buckets.length; i++) {
+            final EntryImpl entry = buckets[i];
+            if (entry != null){
+                keys[keyIndex] = entry;
+                keyIndex++;
+            }
+        }
+        return keys;
     }
 
 }

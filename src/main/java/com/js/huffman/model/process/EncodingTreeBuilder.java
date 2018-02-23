@@ -5,6 +5,7 @@
  */
 package com.js.huffman.model.process;
 
+import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
@@ -24,14 +25,14 @@ public class EncodingTreeBuilder implements TreeBuilder {
     Node root;
     private static final Logger LOG = Logger.getLogger(EncodingTreeBuilder.class.getName());
     private byte emptyBitsTreeRep;
-    private final HashMap<Character, String> codes;
+    private final HuffmanHashMap<Character, String> codes;
     private final PriorityQueue<Node> que;
     private String treeStringRep;
     private String treeSymbols;
     private byte[] treeByteRep;
 
     public EncodingTreeBuilder(PriorityQueue<Node> que) {
-        codes = new HashMap<>();
+        codes = new HuffmanHashMap<>();
         this.que = que;
         this.treeStringRep = "";
         this.treeSymbols = "";

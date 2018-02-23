@@ -5,6 +5,7 @@
  */
 package com.js.huffman.model.structures.node.tree;
 
+import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
 import java.util.HashMap;
@@ -18,13 +19,13 @@ public class HuffmanTree {
 
     private final Node root;
     private Node head;
-    private final HashMap<Character, String> codes; //we want to use String and not a custom class, because String is immutable. This is really handy.
+    private final HuffmanHashMap<Character, String> codes; //we want to use String and not a custom class, because String is immutable. This is really handy.
     static final Logger LOG = Logger.getLogger(HuffmanTree.class.getName());
     private final String treeSymbolsRep;
     private final byte[] treeByteRep;
     private final byte emptyBitsTreeByteRep;
 
-    public HuffmanTree(final Node root, final HashMap<Character, String> codes, final String treeSymbolsRep, final byte[] treeByteRep, final byte emptyBitsTreeByteRep) {
+    public HuffmanTree(final Node root, final HuffmanHashMap<Character, String> codes, final String treeSymbolsRep, final byte[] treeByteRep, final byte emptyBitsTreeByteRep) {
         this.root = root;
         this.head = root;
         this.codes = codes;
@@ -79,7 +80,7 @@ public class HuffmanTree {
         return codes.toString();
     }
 
-    public HashMap<Character, String> getCodes() {
+    public HuffmanHashMap<Character, String> getCodes() {
         return codes;
     }
 
