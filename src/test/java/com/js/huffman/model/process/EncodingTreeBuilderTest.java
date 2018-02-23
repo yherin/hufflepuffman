@@ -30,7 +30,7 @@ public class EncodingTreeBuilderTest {
     public EncodingTreeBuilderTest() {
 
         comp = new NodePriorityComparator();
-        nodes = new NodeHeap(comp,4);
+        nodes = new NodeHeap(comp, 4);
         nodes.add(new BuiltNode('a', 30));
         nodes.add(new BuiltNode('b', 30));
         nodes.add(new BuiltNode('c', 30));
@@ -48,7 +48,6 @@ public class EncodingTreeBuilderTest {
 //    public void tearDown() {
 //        nodes.clear();
 //    }
-
     @Test
     public void rootFrequencyEqualsTotalFrequency() {
 
@@ -57,14 +56,14 @@ public class EncodingTreeBuilderTest {
 
     @Test
     public void symbolsAreEncodedCorrectly() {
-        String expectedSymbolRep = "adcb";
+        String expectedSymbolRep = "bcad";
         String actualSymbolRep = x.getTreeSymbolsString();
         assertEquals(expectedSymbolRep, actualSymbolRep);
     }
 
     @Test
     public void treeRepIsEncodedCorrectlyInBytes() {
-        NodeKey[] expectedRep = new NodeKey[]{NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE, NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE, NodeKey.FAKE, NodeKey.FAKE};
+        NodeKey[] expectedRep = new NodeKey[]{NodeKey.ONE, NodeKey.ZERO, NodeKey.ONE, NodeKey.ZERO, NodeKey.ONE, NodeKey.ONE, NodeKey.FAKE, NodeKey.FAKE};
         byte a = x.getTreeByteRep()[0];
         int fake = x.getEmptyBitsTreeByteRep();
         NodeKey[] actualRep = BitUtils.decodeBits(a, fake);

@@ -53,7 +53,11 @@ public class QueueBuilderTest {
     }
 
     private void inQueue(Character k, Integer v) {
-        assertTrue(this.q.contains(new BuiltNode(k, v)));
+        final Boolean result = this.q.contains(new BuiltNode(k, v));
+        if (result == null) {
+            fail("contains returned null");
+        }
+        assertTrue(result);
     }
 
 }

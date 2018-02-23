@@ -47,6 +47,11 @@ public class NodeHeapTest {
             assertEquals(i,(int)x.getFreq());
         }
     }
+    
+    @Test
+    public void testContains(){
+        
+    }
 
     
 }
