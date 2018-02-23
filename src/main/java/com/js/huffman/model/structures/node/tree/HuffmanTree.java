@@ -8,7 +8,6 @@ package com.js.huffman.model.structures.node.tree;
 import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 /**

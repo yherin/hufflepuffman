@@ -5,13 +5,8 @@
  */
 package com.js.huffman.model.process;
 
-import com.js.huffman.model.process.NodeBuilder;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

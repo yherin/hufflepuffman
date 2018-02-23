@@ -11,7 +11,6 @@ import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.NodeType;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
-import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;

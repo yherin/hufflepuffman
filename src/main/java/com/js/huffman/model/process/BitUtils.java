@@ -5,7 +5,6 @@
  */
 package com.js.huffman.model.process;
 
-import com.js.huffman.io.BitInputStream;
 import com.js.huffman.model.structures.node.NodeKey;
 import java.util.logging.Level;
 import java.util.logging.Logger;

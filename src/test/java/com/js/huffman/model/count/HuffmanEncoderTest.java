@@ -6,10 +6,8 @@
 package com.js.huffman.model.count;
 
 import com.js.huffman.io.BitOutputStream;
-import com.js.huffman.model.count.HuffmanEncoder;
 import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.BuiltNode;
-import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import com.js.huffman.model.structures.node.tree.SymbolConverter;
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,13 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.PriorityQueue;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;

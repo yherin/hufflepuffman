@@ -6,7 +6,6 @@
 package com.js.huffman.model.structures.node.tree;
 
 import com.js.huffman.model.structures.map.HuffmanHashMap;
-import java.util.HashMap;
 
 /**
  *

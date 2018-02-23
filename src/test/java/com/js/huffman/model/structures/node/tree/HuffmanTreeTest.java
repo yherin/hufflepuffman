@@ -7,7 +7,6 @@ package com.js.huffman.model.structures.node.tree;
 
 import com.js.huffman.model.process.BitUtils;
 import com.js.huffman.model.process.EncodingTreeBuilder;
-import com.js.huffman.model.process.EncodingTreeBuilderTest;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodeKey;

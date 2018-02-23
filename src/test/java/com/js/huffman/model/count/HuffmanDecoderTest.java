@@ -5,17 +5,9 @@
  */
 package com.js.huffman.model.count;
 
-import com.js.huffman.io.BitInputStream;
 import com.js.huffman.io.IOHandler;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 /**
  *

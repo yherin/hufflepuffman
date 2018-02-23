@@ -6,7 +6,6 @@
 package com.js.huffman;
 
 import com.js.huffman.io.IOHandler;
-import java.io.File;
 
 /**
  *

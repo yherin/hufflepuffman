@@ -10,7 +10,6 @@ import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodePriorityComparator;
-import java.util.HashMap;
 import java.util.PriorityQueue;
 
 /**

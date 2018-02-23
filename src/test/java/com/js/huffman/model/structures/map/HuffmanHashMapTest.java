@@ -5,9 +5,6 @@
  */
 package com.js.huffman.model.structures.map;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

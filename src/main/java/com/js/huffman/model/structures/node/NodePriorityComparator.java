@@ -7,7 +7,6 @@ package com.js.huffman.model.structures.node;
 
 import com.sun.istack.internal.logging.Logger;
 import java.util.Comparator;
-import java.util.logging.Level;
 
 /**
  *

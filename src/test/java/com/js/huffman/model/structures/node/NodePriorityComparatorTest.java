@@ -5,13 +5,9 @@
  */
 package com.js.huffman.model.structures.node;
 
-import com.js.huffman.model.structures.node.Node;
-import com.js.huffman.model.structures.node.NodePriorityComparator;
 import java.util.PriorityQueue;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

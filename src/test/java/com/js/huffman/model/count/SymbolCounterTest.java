@@ -5,17 +5,11 @@
  */
 package com.js.huffman.model.count;
 
-import com.js.huffman.model.count.SymbolReader;
 import com.js.huffman.model.structures.map.HuffmanHashMap;
-import com.sun.xml.internal.ws.util.StringUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
