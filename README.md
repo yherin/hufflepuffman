@@ -41,4 +41,4 @@ Clean & build, then run. Basic GUI where you can specify a file to compress or d
 
 [Working hours log](documentation/weekly-reports/log.md)
 
-[Implementation document](huffman-impl.pdf)
+[Implementation document](documentation/huffman-impl.pdf)
