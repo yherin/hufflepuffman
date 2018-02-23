@@ -43,4 +43,4 @@ Clean & build, then run. Basic GUI where you can specify a file to compress or d
 
 [Implementation document](documentation/huffman-impl.pdf)
 
-[Latest PIT report](https://htmlpreview.github.io/?http://htmlpreview.github.io/?https://github.com/yherin/hufflepuffman/blob/master/documentation/PIT/201802240111/index.html)
+[Latest PIT report](http://htmlpreview.github.io/?https://github.com/yherin/hufflepuffman/blob/master/documentation/PIT/201802240111/index.html)
