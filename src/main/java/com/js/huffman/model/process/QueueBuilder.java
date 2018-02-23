@@ -14,7 +14,7 @@ import com.js.huffman.model.structures.node.heap.NodeHeap;
 import java.util.PriorityQueue;
 
 /**
- * Class which builds PriorityQueue<Node>.
+ * Class which builds NodeHeap.
  *
  * @author jack
  */

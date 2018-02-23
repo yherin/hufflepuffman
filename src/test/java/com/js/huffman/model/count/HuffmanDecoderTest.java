@@ -28,10 +28,10 @@ public class HuffmanDecoderTest {
     @Before
     public void setUp() {
         io.initialiseTextInput();
-        io.encode();
+        io.encodeToBinary();
         io.setBinaryOutputFile(binary);
         io.initialiseBitOutput();
-        io.write();
+        io.writeBinaryOutput();
     }
 
     @After

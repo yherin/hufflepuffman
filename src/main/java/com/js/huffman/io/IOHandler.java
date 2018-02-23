@@ -34,6 +34,7 @@ import java.util.logging.Logger;
  */
 public class IOHandler {
 
+    //Proccessing
     private final QueueBuilder queueBuilder;
     private SymbolConverter converter;
     private HuffmanEncoder encoder;
@@ -59,7 +60,10 @@ public class IOHandler {
         outputHandler = new OutputFileHandler();
 
     }
-
+    
+    /**
+     * Initialise the BufferedReader used by this file.
+     */
     public void initialiseTextInput() {
         try {
             this.reader = new BufferedReader(new FileReader(this.inputHandler.getFile()));
@@ -67,7 +71,10 @@ public class IOHandler {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Initialise the BufferedWriter used by this file.
+     */
     public void initialiseTextOutput() {
         try {
             this.writer = new BufferedWriter(new FileWriter(this.outputHandler.getFile()));
@@ -76,7 +83,10 @@ public class IOHandler {
         }
 
     }
-
+    
+    /**
+     * Initialise the BitOutputStream used by this file.
+     */
     public void initialiseBitOutput() {
         try {
             this.bitOutputStream = new BitOutputStream((this.binaryOutputFile));
@@ -85,7 +95,10 @@ public class IOHandler {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Initialise the BitInputStream used by this file.
+     */
     public void initialiseBitInput() {
         try {
             this.bitInputStream = new BitInputStream((this.binaryInputFile));
@@ -95,20 +108,25 @@ public class IOHandler {
     }
 
     /**
-     * Write the given file to a binary file, based on the create Huffman tree.
+     * Write the data held within the encoded huffman tree to the currently set
+     * output file. All files and IO utilities must be initialised.
      */
-    public void write() {
+    public void writeBinaryOutput() {
         try {
             converter = new SymbolConverter(encoded_tree.getCodes());
             encoder = new HuffmanEncoder(this.reader, converter, this.bitOutputStream, this.encoded_tree);
             encoder.encodeBits();
-            logger.log(Level.INFO, "Encoding done.");
+            logger.log(Level.INFO, "IO: Writing done.");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void readAndDecode() {
+    
+    /**
+     * Read and decode binary data from the currently defined binary input file,
+     * writing it in decoded format to a text file. 
+     */
+    public void readBinaryInputAndDecode() {
         try {
             Metadata md = fetchMetadata();
             this.extraBits = md.getFakeBitsEOF();
@@ -125,7 +143,7 @@ public class IOHandler {
     /**
      * Encodes the c
      */
-    public void encode() {
+    public void encodeToBinary() {
         HuffmanHashMap<Character, Integer> map = read();
         NodeHeap nodes = queueBuilder.buildAndReturnQueue(map);
         EncodingTreeBuilder etb = new EncodingTreeBuilder(nodes);

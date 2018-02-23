@@ -31,7 +31,8 @@ public class MetadataBuilder {
      * the huffman tree, where each symbol is encoded in UTF-8 and therefore may
      * occupy between 1 and 4 bytes.
      *
-     * The maximum size of the metadata is currently 4096 bytes.
+     * The maximum size of the metadata is currently 4096 bytes. Currently tested
+     * for 700mb file.
      *
      * @see Metadata
      * @param treeRep a byte array representation of the huffman tree

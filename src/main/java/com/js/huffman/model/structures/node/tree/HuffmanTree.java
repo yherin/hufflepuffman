@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.model.structures.node.tree;
 
 import com.js.huffman.model.structures.map.HuffmanHashMap;
@@ -11,7 +6,9 @@ import com.js.huffman.model.structures.node.NodeKey;
 import java.util.logging.Logger;
 
 /**
- *
+ * A binary-tree-like data structure. The core of Huffman coding. Symbols to be 
+ * encoding are stored in leaf nodes. Branch nodes contain frequencies of their leaf symbols
+ * and a binary digit. The route from leaf to root displays the encoding of the symbol.
  * @author jack
  */
 public class HuffmanTree {
@@ -35,7 +32,7 @@ public class HuffmanTree {
     }
 
     /**
-     *
+     * Move the head of the tree down left or right based on the NodeKey.
      * @param key
      * @return true if after moving the head points a leaf node. Else false.
      */

@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.model.structures.node;
 
 import com.sun.istack.internal.logging.Logger;
 import java.util.Comparator;
 
 /**
- *
+ * Node comparator used in NodeHeap.
  * @author jack
  */
 public class NodePriorityComparator implements Comparator<Node> {

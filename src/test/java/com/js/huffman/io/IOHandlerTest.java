@@ -33,13 +33,13 @@ public class IOHandlerTest {
 
         instance.initialiseTextInput();
         File binaryOutputFile = new File(binaryOut);
-        instance.encode();
+        instance.encodeToBinary();
         binaryOutputFile.delete();
         binaryOutputFile.createNewFile();
         assertTrue("File should be empty before writing: " + binaryOutputFile.length(), binaryOutputFile.length() == 0);
         instance.setBinaryOutputFile(binaryOut);
         instance.initialiseBitOutput();
-        instance.write();
+        instance.writeBinaryOutput();
         File textOutputFile = new File(outputFilepath);
         textOutputFile.delete();
         textOutputFile.createNewFile();
@@ -55,7 +55,7 @@ public class IOHandlerTest {
          * symbols of 2 bits each is 8 bits == 1 byte, and 10 repetitions, so 10
          * bytes.
          */
-        instance.readAndDecode();
+        instance.readBinaryInputAndDecode();
         assertTrue(FileUtils.contentEquals(instance.getOriginalFile(), instance.getDecompressedFile()));
     }
 

@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.model.structures.node;
 
 /**
- *
+ * Class represents a Node in a HuffmanTree that has been 'built' from a text file, 
+ * that is, not reconstructed from binary.
  * @author jack
  */
 public class BuiltNode extends Node implements Comparable<Node> {

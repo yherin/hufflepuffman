@@ -11,9 +11,9 @@ package com.js.huffman.io;
  */
 public class HuffmanCompression implements Runnable {
 
-    private final IOHandler io;
-    private final String outputFilepath;
-    private final String inputFilepath;
+    protected final IOHandler io;
+    protected final String outputFilepath;
+    protected final String inputFilepath;
 
     public HuffmanCompression(final String inputFilepath,
             final String outputFilepath) {
@@ -27,16 +27,16 @@ public class HuffmanCompression implements Runnable {
         doCompression();
     }
 
-    private void doCompression() {
+    protected void doCompression() {
         io.setTextInputFile(inputFilepath);
         io.setBinaryOutputFile(outputFilepath);
         io.initialiseTextInput();
         long buildDataStart = System.nanoTime();
-        io.encode();
+        io.encodeToBinary();
         long buildDataEnd = System.nanoTime();
         io.initialiseBitOutput();
         long writeDataStart = System.nanoTime();
-        io.write();
+        io.writeBinaryOutput();
         long writeDataEnd = System.nanoTime();
         long write = (writeDataEnd - writeDataStart) / 1000000l;
         long comp = (buildDataEnd - buildDataStart) / 1000000l;

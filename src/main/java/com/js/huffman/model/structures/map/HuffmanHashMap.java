@@ -1,16 +1,19 @@
 package com.js.huffman.model.structures.map;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Self-implemented HashMap-like data structure. Does not offer all methods that a
+ * HashMap does. NOTE: Set must be imported for me to implement @Map. I'm not using it at all.
  * @author Jack
  * @param <K> key used by this map
  * @param <V> value stored by this key
+ * @see HashMap
  */
 public final class HuffmanHashMap<K extends Object, V extends Object> implements Map<K, V> {
 
@@ -153,13 +156,13 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
 
     @Override
     public V remove(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
 
     }
 
     @Override
     public void putAll(Map<? extends K, ? extends V> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -221,6 +224,11 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         throw new UnsupportedOperationException("Not supported. Use #keyArray instead."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * A complex and time-expensive method which I aim to improve, returning all
+     * keys in the Map as an EntryImpl[].
+     * @return EntryImpl[]
+     */
     public final EntryImpl[] keyArray() {
         LOG.log(Level.WARNING, "EXPENSIVE OPERATION - keyArray()");
         final int amountOfKeys = Math.min(Integer.MAX_VALUE, (int) count);

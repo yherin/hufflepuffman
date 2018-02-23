@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Class for encoding data in the Huffman tree into binary.
  * @author jack
  */
 public class HuffmanEncoder {
@@ -45,8 +45,8 @@ public class HuffmanEncoder {
     }
 
     /**
-     * Encode the text file defined in this class' BufferedReader into a binary
-     * file using bit shifting.
+     * Encode the text file defined in this class' BufferedReader into bytes, ready for
+     * writing to file.
      *
      * @see BitOutputStream
      */

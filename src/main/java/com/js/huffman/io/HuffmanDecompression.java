@@ -11,9 +11,9 @@ package com.js.huffman.io;
  */
 public class HuffmanDecompression implements Runnable {
 
-    private final IOHandler io;
-    private final String outputFilepath;
-    private final String inputFilepath;
+    protected final IOHandler io;
+    protected final String outputFilepath;
+    protected final String inputFilepath;
 
     public HuffmanDecompression(final String inputFilepath,
             final String outputFilepath) {
@@ -27,13 +27,13 @@ public class HuffmanDecompression implements Runnable {
         doDecompression();
     }
 
-    private void doDecompression() {
+    protected void doDecompression() {
         io.setBinaryInputFile(inputFilepath);
         io.setTextOutputFile(outputFilepath);
         io.initialiseTextOutput();
         io.initialiseBitInput();
         long decompressStart = System.nanoTime();
-        io.readAndDecode();
+        io.readBinaryInputAndDecode();
         long decompressEnd = System.nanoTime();
         System.out.println("Done.");
         long end = System.nanoTime();

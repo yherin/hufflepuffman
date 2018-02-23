@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Class for decoding binary and into data structure
  * @author jack
  */
 public class HuffmanDecoder {
@@ -39,7 +39,6 @@ public class HuffmanDecoder {
 
     /**
      * Decode the binary file, writing to the output file specified in the
-     *
      * @BufferedWriter given in this class' constructor. The method is too long
      * and will be refactored later.
      */
@@ -82,8 +81,8 @@ public class HuffmanDecoder {
     }
 
     /**
-     * Attempt to reconstruct a huffman tree based on the information encoded in
-     * the decoded file's metadata. NOT YET IMPLEMENTED FULLY.
+     * Moves the 'head of the tree down the Huffman tree, based on the NodeKey.
+     * 
      */
     private void traverseHuffmanTree(NodeKey bit) {
         this.decodeSuccessful = this.tree.descend(bit);

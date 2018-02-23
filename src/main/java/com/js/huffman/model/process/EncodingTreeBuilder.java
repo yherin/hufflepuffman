@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * This class provides functionality to build a Huffman tree from a text file.
  * @author jack
  */
 public class EncodingTreeBuilder implements TreeBuilder {

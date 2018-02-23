@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Provides methods for bit manipulation.
  * @author jack
  */
 public class BitUtils {

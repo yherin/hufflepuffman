@@ -4,7 +4,6 @@ import com.js.huffman.io.HuffmanCompression;
 import com.js.huffman.io.HuffmanDecompression;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,8 +12,7 @@ import javafx.scene.control.TextField;
 
 public class FXMLController implements Initializable {
 
-    Runner r = new Runner();
-
+    //Runner r = new Runner();
     @FXML
     private Label label;
 
@@ -33,6 +31,9 @@ public class FXMLController implements Initializable {
     @FXML
     private Button btnMenuDecompress;
 
+    /**
+     * The entry point for file compression. Starts on a new thread.
+     */
     @FXML
     private void compress() {
         final String input = compressionInputFilePath.getText();
@@ -40,6 +41,9 @@ public class FXMLController implements Initializable {
         new HuffmanCompression(input, output).run();
     }
 
+    /**
+     * The entry point for file decompression. Starts on a new thread.
+     */
     @FXML
     private void decompress() {
         final String input = decompressionInputFilePath.getText();
@@ -55,8 +59,8 @@ public class FXMLController implements Initializable {
 
     private String formatOutputFilename() {
         String outputRaw = decompressionInputFilePath.getText().trim();
-        StringBuilder sb = new StringBuilder(outputRaw );
-        
+        StringBuilder sb = new StringBuilder(outputRaw);
+
         sb.delete(sb.length() - 5, sb.length()); //remove .huff
         final int fileExtensionDot = sb.lastIndexOf(".");
         if (fileExtensionDot == -1) {
@@ -71,11 +75,6 @@ public class FXMLController implements Initializable {
     @FXML
     private void warnFileExtension(boolean warn) {
         this.warnFileExtension.setVisible(warn);
-    }
-
-    @FXML
-    private void handleCompressionMenuButton(ActionEvent event) {
-
     }
 
     @Override

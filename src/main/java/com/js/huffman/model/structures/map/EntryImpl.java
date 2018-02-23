@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Entry object of our HashMap.
  * @author Jack
  * @param <K>
  * @param <V>

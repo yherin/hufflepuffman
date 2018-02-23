@@ -2,10 +2,14 @@ package com.js.huffman.model.structures.node.heap;
 
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodePriorityComparator;
+import java.util.PriorityQueue;
 import java.util.logging.Logger;
 
 /**
- *
+ * Self-implemented NodeHeap class corresponding to minHeap and Java's PriorityQueue.
+ * My program doesn't require many methods, from this data structure, so naturally
+ * only the required have been implemented.
+ * @see PriorityQueue
  * @author jack
  */
 public class NodeHeap {

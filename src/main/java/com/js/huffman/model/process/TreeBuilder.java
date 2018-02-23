@@ -8,7 +8,7 @@ package com.js.huffman.model.process;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 
 /**
- *
+ * Interface for TreeBuilder implementations
  * @author jack
  */
 public interface TreeBuilder {

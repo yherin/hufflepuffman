@@ -89,6 +89,9 @@
                         <param>com.js.huffman.model.*</param>
                         <param>com.js.huffman.io.*</param>
                     </targetClasses>
+                    <excludedTestClasses>
+                        <param>com.js.huffman.perf.*</param>
+                    </excludedTestClasses>
                 </configuration>
             </plugin>
             <plugin>
@@ -126,7 +129,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.4</version>
+            <version>2.6</version>
             <scope>test</scope>
             <type>jar</type>
         </dependency>

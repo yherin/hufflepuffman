@@ -8,7 +8,7 @@ package com.js.huffman.io;
 import java.io.File;
 
 /**
- *
+ * File utility class that handles file status and File object creation.
  * @author jack
  */
 public class OutputFileHandler extends FileHandler {

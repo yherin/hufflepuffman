@@ -8,7 +8,8 @@ package com.js.huffman.io;
 import java.util.logging.Logger;
 
 /**
- *
+ * This class is an object representing the data stored in some specific
+ * amount of bytes at the start of the encoded binary file.
  * @author jack
  */
 public class Metadata {
