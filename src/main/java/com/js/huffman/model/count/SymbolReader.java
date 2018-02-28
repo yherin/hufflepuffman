@@ -26,14 +26,12 @@ public class SymbolReader {
     private final HuffmanHashMap<Character, Integer> symbols;
     private final String newLineSep;
 
+    /**
+     * Create a new @SymbolReader, providing functionality to count symbols from text files.
+     * @param  file                  the file to be read.
+     * @throws FileNotFoundException
+     */
     public SymbolReader(final File file) throws FileNotFoundException {
-        /**
-         * Create a new HuffmanReader object. Used to read text files into a
-         * Character, Count(Integer) HashMap.
-         *
-         * @param file the file to be read.
-         * @throws FileNotFoundException
-         */
         this.file = file;
         this.reader = new BufferedReader(new FileReader(this.file));
         this.symbols = new HuffmanHashMap<>();
@@ -56,7 +54,7 @@ public class SymbolReader {
                 }
 
                 readLine = reader.readLine();
-                if (readLine != null) {
+                if (readLine != null) { //check if the file has a new line
                     insertNewLineSymbols();
 
                 }

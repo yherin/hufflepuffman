@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.model.count;
 
 import com.js.huffman.io.BitOutputStream;
@@ -16,11 +11,12 @@ import java.util.logging.Logger;
 
 /**
  * Class for encoding data in the Huffman tree into binary.
+ *
  * @author jack
  */
 public class HuffmanEncoder {
 
-    private final Logger logger = Logger.getLogger(HuffmanEncoder.class.getName());
+    private static final Logger logger = Logger.getLogger(HuffmanEncoder.class.getName());
     private final BufferedReader reader;
     private final SymbolConverter converter;
     private final BitOutputStream stream;
@@ -30,7 +26,10 @@ public class HuffmanEncoder {
     private byte[] treeBytes;
     private byte treeRepEmptyBits;
 
-    public HuffmanEncoder(BufferedReader reader, SymbolConverter converter, BitOutputStream bitOutputStream, HuffmanTree tree) throws FileNotFoundException {
+    public HuffmanEncoder(final BufferedReader reader,
+            final SymbolConverter converter,
+            final BitOutputStream bitOutputStream, final HuffmanTree tree)
+            throws FileNotFoundException {
         this.reader = reader;
         this.converter = converter;
         this.stream = bitOutputStream;
@@ -45,8 +44,8 @@ public class HuffmanEncoder {
     }
 
     /**
-     * Encode the text file defined in this class' BufferedReader into bytes, ready for
-     * writing to file.
+     * Encode the text file defined in this class' BufferedReader into bytes,
+     * ready for writing to file.
      *
      * @see BitOutputStream
      */

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.io;
 
 import com.js.huffman.model.process.BitUtils;
@@ -23,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class BitInputStream extends FileInputStream {
 
-    static final Logger logger = Logger.getLogger(BitInputStream.class.getName());
+    static final Logger LOG = Logger.getLogger(BitInputStream.class.getName());
     final long totalBytes;
     long remainingBytes;
     long readBytes;
@@ -108,7 +103,7 @@ public class BitInputStream extends FileInputStream {
             int remaining = readBytesToBuffer();
 
             if (remaining == -1) {
-                logger.log(Level.INFO, "EOF");
+                LOG.log(Level.INFO, "EOF");
                 return null;
             } else {
                 return readSingleByte();
@@ -129,7 +124,7 @@ public class BitInputStream extends FileInputStream {
         remainingBytes--;
         // logger.log(Level.INFO, "remaning bytes: {0}", remainingBytes);
         if (remainingBytes == 0) {
-            logger.log(Level.INFO, "FINAL BIT");
+            LOG.log(Level.INFO, "FINAL BIT");
             return BitUtils.decodeBits(x, this.emptyBits);
         } else {
             return BitUtils.decodeBits(x, 0);

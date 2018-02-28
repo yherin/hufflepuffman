@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.io;
 
 import java.util.ArrayList;
@@ -10,15 +5,16 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * This class is used ONLY for performance testing. It is not used in the normal 
+ * This class is used ONLY for performance testing. It is not used in the normal
  * running of the application.
+ *
  * @author jack
  */
 public class HuffmanCompressionPerfTester extends HuffmanCompression {
 
     private final int iterations;
     private static final Logger LOG = Logger.getLogger(HuffmanCompressionPerfTester.class.getName());
-    private List<String> results;
+    private final List<String> results;
 
     public HuffmanCompressionPerfTester(String inputFilepath, String outputFilepath, int iterations) {
         super(inputFilepath, outputFilepath);
@@ -30,7 +26,7 @@ public class HuffmanCompressionPerfTester extends HuffmanCompression {
     public void run() {
         doCompression();
     }
-    
+
     @Override
     protected void doCompression() {
         long totalBuildTime = 0L;

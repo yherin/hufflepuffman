@@ -24,10 +24,17 @@ public class HuffmanDecoder {
     private final BitInputStream stream;
     private final HuffmanTree tree;
     private boolean decodeSuccessful;
-    final Logger logger = Logger.getLogger(HuffmanDecoder.class.getName());
-
+    private final static Logger logger = Logger.getLogger(HuffmanDecoder.class.getName());
     private int bitPos;
 
+    /**
+     * Create a new HuffmanDecoder object.
+     * @param  writer                A @BufferedWriter object, containing the text output file.
+     * @param  tree                  A @HuffmanTree object, containing the codes used by this decoder.
+     * @param  extraBits             The number of extra bits in the final byte to be ignored by this decoder.
+     * @param  bitInputStream        A @BitInputStream object, containing the binary input file.
+     * @throws FileNotFoundException Thrown on unexepected file errors.
+     */
     public HuffmanDecoder(BufferedWriter writer, HuffmanTree tree, int extraBits, BitInputStream bitInputStream) throws FileNotFoundException {
         this.writer = writer;
         this.stream = bitInputStream;
@@ -82,7 +89,7 @@ public class HuffmanDecoder {
 
     /**
      * Moves the 'head of the tree down the Huffman tree, based on the NodeKey.
-     * 
+     *
      */
     private void traverseHuffmanTree(NodeKey bit) {
         this.decodeSuccessful = this.tree.descend(bit);
