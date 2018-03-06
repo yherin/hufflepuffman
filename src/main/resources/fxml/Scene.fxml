@@ -7,15 +7,18 @@
 <?import javafx.scene.layout.Pane?>
 
 <AnchorPane id="AnchorPane" prefHeight="139.0" prefWidth="323.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.js.huffman.FXMLController">
-   <children>
-      <Pane id="menu" layoutX="3.0" layoutY="6.0" prefHeight="134.0" prefWidth="320.0">
-         <children>
-            <Button fx:id="btnMenuCompress" layoutX="221.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#compress" text="Compress!" />
-            <Button fx:id="btnMenuDecompress" layoutX="206.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#decompress" text="Decompress!" />
-            <TextField fx:id="compressionInputFilePath" layoutX="11.0" layoutY="32.0" />
-            <TextField fx:id="decompressionInputFilePath" layoutX="11.0" layoutY="77.0" />
-            <Label fx:id="warnFileExtension" layoutX="11.0" layoutY="112.0" prefHeight="17.0" prefWidth="253.0" text="Target file must end in .huff" textFill="#dd1515" visible="false" />
-         </children>
-      </Pane>
-   </children>
+    <children>
+        <Pane id="menu" layoutX="3.0" layoutY="6.0" prefHeight="134.0" prefWidth="320.0">
+            <children>
+                <Button fx:id="btnMenuCompress" layoutX="221.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#compress" text="Compress!" />
+                <Button fx:id="btnMenuDecompress" layoutX="206.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#decompress" text="Decompress!" />
+                <TextField fx:id="compressionInputFilePath" layoutX="11.0" layoutY="32.0" />
+                <TextField fx:id="decompressionInputFilePath" layoutX="11.0" layoutY="77.0" />
+                <Label fx:id="warnFileExtension" layoutX="11.0" layoutY="112.0" prefHeight="17.0" prefWidth="253.0" text="Target file must end in .huff" textFill="#dd1515" visible="false" />
+                <Label fx:id="warnIOError" layoutX="11.0" layoutY="112.0" prefHeight="17.0" prefWidth="253.0" text="IO error. Please check file path." textFill="#dd1515" visible="false" />
+                <Label fx:id="success" layoutX="11.0" layoutY="112.0" prefHeight="17.0" prefWidth="253.0" text="Operation successful." textFill="#15dd15" visible="false" />
+
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>
