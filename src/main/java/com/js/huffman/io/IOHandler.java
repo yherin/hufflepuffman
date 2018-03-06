@@ -58,7 +58,7 @@ public class IOHandler {
         outputHandler = new OutputFileHandler();
 
     }
-    
+
     /**
      * Initialise the BufferedReader used by this file.
      */
@@ -67,9 +67,10 @@ public class IOHandler {
             this.reader = new BufferedReader(new FileReader(this.inputHandler.getFile()));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+            throw new UnsupportedOperationException("no text input");
         }
     }
-    
+
     /**
      * Initialise the BufferedWriter used by this file.
      */
@@ -78,10 +79,12 @@ public class IOHandler {
             this.writer = new BufferedWriter(new FileWriter(this.outputHandler.getFile()));
         } catch (IOException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+            throw new UnsupportedOperationException("failed to init text output");
+
         }
 
     }
-    
+
     /**
      * Initialise the BitOutputStream used by this file.
      */
@@ -91,9 +94,11 @@ public class IOHandler {
             this.bitOutputStream.setFileChannel();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+            throw new UnsupportedOperationException("failed to init binary output file");
+
         }
     }
-    
+
     /**
      * Initialise the BitInputStream used by this file.
      */
@@ -101,7 +106,9 @@ public class IOHandler {
         try {
             this.bitInputStream = new BitInputStream((this.binaryInputFile));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+            throw new UnsupportedOperationException("failed to init binary input file");
+
         }
     }
 
@@ -114,15 +121,15 @@ public class IOHandler {
             converter = new SymbolConverter(encoded_tree.getCodes());
             encoder = new HuffmanEncoder(this.reader, converter, this.bitOutputStream, this.encoded_tree);
             encoder.encodeBits();
-       //     logger.log(Level.INFO, "IO: Writing done.");
+            //     logger.log(Level.INFO, "IO: Writing done.");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * Read and decode binary data from the currently defined binary input file,
-     * writing it in decoded format to a text file. 
+     * writing it in decoded format to a text file.
      */
     public void readBinaryInputAndDecode() {
         try {
@@ -132,7 +139,7 @@ public class IOHandler {
             this.decoded_tree = dtb.buildTree();
             decoder = new HuffmanDecoder(this.writer, this.decoded_tree, this.extraBits, this.bitInputStream);
             decoder.decode();
-     //       logger.log(Level.INFO, "Decoding done.");
+            //       logger.log(Level.INFO, "Decoding done.");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }

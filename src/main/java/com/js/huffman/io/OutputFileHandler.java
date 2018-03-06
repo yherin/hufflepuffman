@@ -4,6 +4,7 @@ import java.io.File;
 
 /**
  * File utility class that handles file status and File object creation.
+ *
  * @author jack
  */
 public class OutputFileHandler extends FileHandler {
@@ -26,7 +27,11 @@ public class OutputFileHandler extends FileHandler {
 
     @Override
     public File getFile() {
-        return this.file;
+        if (hasFileSet()) {
+            return this.file;
+        } else {
+            throw new UnsupportedOperationException("Failed to set file.");
+        }
     }
 
     @Override

@@ -32,7 +32,11 @@ public class InputFileHandler extends FileHandler {
 
     @Override
     public File getFile() {
+        if (hasFileSet()){
         return this.file;
+        } else {
+            throw new UnsupportedOperationException("Failed to set file.");
+        }
     }
 
     @Override

@@ -26,19 +26,30 @@ public class FXMLController implements Initializable {
     private Label warnFileExtension;
 
     @FXML
+    private Label success;
+
+    @FXML
     private Button btnMenuCompress;
 
     @FXML
     private Button btnMenuDecompress;
+
+    @FXML
+    private Label warnIOError;
 
     /**
      * The entry point for file compression. Starts on a new thread.
      */
     @FXML
     private void compress() {
-        final String input = compressionInputFilePath.getText();
-        final String output = input + ".huff";
-        new HuffmanCompression(input, output).run();
+        try {
+            final String input = compressionInputFilePath.getText();
+            final String output = input + ".huff";
+            new HuffmanCompression(input, output).run();
+            this.showSuccess(true);
+        } catch (UnsupportedOperationException e) {
+            this.warnIOError(true);
+        }
     }
 
     /**
@@ -49,8 +60,13 @@ public class FXMLController implements Initializable {
         final String input = decompressionInputFilePath.getText();
         if (input.endsWith(".huff")) {
             warnFileExtension(false);
-            final String output = formatOutputFilename();
-            new HuffmanDecompression(input, output).run();
+            try {
+                final String output = formatOutputFilename();
+                new HuffmanDecompression(input, output).run();
+                this.showSuccess(true);
+            } catch (UnsupportedOperationException e) {
+                this.warnIOError(true);
+            }
         } else {
             warnFileExtension(true);
         }
@@ -73,7 +89,24 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
+    private void warnIOError(boolean warn) {
+        this.warnFileExtension.setVisible(false);
+        this.success.setVisible(false);
+        this.warnIOError.setVisible(warn);
+    }
+
+    @FXML
+    private void showSuccess(boolean show) {
+        this.warnFileExtension.setVisible(false);
+        this.warnIOError.setVisible(false);
+        this.success.setVisible(
+                true);
+    }
+
+    @FXML
     private void warnFileExtension(boolean warn) {
+        this.warnIOError.setVisible(false);
+        this.success.setVisible(false);
         this.warnFileExtension.setVisible(warn);
     }
 
