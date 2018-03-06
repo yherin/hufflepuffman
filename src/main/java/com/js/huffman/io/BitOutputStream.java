@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.io;
 
 import java.io.File;
@@ -91,7 +86,7 @@ public class BitOutputStream extends FileOutputStream {
         try {
             final long pos = this.fc.position();
             this.fc.position(0x5); //5th byte contains this data
-            logger.log(Level.INFO, "Trying to write {0} to byte at index {1}", new Object[]{this.endExtraBits, 0x5});
+         //   logger.log(Level.INFO, "Trying to write {0} to byte at index {1}", new Object[]{this.endExtraBits, 0x5});
             ByteBuffer bits = ByteBuffer.allocate(1);
             assert this.endExtraBits < 8;
             bits.put((byte) this.endExtraBits);
@@ -149,7 +144,7 @@ public class BitOutputStream extends FileOutputStream {
     private void forceWriteBuffer() {
         if (this.buffer.limit() != this.buffer.remaining()) {
             try {
-                logger.log(Level.INFO, "Forcing buffer to file with " + buffer.position() + " bytes");
+        //        logger.log(Level.INFO, "Forcing buffer to file with " + buffer.position() + " bytes");
                 this.buffer.flip();
                 this.fc.write(this.buffer);
 
@@ -170,8 +165,8 @@ public class BitOutputStream extends FileOutputStream {
 
         try {
             if (n > 0 && n < 8) {
-                String message = "" + (8 - n) + " bits to be written in final byte.";
-                logger.log(Level.INFO, message);
+         //       String message = "" + (8 - n) + " bits to be written in final byte.";
+         //       logger.log(Level.INFO, message);
                 endExtraBits = (byte) fillFinalByte();
 //                writeNumberOfEmptyEOFBitsToMetaData();
 
@@ -201,7 +196,7 @@ public class BitOutputStream extends FileOutputStream {
             addSingleBit('0');
         }
         String msg = "" + endExtraBits + " extra 0 bits written to byte at EOF.";
-        logger.log(Level.INFO, msg);
+    //    logger.log(Level.INFO, msg);
         forceWriteBuffer();
         return endExtraBits;
     }

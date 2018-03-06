@@ -43,7 +43,7 @@ public class EntryImpl<K extends Object, V extends Object> implements Map.Entry 
         try {
             this.value = (V) v;
         } catch (ClassCastException e) {
-            LOG.log(Level.SEVERE, "Set value failed to cast", e);
+            //LOG.log(Level.SEVERE, "Set value failed to cast", e);
             return null;
         }
         return this.value;

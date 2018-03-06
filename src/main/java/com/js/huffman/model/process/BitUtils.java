@@ -23,7 +23,7 @@ public class BitUtils {
     public static NodeKey[] decodeBits(byte readByte, int fakeBits) {
         NodeKey[] bits = new NodeKey[8];
         if (fakeBits != 0) {
-            LOG.log(Level.WARNING, "Discarding {0} fake bits. This message should only appear once.", fakeBits);
+            //LOG.log(Level.WARNING, "Discarding {0} fake bits. This message should only appear once.", fakeBits);
         }
         for (int i = 7; i >= 0; i--) {
             if (i < fakeBits) {

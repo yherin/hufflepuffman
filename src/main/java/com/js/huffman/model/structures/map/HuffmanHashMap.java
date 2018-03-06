@@ -42,7 +42,7 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
 
     private void handlePossibleResize() {
         if (doResize()) {
-            LOG.log(Level.INFO, "Resizing the HashMap. Count: {0} | Capacity: " + this.buckets.length, this.count);
+            //LOG.log(Level.INFO, "Resizing the HashMap. Count: {0} | Capacity: " + this.buckets.length, this.count);
             final int newSize = Math.min(Integer.MAX_VALUE - 1, this.buckets.length * 2);
             EntryImpl[] bigger = new EntryImpl[newSize];
             for (int i = 0; i < this.buckets.length; i++) {
@@ -129,7 +129,7 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
             }
 
         } catch (ClassCastException e) {
-            LOG.log(Level.SEVERE, null, e);
+            //LOG.log(Level.SEVERE, null, e);
             return null;
         }
     }
@@ -230,7 +230,7 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
      * @return EntryImpl[]
      */
     public final EntryImpl[] keyArray() {
-        LOG.log(Level.WARNING, "EXPENSIVE OPERATION - keyArray()");
+        //LOG.log(Level.WARNING, "EXPENSIVE OPERATION - keyArray()");
         final int amountOfKeys = Math.min(Integer.MAX_VALUE, (int) count);
         keyIndex = 0;
         final EntryImpl[] keys = new EntryImpl[amountOfKeys];

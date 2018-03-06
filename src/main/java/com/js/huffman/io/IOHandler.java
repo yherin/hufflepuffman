@@ -12,7 +12,6 @@ import com.js.huffman.model.process.DecodingTreeBuilder;
 import com.js.huffman.model.process.EncodingTreeBuilder;
 import com.js.huffman.model.process.QueueBuilder;
 import com.js.huffman.model.structures.map.HuffmanHashMap;
-import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.heap.NodeHeap;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import com.js.huffman.model.structures.node.tree.SymbolConverter;
@@ -23,7 +22,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -116,7 +114,7 @@ public class IOHandler {
             converter = new SymbolConverter(encoded_tree.getCodes());
             encoder = new HuffmanEncoder(this.reader, converter, this.bitOutputStream, this.encoded_tree);
             encoder.encodeBits();
-            logger.log(Level.INFO, "IO: Writing done.");
+       //     logger.log(Level.INFO, "IO: Writing done.");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -134,7 +132,7 @@ public class IOHandler {
             this.decoded_tree = dtb.buildTree();
             decoder = new HuffmanDecoder(this.writer, this.decoded_tree, this.extraBits, this.bitInputStream);
             decoder.decode();
-            logger.log(Level.INFO, "Decoding done.");
+     //       logger.log(Level.INFO, "Decoding done.");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -148,7 +146,6 @@ public class IOHandler {
         NodeHeap nodes = queueBuilder.buildAndReturnQueue(map);
         EncodingTreeBuilder etb = new EncodingTreeBuilder(nodes);
         this.encoded_tree = etb.buildTree();
-        System.out.println(encoded_tree);
 
     }
 

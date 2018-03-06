@@ -37,21 +37,20 @@ public class HuffmanCompressionPerfTester extends HuffmanCompression {
 
             long buildDataStart = System.nanoTime();
             io.encodeToBinary();
+            io.initialiseBitOutput();
+            io.writeBinaryOutput();
             long buildDataEnd = System.nanoTime();
             long build = (buildDataEnd - buildDataStart) / 1000000l;
             this.results.add("Algorithm processing time: " + build + "ms.");
             totalBuildTime += build;
         }
-        this.results.add("Total processing time over" + iterations + " iterations: " + (totalBuildTime) + "ms");
-        this.results.add("Average : " + ((totalBuildTime) / iterations) + "ms");
+       // this.results.add("Total processing time over" + iterations + " iterations: " + (totalBuildTime) + "ms");
+        System.out.println("Average : " + ((totalBuildTime) / iterations) + "ms");
 
-        io.initialiseBitOutput();
         long writeDataStart = System.nanoTime();
-        io.writeBinaryOutput();
         long writeDataEnd = System.nanoTime();
         long write = (writeDataEnd - writeDataStart) / 1000000l;
 
-        this.results.add("IO writing time (One operation): " + write + "ms.");
     }
 
     public List<String> getResults() {

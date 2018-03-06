@@ -103,7 +103,7 @@ public class BitInputStream extends FileInputStream {
             int remaining = readBytesToBuffer();
 
             if (remaining == -1) {
-                LOG.log(Level.INFO, "EOF");
+                //LOG.log(Level.INFO, "EOF");
                 return null;
             } else {
                 return readSingleByte();
@@ -124,7 +124,7 @@ public class BitInputStream extends FileInputStream {
         remainingBytes--;
         // logger.log(Level.INFO, "remaning bytes: {0}", remainingBytes);
         if (remainingBytes == 0) {
-            LOG.log(Level.INFO, "FINAL BIT");
+            //LOG.log(Level.INFO, "FINAL BIT");
             return BitUtils.decodeBits(x, this.emptyBits);
         } else {
             return BitUtils.decodeBits(x, 0);

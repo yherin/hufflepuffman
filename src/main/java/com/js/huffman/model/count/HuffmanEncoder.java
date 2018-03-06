@@ -69,7 +69,7 @@ public class HuffmanEncoder {
             }
             this.stream.flush();
             this.stream.close();
-            logger.log(Level.INFO, "Total " + this.stream.getCount() + " bytes written.");
+       //     logger.log(Level.INFO, "Total " + this.stream.getCount() + " bytes written.");
         } catch (IOException ex) {
             logger.log(Level.SEVERE, null, ex);
         }
