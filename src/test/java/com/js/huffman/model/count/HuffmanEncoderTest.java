@@ -29,13 +29,13 @@ public class HuffmanEncoderTest {
     private final BufferedReader textReader;
     private final FileInputStream binaryReader;
     private final SymbolConverter converter;
-    private final File out = new File("src/main/resources/samples/encoded_binary");
+    private final File out = new File("src/test/plain/encoded_binary");
     private final Logger logger = Logger.getLogger(HuffmanEncoderTest.class.getName());
     private PriorityQueue<BuiltNode> nodes;
 
     public HuffmanEncoderTest() throws FileNotFoundException {
 
-        this.textReader = new BufferedReader(new FileReader("src/main/resources/samples/test/test1.txt"));
+        this.textReader = new BufferedReader(new FileReader("src/test/plain/test1.txt"));
         this.converter = new SymbolConverter(buildCodes());
         this.binaryReader = new FileInputStream(out);
         this.nodes = new PriorityQueue<>();

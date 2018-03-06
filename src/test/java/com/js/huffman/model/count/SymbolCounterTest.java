@@ -31,7 +31,7 @@ public class SymbolCounterTest {
     private File tenThousandCharacters;
 
     public SymbolCounterTest() {
-        this.test_dir = "src/main/resources/samples/test/";
+        this.test_dir = "src/test/plain/";
     }
 
     @BeforeClass

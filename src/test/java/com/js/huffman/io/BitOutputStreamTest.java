@@ -25,7 +25,7 @@ public class BitOutputStreamTest {
 
     public BitOutputStreamTest() {
         try {
-            test_dir = "src/main/resources/samples/test/";
+            test_dir = "src/test/plain/";
             this.file = new File(test_dir + "out");
             this.streamer = new BitOutputStream(file);
             this.streamer.setFileChannel();

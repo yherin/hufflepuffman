@@ -17,8 +17,8 @@ import static org.junit.Assert.*;
  */
 public class IOHandlerTest {
 
-    String inputFilepath = "src/main/resources/samples/lorem";
-    String outputFilepath = "src/main/resources/samples/decoded_binary.txt";
+    String inputFilepath = "src/test/plain/lorem";
+    String outputFilepath = "src/test/plain/decoded_binary.txt";
     String binaryOut = inputFilepath + ".huff";
     String binaryIn = binaryOut;
 

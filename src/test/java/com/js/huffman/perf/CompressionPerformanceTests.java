@@ -36,8 +36,8 @@ public class CompressionPerformanceTests {
 //    }
     @Test
     public void testEncoding100kb() {
-        final String input = "src/main/resources/samples/test/lorem.txt";
-        final String output = "src/main/resources/samples/test/lorem.huff";
+        final String input = "src/test/perf/lorem.txt";
+        final String output = "src/test/perf/lorem.huff";
         HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 100);
         p.run();
         System.out.println("********\n");
@@ -47,8 +47,8 @@ public class CompressionPerformanceTests {
 
     @Test
     public void testEncoding500kb() {
-        final String input = "src/main/resources/samples/test/customer-500kb.xml";
-        final String output = "src/main/resources/samples/test/customer-500kb.xml.huff";
+        final String input = "src/test/perf/customer-500kb.xml";
+        final String output = "src/test/perf/customer-500kb.xml.huff";
         HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 100);
         p.run();
         System.out.println("********\n");
@@ -58,8 +58,8 @@ public class CompressionPerformanceTests {
 
     @Test
     public void testEncoding1mb() {
-        final String input = "src/main/resources/samples/test/mondial-3.0-1mb.xml";
-        final String output = "src/main/resources/samples/test/mondial-3.0-1mb.xml.huff";
+        final String input = "src/test/perf/mondial-3.0-1mb.xml";
+        final String output = "src/test/perf/mondial-3.0-1mb.xml.huff";
         HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 100);
         p.run();
         System.out.println("********\n");
@@ -69,8 +69,8 @@ public class CompressionPerformanceTests {
 
     @Test
     public void testEncoding2mb() {
-        final String input = "src/main/resources/samples/test/Tf_french2.3mb.txt";
-        final String output = "src/main/resources/samples/test/Tf_french2.3mb.txt.huff";
+        final String input = "src/test/perf/Tf_french2.3mb.txt";
+        final String output = "src/test/perf/Tf_french2.3mb.txt.huff";
         HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 100);
         p.run();
         System.out.println("********\n");
@@ -80,8 +80,8 @@ public class CompressionPerformanceTests {
 
     @Test
     public void testEncoding4mb() {
-        final String input = "src/main/resources/samples/test/bible4.4mb.txt";
-        final String output = "src/main/resources/samples/test/bible4.4mb.txt.huff";
+        final String input = "src/test/perf/bible4.4mb.txt";
+        final String output = "src/test/perf/bible4.4mb.txt.huff";
         HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 100);
         p.run();
         System.out.println("********\n");
@@ -90,8 +90,8 @@ public class CompressionPerformanceTests {
 
     @Test
     public void testEncoding9mb() {
-        final String input = "src/main/resources/samples/test/bible8.9mb.txt";
-        final String output = "src/main/resources/samples/test/bible8.9mb.txt.huff";
+        final String input = "src/test/perf/bible8.9mb.txt";
+        final String output = "src/test/perf/bible8.9mb.txt.huff";
         HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 100);
         p.run();
         System.out.println("********\n");
@@ -103,7 +103,7 @@ public class CompressionPerformanceTests {
     public void testConstantKExponentialN() {
         for (int i = 1; i <= 11; i++) {
             String suffix = Integer.toString(i);
-            final String input = "src/main/resources/samples/test/lorem" + suffix;
+            final String input = "src/test/perf/lorem" + suffix;
             final String output = input + ".huff";
             HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 10);
             p.run();
@@ -115,7 +115,7 @@ public class CompressionPerformanceTests {
     public void testConstantKLinearN() {
         for (int i = 1; i <= 11; i++) {
             String suffix = Integer.toString(i);
-            final String input = "src/main/resources/samples/test/" + suffix + "lorem";
+            final String input = "src/test/perf/" + suffix + "lorem";
             final String output = input + ".huff";
             HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 10);
             p.run();
@@ -127,13 +127,13 @@ public class CompressionPerformanceTests {
     public void testLinearKConstantN() {
         for (int i = 1; i <= 10; i++) {
             String suffix = Integer.toString(i * 10);
-            final String input = "src/main/resources/samples/test/symbols" + suffix;
+            final String input = "src/test/perf/symbols" + suffix;
             final String output = input + ".huff";
             HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 100);
             p.run();
         }
         String suffix = "200";
-        final String input = "src/main/resources/samples/test/symbols" + suffix;
+        final String input = "src/test/perf/symbols" + suffix;
         final String output = input + ".huff";
         HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 100);
         p.run();

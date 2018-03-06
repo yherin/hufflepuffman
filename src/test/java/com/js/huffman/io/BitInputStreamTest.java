@@ -26,7 +26,7 @@ public class BitInputStreamTest {
          * symbols must be 00111001
          *
          */
-        stream = new BitInputStream(new File("src/main/resources/samples/test/binary_abcd"));
+        stream = new BitInputStream(new File("src/test/plain/binary_abcd"));
         stream.setEmptyBits(0);
     }
 

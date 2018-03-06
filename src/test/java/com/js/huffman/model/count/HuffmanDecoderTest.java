@@ -15,13 +15,13 @@ import org.junit.Before;
  */
 public class HuffmanDecoderTest {
 
-    private final String binary = "src/main/resources/samples/encoded_binary";
+    private final String binary = "src/test/plain/encoded_binary";
 
     private final IOHandler io;
 
     public HuffmanDecoderTest() {
         io = new IOHandler();
-        io.setTextInputFile("src/main/resources/samples/test/test1.txt");
+        io.setTextInputFile("src/test/plain/test1.txt");
 
     }
 
@@ -45,7 +45,7 @@ public class HuffmanDecoderTest {
 //    public void testDecode() {
 //        try {
 //            System.out.println("decode");
-//            HuffmanDecoder instance = new HuffmanDecoder(new BufferedWriter(new FileWriter(new File("src/main/resources/samples/decoded_binary.txt"))), io.getDecoded_tree(),  0, new BitInputStream(new File(binary)));
+//            HuffmanDecoder instance = new HuffmanDecoder(new BufferedWriter(new FileWriter(new File("src/test/plain/decoded_binary.txt"))), io.getDecoded_tree(),  0, new BitInputStream(new File(binary)));
 //            instance.decode();
 //            
 //        } catch (IOException ex) {

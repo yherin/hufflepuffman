@@ -45,7 +45,8 @@ public class HuffmanCompressionPerfTester extends HuffmanCompression {
             totalBuildTime += build;
         }
        // this.results.add("Total processing time over" + iterations + " iterations: " + (totalBuildTime) + "ms");
-        System.out.println("Average : " + ((totalBuildTime) / iterations) + "ms");
+        System.out.println("Total over "+iterations+ " iterations: "+ totalBuildTime+"ms"); 
+       System.out.println("Average : " + ((totalBuildTime) / iterations) + "ms");
 
         long writeDataStart = System.nanoTime();
         long writeDataEnd = System.nanoTime();
