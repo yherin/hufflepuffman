@@ -12,6 +12,7 @@ public class SymbolConverter {
 
     public SymbolConverter(final HuffmanHashMap<Character, String> codes) {
         this.codes = codes;
+        System.out.println(codes.toString());
     }
 
     public String characterToHuffmanCode(final Character c) {

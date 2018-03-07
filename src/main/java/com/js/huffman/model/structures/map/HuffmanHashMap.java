@@ -258,5 +258,14 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
     private void incrementKeyIndex() {
         this.keyIndex++;
     }
+    
+    @Override
+    public String toString(){
+        StringBuilder rep = new StringBuilder();
+        for (EntryImpl e : keyArray()){
+            rep.append("(").append(e.getKey()).append(",").append(e.getValue()).append(")");
+        }
+        return rep.toString();
+    }
 
 }
