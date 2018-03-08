@@ -16,10 +16,12 @@ import org.junit.Test;
 public class DecompressionPerformanceTests {
 
     public DecompressionPerformanceTests() {
+        System.out.println("Testing : "+DecompressionPerformanceTests.class);
     }
 
     @Test
     public void testConstantKLinearN() {
+        System.out.println("Test linear N, constant K");
         for (int i = 1; i <= 11; i++) {
             String suffix = Integer.toString(i);
             final String input = "src/test/perf/" + suffix + "lorem.huff";
@@ -32,6 +34,7 @@ public class DecompressionPerformanceTests {
 
     @Test
     public void testLinearKConstantN() {
+        System.out.println("Test linear K, constant N.");
         for (int i = 1; i <= 10; i++) {
             String suffix = Integer.toString(i * 10);
             final String input = "src/test/perf/symbols" + suffix + ".huff";

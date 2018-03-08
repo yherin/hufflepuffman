@@ -62,7 +62,7 @@ public class SymbolReader {
         } catch (IOException ex) {
             Logger.getLogger(SymbolReader.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return this.symbols;
     }
 

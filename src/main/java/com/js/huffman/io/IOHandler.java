@@ -150,6 +150,7 @@ public class IOHandler {
      */
     public void encodeToBinary() {
         HuffmanHashMap<Character, Integer> map = read();
+        logger.log(Level.INFO, map.toString());
         NodeHeap nodes = queueBuilder.buildAndReturnQueue(map);
         EncodingTreeBuilder etb = new EncodingTreeBuilder(nodes);
         this.encoded_tree = etb.buildTree();
