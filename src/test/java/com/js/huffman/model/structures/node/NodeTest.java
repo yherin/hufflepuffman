@@ -5,8 +5,8 @@
  */
 package com.js.huffman.model.structures.node;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *

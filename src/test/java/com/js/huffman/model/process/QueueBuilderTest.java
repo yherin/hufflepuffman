@@ -8,12 +8,10 @@ package com.js.huffman.model.process;
 import com.js.huffman.model.structures.map.EntryImpl;
 import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.BuiltNode;
-import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.heap.NodeHeap;
-import java.util.PriorityQueue;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

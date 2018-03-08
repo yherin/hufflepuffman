@@ -8,8 +8,8 @@ package com.js.huffman.model.structures.node.heap;
 import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodePriorityComparator;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *

@@ -11,7 +11,6 @@ import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.ReconstructedNode;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

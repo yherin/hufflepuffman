@@ -13,7 +13,6 @@ import com.js.huffman.model.structures.node.NodeType;
 import com.js.huffman.model.structures.node.heap.NodeHeap;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import java.util.Arrays;
-import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

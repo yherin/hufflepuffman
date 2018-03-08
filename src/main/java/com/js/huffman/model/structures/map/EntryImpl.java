@@ -6,7 +6,6 @@
 package com.js.huffman.model.structures.map;
 
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**

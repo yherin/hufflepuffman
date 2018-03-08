@@ -11,7 +11,6 @@ import com.js.huffman.model.structures.node.BuiltNode;
 import com.js.huffman.model.structures.node.Node;
 import com.js.huffman.model.structures.node.NodePriorityComparator;
 import com.js.huffman.model.structures.node.heap.NodeHeap;
-import java.util.PriorityQueue;
 
 /**
  * Class which builds NodeHeap.

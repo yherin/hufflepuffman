@@ -10,9 +10,9 @@ import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
 import java.io.UnsupportedEncodingException;
 import org.junit.After;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

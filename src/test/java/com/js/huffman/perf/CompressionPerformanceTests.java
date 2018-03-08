@@ -1,7 +1,6 @@
 package com.js.huffman.perf;
 
 import com.js.huffman.io.HuffmanCompressionPerfTester;
-import java.util.List;
 import org.junit.Test;
 
 /**

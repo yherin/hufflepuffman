@@ -6,7 +6,6 @@ package com.js.huffman.perf;
  * and open the template in the editor.
  */
 import com.js.huffman.io.HuffmanDecompressionPerfTester;
-import java.util.List;
 import org.junit.Test;
 
 /**
