@@ -1,0 +1,22 @@
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'C:/Users/Jack/code/hufflepuffman/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2018 Your Organisation. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Jack/code/hufflepuffman/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'hufflepuffman 1.0 API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/Jack/code/hufflepuffman/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'hufflepuffman 1.0 API'

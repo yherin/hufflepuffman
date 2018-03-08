@@ -1,0 +1,8 @@
+com.js.huffman
+com.js.huffman.io
+com.js.huffman.model.count
+com.js.huffman.model.process
+com.js.huffman.model.structures.map
+com.js.huffman.model.structures.node
+com.js.huffman.model.structures.node.heap
+com.js.huffman.model.structures.node.tree
