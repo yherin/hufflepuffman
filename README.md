@@ -23,6 +23,8 @@ Clean & build, then run. Basic GUI where you can specify a file to compress or d
 
 ## Docs
 
+[JavaDoc](https://htmlpreview.github.io/?https://github.com/yherin/hufflepuffman/blob/master/documentation/apidocs/index.html)
+
 [Specs](documentation/specification.md)
 
 [Algorithm complexity](documentation/complexity.md)
