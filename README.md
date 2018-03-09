@@ -30,7 +30,7 @@ Basic GUI where you can specify a file to compress or decompress. Only _absolute
 
 [Implementation and test document](documentation/huffman-impl.pdf)
 
-[Latest PIT report](http://htmlpreview.github.io/?https://github.com/yherin/hufflepuffman/blob/master/documentation/PIT/201802240111/index.html)
+[Latest PIT report](http://htmlpreview.github.io/?https://github.com/yherin/hufflepuffman/blob/master/documentation/PIT/index.html)
 
 [Initial and rough specs](documentation/specification.md)
 
