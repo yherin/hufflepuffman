@@ -1,4 +1,6 @@
-package com.js.huffman.io;
+package com.js.huffman.action;
+
+import com.js.huffman.io.IOHandler;
 
 /**
  * This class is provides the functionality to perform a compression operation.
@@ -41,11 +43,11 @@ public class HuffmanCompression implements Runnable {
         io.initialiseBitOutput();
         long writeDataStart = System.nanoTime();
         io.writeBinaryOutput();
-        long writeDataEnd = System.nanoTime();
-        long write = (writeDataEnd - writeDataStart) / 1000000l;
-        long comp = (buildDataEnd - buildDataStart) / 1000000l;
-        System.out.println("Build data time: " + comp + "ms.");
-        System.out.println("Write data time: " + write + "ms.");
+//        long writeDataEnd = System.nanoTime();
+//        long write = (writeDataEnd - writeDataStart) / 1000000l;
+//        long comp = (buildDataEnd - buildDataStart) / 1000000l;
+//        System.out.println("Build data time: " + comp + "ms.");
+//        System.out.println("Write data time: " + write + "ms.");
     }
 
 }

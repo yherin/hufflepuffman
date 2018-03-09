@@ -1,4 +1,4 @@
-package com.js.huffman;
+package com.js.huffman.action;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;

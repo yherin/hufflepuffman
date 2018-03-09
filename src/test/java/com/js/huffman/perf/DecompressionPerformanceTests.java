@@ -5,7 +5,7 @@ package com.js.huffman.perf;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.js.huffman.action.HuffmanDecompressionPerfTester;
+import com.js.huffman.action.PerfTesterHuffmanDecompression;
 import org.junit.Test;
 
 /**
@@ -25,7 +25,7 @@ public class DecompressionPerformanceTests {
             String suffix = Integer.toString(i);
             final String input = "src/test/perf/" + suffix + "lorem.huff";
             final String output = "src/test/perf/" + suffix + "lorem_d";
-            HuffmanDecompressionPerfTester p = new HuffmanDecompressionPerfTester(input, output, 10);
+            PerfTesterHuffmanDecompression p = new PerfTesterHuffmanDecompression(input, output, 10);
             p.run();
 
         }
@@ -38,13 +38,13 @@ public class DecompressionPerformanceTests {
             String suffix = Integer.toString(i * 10);
             final String input = "src/test/perf/symbols" + suffix + ".huff";
             final String output = "src/test/perf/symbols_d" + suffix;
-            HuffmanDecompressionPerfTester p = new HuffmanDecompressionPerfTester(input, output, 10);
+            PerfTesterHuffmanDecompression p = new PerfTesterHuffmanDecompression(input, output, 10);
             p.run();
         }
         String suffix = "200";
         final String input = "src/test/perf/symbols" + suffix + ".huff";
         final String output = "src/test/perf/symbols_d" + suffix;
-        HuffmanDecompressionPerfTester p = new HuffmanDecompressionPerfTester(input, output, 10);
+        PerfTesterHuffmanDecompression p = new PerfTesterHuffmanDecompression(input, output, 10);
         p.run();
 
     }

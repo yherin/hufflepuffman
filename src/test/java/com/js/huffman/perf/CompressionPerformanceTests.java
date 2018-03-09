@@ -1,6 +1,6 @@
 package com.js.huffman.perf;
 
-import com.js.huffman.action.HuffmanCompressionPerfTester;
+import com.js.huffman.action.PerfTesterHuffmanCompression;
 import org.junit.Test;
 
 /**
@@ -22,7 +22,7 @@ public class CompressionPerformanceTests {
             String suffix = Integer.toString(i);
             final String input = "src/test/perf/" + suffix + "lorem";
             final String output = input + ".huff";
-            HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 10);
+            PerfTesterHuffmanCompression p = new PerfTesterHuffmanCompression(input, output, 10);
             p.run();
 
         }
@@ -35,13 +35,13 @@ public class CompressionPerformanceTests {
             String suffix = Integer.toString(i * 10);
             final String input = "src/test/perf/symbols" + suffix;
             final String output = input + ".huff";
-            HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 10);
+            PerfTesterHuffmanCompression p = new PerfTesterHuffmanCompression(input, output, 10);
             p.run();
         }
         String suffix = "200";
         final String input = "src/test/perf/symbols" + suffix;
         final String output = input + ".huff";
-        HuffmanCompressionPerfTester p = new HuffmanCompressionPerfTester(input, output, 10);
+        PerfTesterHuffmanCompression p = new PerfTesterHuffmanCompression(input, output, 10);
         p.run();
     }
 }

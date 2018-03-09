@@ -1,5 +1,6 @@
-package com.js.huffman.io;
+package com.js.huffman.action;
 
+import com.js.huffman.action.HuffmanCompression;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,7 +11,7 @@ import java.util.logging.Logger;
  *
  * @author jack
  */
-public final class HuffmanCompressionPerfTester extends HuffmanCompression {
+public final class PerfTesterHuffmanCompression extends HuffmanCompression {
 
     private final int iterations;
     private final List<String> results;
@@ -21,7 +22,7 @@ public final class HuffmanCompressionPerfTester extends HuffmanCompression {
      * @param outputFilepath
      * @param iterations
      */
-    public HuffmanCompressionPerfTester(String inputFilepath, String outputFilepath, int iterations) {
+    public PerfTesterHuffmanCompression(String inputFilepath, String outputFilepath, int iterations) {
         super(inputFilepath, outputFilepath);
         this.iterations = iterations;
         this.results = new ArrayList<>();

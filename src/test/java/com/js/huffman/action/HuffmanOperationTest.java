@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.js.huffman;
+package com.js.huffman.action;
 
 import com.js.huffman.action.HuffmanCompression;
 import com.js.huffman.action.HuffmanDecompression;
@@ -51,9 +51,11 @@ public class HuffmanOperationTest {
         File decompressedFile = new File(decompressed);
         compressedFile.delete();
         decompressedFile.delete();
-        new HuffmanCompression(original, compressed).run();
+        assertTrue(!compressedFile.exists());
+        assertTrue(!decompressedFile.exists());
+        new HuffmanCompression(original, compressed).doCompression();
         assertTrue(compressedFile.exists());
-        new HuffmanDecompression(compressed, decompressed).run();
+        new HuffmanDecompression(compressed, decompressed).doDecompression();
         assertTrue(decompressedFile.exists());
         try {
             FileUtils.contentEquals(new File(original), decompressedFile);

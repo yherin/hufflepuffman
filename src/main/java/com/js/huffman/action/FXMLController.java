@@ -1,7 +1,5 @@
-package com.js.huffman;
+package com.js.huffman.action;
 
-import com.js.huffman.io.HuffmanCompression;
-import com.js.huffman.io.HuffmanDecompression;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

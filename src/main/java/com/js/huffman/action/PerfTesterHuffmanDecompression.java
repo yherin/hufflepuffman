@@ -1,5 +1,7 @@
-package com.js.huffman.io;
+package com.js.huffman.action;
 
+import com.js.huffman.action.PerfTesterHuffmanCompression;
+import com.js.huffman.action.HuffmanDecompression;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,10 +12,10 @@ import java.util.logging.Logger;
  *
  * @author jack
  */
-public class HuffmanDecompressionPerfTester extends HuffmanDecompression {
+public class PerfTesterHuffmanDecompression extends HuffmanDecompression {
 
     private final int iterations;
-    private static final Logger LOG = Logger.getLogger(HuffmanCompressionPerfTester.class.getName());
+    private static final Logger LOG = Logger.getLogger(PerfTesterHuffmanCompression.class.getName());
     private List<String> results;
 
     /**
@@ -22,7 +24,7 @@ public class HuffmanDecompressionPerfTester extends HuffmanDecompression {
      * @param outputFilepath
      * @param iterations
      */
-    public HuffmanDecompressionPerfTester(String inputFilepath, String outputFilepath, int iterations) {
+    public PerfTesterHuffmanDecompression(String inputFilepath, String outputFilepath, int iterations) {
         super(inputFilepath, outputFilepath);
         this.iterations = iterations;
         this.results = new ArrayList<>();

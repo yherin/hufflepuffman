@@ -1,4 +1,6 @@
-package com.js.huffman.io;
+package com.js.huffman.action;
+
+import com.js.huffman.io.IOHandler;
 
 /**
  * This class is provides the functionality to perform a decompression operation.
@@ -11,8 +13,8 @@ public class HuffmanDecompression implements Runnable {
     protected final String outputFilepath;
     protected final String inputFilepath;
 
-    /**
-     *
+    /** Create a new HuffmanDecompression object, representing a single compression
+     * operation.
      * @param inputFilepath
      * @param outputFilepath
      */
@@ -24,7 +26,7 @@ public class HuffmanDecompression implements Runnable {
     }
 
     /**
-     *
+     * Perform the decompression operation.
      */
     @Override
     public void run() {
@@ -36,12 +38,12 @@ public class HuffmanDecompression implements Runnable {
         io.setTextOutputFile(outputFilepath);
         io.initialiseTextOutput();
         io.initialiseBitInput();
-        long decompressStart = System.nanoTime();
+//        long decompressStart = System.nanoTime();
         io.readBinaryInputAndDecode();
-        long decompressEnd = System.nanoTime();
-        System.out.println("Done.");
-        long end = System.nanoTime();
-        long decomp = (decompressEnd - decompressStart) / 1000000l;
-        System.out.println("Decompression time: " + decomp + "ms.");
+//        long decompressEnd = System.nanoTime();
+//        System.out.println("Done.");
+//        long end = System.nanoTime();
+//        long decomp = (decompressEnd - decompressStart) / 1000000l;
+//        System.out.println("Decompression time: " + decomp + "ms.");
     }
 }
