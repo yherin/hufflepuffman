@@ -10,7 +10,7 @@ Read more: https://en.wikipedia.org/wiki/Huffman_coding
 
 ## Usage
 
-Clean & build, then run. Basic GUI where you can specify a file to compress or decompress. Only _absolute_ file paths are accepted. The program outputs in the following way: compressed binary gets `.huff` file extension. Decompressed files get  `originalFileName_decomp.txt`.
+Basic GUI where you can specify a file to compress or decompress. Only _absolute_ file paths are accepted. The program outputs in the following way: compressed binary gets `.huff` file extension. Decompressed files get  `originalFileNamedecomp.extension`.
 
 ## Status
 - To inspect the compressed binary, use `hexdump inputFileName.huff`
@@ -19,7 +19,10 @@ Clean & build, then run. Basic GUI where you can specify a file to compress or d
  - Use `ls -al` to inspect the sizes of the files.
 
 ## Known issues
-- Fails to write new line at EOF when decompressing.
+- The difference between new line characters may cause issues for some combinations of files.
+  - The program uses whichever line seperator the user's system specifies. So if a file written on a Windows system is compressed and then decompressed on Linux, it will contain Linux style new line characters.
+  - Most programs are smart enough to display these new lines (even on Windows), but there are some notable exceptions (Notepad, for example).
+  - The may cause the size of the decompressed file to differ from the original (Windows uses 2 bytes, Linux only 1).
 
 ## Docs
 
@@ -43,6 +46,6 @@ Clean & build, then run. Basic GUI where you can specify a file to compress or d
 
 [Working hours log](documentation/weekly-reports/log.md)
 
-[Implementation document](documentation/huffman-impl.pdf)
+[Implementation and test document](documentation/huffman-impl.pdf)
 
 [Latest PIT report](http://htmlpreview.github.io/?https://github.com/yherin/hufflepuffman/blob/master/documentation/PIT/201802240111/index.html)
