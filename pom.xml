@@ -4,7 +4,7 @@
 
     <groupId>com.js</groupId>
     <artifactId>huffman</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>hufflepuffman</name>
@@ -16,7 +16,7 @@
 
     <organization>
         <!-- Used as the 'Vendor' for JNLP generation -->
-        <name>Your Organisation</name>
+        <name>University of Helsinki</name>
     </organization>
 
     <build>
@@ -85,10 +85,18 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.8</version>
                 <configuration>
-                    <excludedClasses> 
-                        <param>com.js.huffman.FXMLController.*</param>
-                        <param>com.js.huffman.MainApp.*</param>
-                    </excludedClasses>
+                    <targetClasses>
+                        <param>com.js.huffman.io.*</param>
+                        <param>com.js.huffman.model.*</param>
+                        <param>com.js.huffman.action.HuffmanCompression*</param>
+                        <param>com.js.huffman.action.HuffmanDecompression*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>com.js.huffman.action.*</param>
+                        <param>com.js.huffman.model.*</param>
+                        <param>com.js.huffman.io.*</param>
+                    </targetTests>
+                    
                     <excludedTestClasses>
                         <param>com.js.huffman.perf.*</param>
                         <param>com.js.huffman.ui.*</param>
@@ -117,6 +125,27 @@
                     </additionalClasspathElements>
                 </configuration>
             </plugin>
+             <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>2.4.3</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
+                        <transformers>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>com.js.huffman.action.MainApp</mainClass>
+                                <!-- mainClass on muotoa "fi.omanimi.superprojekti.Main" -->
+                            </transformer>
+                        </transformers>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
     <dependencies>
