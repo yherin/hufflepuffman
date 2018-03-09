@@ -14,61 +14,54 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.js.huffman.ui;
+package com.js.huffman;
 
-import com.js.huffman.action.MainApp;
+import com.js.huffman.action.HuffmanCompression;
+import com.js.huffman.action.HuffmanDecompression;
+import com.js.huffman.ui.AppTest;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author Jack
  */
-public class AppTest extends ApplicationTest {
+public class HuffmanOperationTest {
 
-    MainApp app;
     String original = "src/test/plain/lorem";
     String compressed = original + ".huff";
     String decompressed = original + "_d";
 
-    @Override
-    public void start(Stage stage) {
-        app = new MainApp();
-        try {
-            app.start(stage);
-        } catch (Exception ex) {
-            Logger.getLogger(AppTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+    /**
+     * Test of run method, of class HuffmanDecompression.
+     */
     @Test
-    public void applicationFlowTest() throws InterruptedException {
-        clickOn("#compressionInputFilePath");
-        write(original);
-        clickOn("#btnMenuCompress");
-        sleep(500l);
+    public void testRun() {
+        System.out.println("run");
         File compressedFile = new File(compressed);
-        assertTrue(compressedFile.exists());
-        clickOn("#decompressionInputFilePath");
-        write(compressed);
-        clickOn("#btnMenuDecompress");
-        sleep(500l);
         File decompressedFile = new File(decompressed);
+        compressedFile.delete();
+        decompressedFile.delete();
+        new HuffmanCompression(original, compressed).run();
+        assertTrue(compressedFile.exists());
+        new HuffmanDecompression(compressed, decompressed).run();
         assertTrue(decompressedFile.exists());
         try {
             FileUtils.contentEquals(new File(original), decompressedFile);
         } catch (IOException ex) {
-            Logger.getLogger(AppTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HuffmanOperationTest.class.getName()).log(Level.SEVERE, null, ex);
             fail("io exception");
         }
+
     }
 
 }

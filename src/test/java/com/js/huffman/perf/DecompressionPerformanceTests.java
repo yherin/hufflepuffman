@@ -5,7 +5,7 @@ package com.js.huffman.perf;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.js.huffman.io.HuffmanDecompressionPerfTester;
+import com.js.huffman.action.HuffmanDecompressionPerfTester;
 import org.junit.Test;
 
 /**
