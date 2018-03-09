@@ -36,8 +36,8 @@ public class DecodingTreeBuilder implements TreeBuilder {
         this.symbolsIndex = 0;
         this.data = data;
         this.decoded_symbols = convertSymbolsToUTF8();
-        LOG.log(Level.INFO, "Number of symbols: {0}", this.decoded_symbols.length());
-        LOG.log(Level.INFO, (this.decoded_symbols));
+        //LOG.log(Level.INFO, "Number of symbols: {0}", this.decoded_symbols.length());
+        //LOG.log(Level.INFO, (this.decoded_symbols));
         this.nodeKeys = convertBitsToNodeKeys();
         //LOG.log(Level.INFO, (Arrays.toString(this.nodeKeys)));
         //    this.root = new ReconstructedNode(NodeKey.FAKE);
@@ -61,7 +61,7 @@ public class DecodingTreeBuilder implements TreeBuilder {
         ReconstructedNode right = build();
         node.setRight(right);
         node.setRoot();
-        LOG.log(Level.INFO, "Reconstructured tree");
+        //LOG.log(Level.INFO, "Reconstructured tree");
         return node;
     }
 

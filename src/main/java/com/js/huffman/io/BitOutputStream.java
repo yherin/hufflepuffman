@@ -127,7 +127,7 @@ public class BitOutputStream extends FileOutputStream {
             //        logger.log(Level.INFO, "Added byte to buffer");
             this.buffer.put(x);
         } else {
-               logger.log(Level.INFO, "Writing buffer to file");
+            //   logger.log(Level.INFO, "Writing buffer to file");
             try {
                 this.buffer.flip();
                 this.fc.write(this.buffer);
@@ -144,7 +144,7 @@ public class BitOutputStream extends FileOutputStream {
     private void forceWriteBuffer() {
         if (this.buffer.limit() != this.buffer.remaining()) {
             try {
-                logger.log(Level.INFO, "Forcing buffer to file with " + buffer.position() + " bytes");
+        //        logger.log(Level.INFO, "Forcing buffer to file with " + buffer.position() + " bytes");
                 this.buffer.flip();
                 this.fc.write(this.buffer);
 

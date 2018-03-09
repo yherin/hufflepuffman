@@ -67,8 +67,8 @@ public class MetadataBuilder {
     }
 
     private static void logInfo(int METADATA_SIZE, final byte[] treeRep, byte[] symbolBytes) {
-        LOG.log(Level.INFO, "MD SIZE:{0}", METADATA_SIZE);
-        LOG.log(Level.INFO, "TREE REP SIZE: {0}", treeRep.length);
-        LOG.log(Level.INFO, "SYMBOLS SIZE: {0}", symbolBytes.length);
+        //LOG.log(Level.INFO, "MD SIZE:{0}", METADATA_SIZE);
+        //LOG.log(Level.INFO, "TREE REP SIZE: {0}", treeRep.length);
+        //LOG.log(Level.INFO, "SYMBOLS SIZE: {0}", symbolBytes.length);
     }
 }

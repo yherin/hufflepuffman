@@ -68,7 +68,6 @@ public class BitInputStream extends FileInputStream {
             this.fc.read(buffer);
             this.buffer.flip();
             final int MD_SIZE = this.buffer.getInt() - 4; //we read 4 bytes.
-            LOG.log(Level.INFO, "MD_SIZE"+(MD_SIZE+4));
             this.readBytes += MD_SIZE + 4;
             this.remainingBytes -= MD_SIZE + 4;
             this.buffer = ByteBuffer.allocate(MD_SIZE);

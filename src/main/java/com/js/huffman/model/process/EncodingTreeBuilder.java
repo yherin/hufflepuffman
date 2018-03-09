@@ -70,7 +70,7 @@ public class EncodingTreeBuilder implements TreeBuilder {
         }
         root = que.poll();
         root.setType(NodeType.BRANCH);
-        LOG.log(Level.INFO, "Built tree successfully");
+        //LOG.log(Level.INFO, "Built tree successfully");
         return root;
     }
 
@@ -118,10 +118,10 @@ public class EncodingTreeBuilder implements TreeBuilder {
 
     private byte[] encodeTreeBytes(final String rep) {
 
-        LOG.log(Level.INFO, "Tree rep: {0}", rep);
+//        //LOG.log(Level.INFO, "Tree rep: {0}", rep);
         int bytesNeeded = calculateRequiredBytes(rep);
         this.emptyBitsTreeRep = calculateEmptyBitsInFinalTreeByte(rep);
-        LOG.log(Level.INFO, "Tree rep empty bits{0}", emptyBitsTreeRep);
+//        //LOG.log(Level.INFO, "Tree rep empty bits{0}", emptyBitsTreeRep);
         int index = 0;
         final byte[] treeBytes = new byte[bytesNeeded];
         encodeTreeRepInBytes(rep, treeBytes, index);
@@ -145,7 +145,7 @@ public class EncodingTreeBuilder implements TreeBuilder {
             } else {
                 treeBytes[index] = (byte) ((byte) (treeBytes[index] << 1) | 1); //Shift the bit sequence left by 1 place and insert a 1. So 0001 becomes 0011
             }
-            LOG.log(Level.INFO, Arrays.toString(treeBytes));
+//            //LOG.log(Level.INFO, Arrays.toString(treeBytes));
         }
         /* If we have excess bits, pad the bits to make a full byte.
          * E.g. our tree rep is 10 characters, each character corresponding
