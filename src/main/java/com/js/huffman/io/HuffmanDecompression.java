@@ -1,6 +1,7 @@
 package com.js.huffman.io;
 
 /**
+ * This class is provides the functionality to perform a decompression operation.
  *
  * @author jack
  */
@@ -10,6 +11,11 @@ public class HuffmanDecompression implements Runnable {
     protected final String outputFilepath;
     protected final String inputFilepath;
 
+    /**
+     *
+     * @param inputFilepath
+     * @param outputFilepath
+     */
     public HuffmanDecompression(final String inputFilepath,
             final String outputFilepath) {
         io = new IOHandler();
@@ -17,6 +23,9 @@ public class HuffmanDecompression implements Runnable {
         this.outputFilepath = outputFilepath;
     }
 
+    /**
+     *
+     */
     @Override
     public void run() {
         doDecompression();

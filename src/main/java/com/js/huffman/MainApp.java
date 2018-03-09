@@ -7,6 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Pre-built JavaFX entry point.
+ * @author Jack
+ */
 public class MainApp extends Application {
 
     @Override

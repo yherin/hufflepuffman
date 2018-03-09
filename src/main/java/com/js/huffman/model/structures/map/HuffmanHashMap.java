@@ -25,6 +25,9 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
     long count;
     private int keyIndex;
 
+    /**
+     * Create a new Map.
+     */
     public HuffmanHashMap() {
         this.initialCapacity = 4096;
         this.capacity = initialCapacity;
@@ -32,6 +35,10 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         this.count = 0L;
     }
 
+    /**
+     * Create a new map with the specified initial capacity.
+     * @param initialCapacity
+     */
     public HuffmanHashMap(final int initialCapacity) {
         this.initialCapacity = initialCapacity;
         this.capacity = initialCapacity;
@@ -79,6 +86,10 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         }
     }
 
+    /**
+     * Return the size of this map.
+     * @return size
+     */
     @Override
     public int size() {
         if (this.count > Integer.MAX_VALUE) {
@@ -89,11 +100,20 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
 
     }
 
+    /**
+     * Returns true if map contains no elements.
+     * @return true if the map is empty, else false
+     */
     @Override
     public boolean isEmpty() {
         return this.count == 0L;
     }
 
+    /**
+     * Check if the map contains an object.
+     * @param o
+     * @return true if this map contains o, else false.
+     */
     @Override
     public boolean containsKey(final Object o) {
         Object result = get(o);
@@ -101,11 +121,19 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
 
     }
 
+    /**
+     * NOT IMPLEMENTED.
+     */
     @Override
     public boolean containsValue(Object o) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
+    /**
+     * Get the value associated with object o.
+     * @param o
+     * @return the value V associated with O, else null
+     */
     @Override
     public V get(Object o) {
         try {
@@ -133,6 +161,12 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         }
     }
 
+    /**
+     * Put an item in the map.
+     * @param k
+     * @param v
+     * @return v the value associated with k.
+     */
     @Override
     public V put(K k, V v) {
         handlePossibleResize();
@@ -153,27 +187,42 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         }
     }
 
+    /**
+     * NOT IMPLEMENTED.
+     */
     @Override
     public V remove(Object o) {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
 
     }
 
+    /**
+     * NOT IMPLEMENTED.
+     */
     @Override
     public void putAll(Map<? extends K, ? extends V> map) {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * NOT IMPLEMENTED.
+     */
     @Override
     public void clear() {
         this.buckets = new EntryImpl[initialCapacity];
     }
 
+    /**
+     * NOT IMPLEMENTED.
+     */
     @Override
     public Collection<V> values() {
         throw new UnsupportedOperationException("Not supported.");
     }
 
+    /**
+     * NOT IMPLEMENTED.
+     */
     @Override
     public Set<Entry<K, V>> entrySet() {
         throw new UnsupportedOperationException("Not supported.");
@@ -218,18 +267,20 @@ public final class HuffmanHashMap<K extends Object, V extends Object> implements
         return null;
     }
 
+    /**
+     * NOT IMPLEMENTED. Use #entryArray().
+     * @return
+     */
     @Override
     public Set<K> keySet() {
         throw new UnsupportedOperationException("Not supported. Use #keyArray instead."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
-     * A complex and time-expensive method which I aim to improve, returning all
-     * keys in the Map as an EntryImpl[].
+     * Returns all entries in the Map as an EntryImpl[].
      * @return EntryImpl[]
      */
-    public final EntryImpl[] keyArray() {
-        //LOG.log(Level.WARNING, "EXPENSIVE OPERATION - keyArray()");
+    public final EntryImpl[] entryArray() {
         final int amountOfKeys = Math.min(Integer.MAX_VALUE, (int) count);
         keyIndex = 0;
         final EntryImpl[] keys = new EntryImpl[amountOfKeys];

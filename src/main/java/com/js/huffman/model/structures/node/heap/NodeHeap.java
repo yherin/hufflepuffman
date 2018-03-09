@@ -24,6 +24,11 @@ public class NodeHeap {
     int head;
     private final NodePriorityComparator npc;
 
+    /**
+     * Create a new NodeHeap with a fixed size.
+     * @param npc
+     * @param numberOfNodes
+     */
     public NodeHeap(final NodePriorityComparator npc, final int numberOfNodes) {
         this.npc = npc;
         this.capacity = (numberOfNodes * 2) + 1; //index starting at 1, possible 2 children for a node
@@ -31,6 +36,10 @@ public class NodeHeap {
         this.size = 0;
     }
 
+    /**
+     * Return and remove the Node at the top of the heap.
+     * @return node with the lowest frequency.
+     */
     public final Node poll() {
         final Node polling = heap[TOP];
         heap[TOP] = heap[size];
@@ -42,6 +51,10 @@ public class NodeHeap {
         return polling;
     }
 
+    /**
+     * Add a Node to the heap.
+     * @param node
+     */
     public final void add(final Node node) {
         size++;
         heap[size] = node;
@@ -131,10 +144,19 @@ public class NodeHeap {
 
     }
 
+    /**
+     * Return size of the heap.
+     * @return size
+     */
     public int getSize() {
         return this.size;
     }
 
+    /**
+     * Check if o exists in this heap.
+     * @param o
+     * @return true iff o is present in the heap.
+     */
     public boolean contains(Object o) {
         try {
             Node x = (Node) o;

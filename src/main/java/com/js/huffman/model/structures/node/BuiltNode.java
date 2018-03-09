@@ -7,6 +7,11 @@ package com.js.huffman.model.structures.node;
  */
 public class BuiltNode extends Node implements Comparable<Node> {
 
+    /**
+     * Create a [leaf] Built Node, a Node created from original uncompressed data.
+     * @param character
+     * @param count
+     */
     public BuiltNode(final Character character, final Integer count) {
         super(character, count);
         determineNodeType();
@@ -14,7 +19,7 @@ public class BuiltNode extends Node implements Comparable<Node> {
     }
 
     /**
-     * Creates a Node representing a branch node in the tree.
+     * Create a [branch] Built Node, a Node created from original uncompressed data.
      *
      * @param l the node which will be the left child of the new node.
      * @param r the node which will be the right child of the new node.
@@ -32,6 +37,10 @@ public class BuiltNode extends Node implements Comparable<Node> {
         this.right.determineNodeType();
     }
 
+    /**
+     * toString
+     * @return String representation of this Node.
+     */
     @Override
     public final String toString() {
         if (this.symbol == null) {
@@ -41,6 +50,11 @@ public class BuiltNode extends Node implements Comparable<Node> {
         return "(" + this.symbol + ", " + this.freq + ")";
     }
 
+    /**
+     * Not implemented, do not use.
+     * @param o
+     * @return
+     */
     @Override
     public int compareTo(Node o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

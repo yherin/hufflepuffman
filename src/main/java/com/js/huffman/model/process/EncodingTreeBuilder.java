@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.model.process;
 
 import com.js.huffman.model.structures.map.HuffmanHashMap;
@@ -12,12 +7,11 @@ import com.js.huffman.model.structures.node.NodeKey;
 import com.js.huffman.model.structures.node.NodeType;
 import com.js.huffman.model.structures.node.heap.NodeHeap;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
-import java.util.Arrays;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * This class provides functionality to build a Huffman tree from a text file.
+ *
  * @author jack
  */
 public class EncodingTreeBuilder implements TreeBuilder {
@@ -31,6 +25,10 @@ public class EncodingTreeBuilder implements TreeBuilder {
     private String treeSymbols;
     private byte[] treeByteRep;
 
+    /**
+     * Create a new DecodingTreeBuilder, which can build HuffmanTree objects
+     * from NodeHeap.
+     */
     public EncodingTreeBuilder(NodeHeap que) {
         codes = new HuffmanHashMap<>();
         this.que = que;
@@ -38,6 +36,11 @@ public class EncodingTreeBuilder implements TreeBuilder {
         this.treeSymbols = "";
     }
 
+    /**
+     * Builds and returns a HuffmanTree object, based on the @NodeHeap given in
+     * this class' constructor.
+     * @return the created HuffmanTree.
+     */
     @Override
     public HuffmanTree buildTree() {
         this.root = buildTreeStructure(que);
@@ -56,13 +59,8 @@ public class EncodingTreeBuilder implements TreeBuilder {
             return (byte) (8 - (rep.length() % 8));
         }
     }
-
-    //    public HuffmanTree(final Node root){
-    //        this.root = root;
-    //        this.head = root;
-    //    }
     private Node buildTreeStructure(NodeHeap que) {
-        while (que.getSize()>= 2) {
+        while (que.getSize() >= 2) {
             Node firstNode = que.poll();
             Node secondNode = que.poll();
             Node joint = new BuiltNode(firstNode, secondNode);
@@ -70,11 +68,9 @@ public class EncodingTreeBuilder implements TreeBuilder {
         }
         root = que.poll();
         root.setType(NodeType.BRANCH);
-        //LOG.log(Level.INFO, "Built tree successfully");
         return root;
     }
 
-    //00011 Öæ
     private void buildCodes(Node x, String huffCode) {
         if (!x.hasLeft() && !x.hasRight()) {
             buildNodesBaseCase(x, huffCode);
@@ -83,12 +79,8 @@ public class EncodingTreeBuilder implements TreeBuilder {
             if (!x.isRoot()) {
                 this.treeStringRep += '0';
             }
-            //   }
-            //   if (x.hasLeft()) {
             String leftHuffCode = huffCode + x.getLeft().getKey().toString();
             buildCodes(x.getLeft(), leftHuffCode);
-            // }
-            // if (x.hasRight()) {
             String rightHuffCode = huffCode + x.getRight().getKey().toString();
             buildCodes(x.getRight(), rightHuffCode);
         }
@@ -118,10 +110,8 @@ public class EncodingTreeBuilder implements TreeBuilder {
 
     private byte[] encodeTreeBytes(final String rep) {
 
-//        //LOG.log(Level.INFO, "Tree rep: {0}", rep);
         int bytesNeeded = calculateRequiredBytes(rep);
         this.emptyBitsTreeRep = calculateEmptyBitsInFinalTreeByte(rep);
-//        //LOG.log(Level.INFO, "Tree rep empty bits{0}", emptyBitsTreeRep);
         int index = 0;
         final byte[] treeBytes = new byte[bytesNeeded];
         encodeTreeRepInBytes(rep, treeBytes, index);

@@ -30,6 +30,10 @@ public class ReconstructedNode extends Node {
         super.determineNodeType();
     }
 
+    /**
+     * Return string representation.
+     * @return string rep.
+     */
     @Override
     public final String toString() {
         if (this.hasLeft() && this.hasRight()) {

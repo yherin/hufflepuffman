@@ -28,7 +28,7 @@ public class HuffmanDecoderTest {
     @Before
     public void setUp() {
         io.initialiseTextInput();
-        io.encodeToBinary();
+        io.encodeTree();
         io.setBinaryOutputFile(binary);
         io.initialiseBitOutput();
         io.writeBinaryOutput();

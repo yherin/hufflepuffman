@@ -1,7 +1,6 @@
 package com.js.huffman.model.process;
 
 import com.js.huffman.model.structures.node.NodeKey;
-import java.util.logging.Logger;
 
 /**
  * Provides methods for bit manipulation.
@@ -9,7 +8,6 @@ import java.util.logging.Logger;
  */
 public class BitUtils {
 
-    private static final Logger LOG = Logger.getLogger(BitUtils.class.getName());
 
     /**
      * Evaluate the bits in the given byte, returning an array representing a
@@ -21,11 +19,11 @@ public class BitUtils {
      */
     public static NodeKey[] decodeBits(byte readByte, int fakeBits) {
         NodeKey[] bits = new NodeKey[8];
-        if (fakeBits != 0) {
-            //LOG.log(Level.WARNING, "Discarding {0} fake bits. This message should only appear once.", fakeBits);
-        }
         for (int i = 7; i >= 0; i--) {
             if (i < fakeBits) {
+                /* if param fakeBits is not 0, we will write some 'fake/empty'
+                *  into this byte.
+                */
                 bits[bits.length - 1 - i] = NodeKey.FAKE;
             } else {
                 /**
@@ -39,8 +37,6 @@ public class BitUtils {
                 }
             }
         }
-        //0 1 2 3 4 5 6 7
-        //
         return bits;
     }
 

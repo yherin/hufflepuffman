@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.model.process;
 
 import com.js.huffman.model.structures.map.EntryImpl;
@@ -13,11 +8,11 @@ import com.js.huffman.model.structures.node.NodePriorityComparator;
 import com.js.huffman.model.structures.node.heap.NodeHeap;
 
 /**
- * Class which builds NodeHeap.
+ * Class which builds NodeHeap objects.
  *
  * @author jack
  */
-public class QueueBuilder {
+public class NodeHeapBuilder {
 
     private NodeHeap que;
 
@@ -29,7 +24,7 @@ public class QueueBuilder {
      */
     public final NodeHeap buildAndReturnQueue(final HuffmanHashMap<Character, Integer> map) {
         que = new NodeHeap(new NodePriorityComparator(), map.size());
-        final EntryImpl[] entries = map.keyArray();
+        final EntryImpl[] entries = map.entryArray();
         for (EntryImpl entry : entries) {
             buildNodeAndAddToQueue((Character) entry.getKey(), (Integer) entry.getValue());
         }

@@ -6,8 +6,19 @@ package com.js.huffman.model.structures.node;
  */
 public enum NodeKey {
 
+    /**
+     * ZERO BIT
+     */
     ZERO(0, 0b0, "0"),
+
+    /**
+     * ONE BIT.
+     */
     ONE(1, 0b1, "1"),
+
+    /**
+     * FAKE BIT.
+     */
     FAKE(-1, -1, "-1");
 
     private final int numberRep;
@@ -20,6 +31,10 @@ public enum NodeKey {
         this.charRep = cs;
     }
 
+    /**
+     * toString
+     * @return string representation of this NodeKey.
+     */
     @Override
     public String toString() {
         return this.charRep;

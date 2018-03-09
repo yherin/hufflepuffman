@@ -1,7 +1,7 @@
 package com.js.huffman.io;
 
 /**
- *
+ * This class is provides the functionality to perform a compression operation.
  * @author jack
  */
 public class HuffmanCompression implements Runnable {
@@ -10,6 +10,12 @@ public class HuffmanCompression implements Runnable {
     protected final String outputFilepath;
     protected final String inputFilepath;
 
+    /**
+     * Create a new HuffmanCompression object, representing a single compression
+     * operation.
+     * @param inputFilepath
+     * @param outputFilepath
+     */
     public HuffmanCompression(final String inputFilepath,
             final String outputFilepath) {
         io = new IOHandler();
@@ -17,6 +23,9 @@ public class HuffmanCompression implements Runnable {
         this.outputFilepath = outputFilepath;
     }
 
+    /**
+     * Perform the compression operation.
+     */
     @Override
     public void run() {
         doCompression();
@@ -27,7 +36,7 @@ public class HuffmanCompression implements Runnable {
         io.setBinaryOutputFile(outputFilepath);
         io.initialiseTextInput();
         long buildDataStart = System.nanoTime();
-        io.encodeToBinary();
+        io.encodeTree();
         long buildDataEnd = System.nanoTime();
         io.initialiseBitOutput();
         long writeDataStart = System.nanoTime();

@@ -10,6 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+/**
+ *
+ * @author Jack
+ */
 public class FXMLController implements Initializable {
 
     //Runner r = new Runner();

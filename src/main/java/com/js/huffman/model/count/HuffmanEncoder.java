@@ -26,6 +26,14 @@ public class HuffmanEncoder {
     private byte[] treeBytes;
     private byte treeRepEmptyBits;
 
+    /**
+     * Create a new HuffmanEncoder, used to encode to binary.
+     * @param reader
+     * @param converter
+     * @param bitOutputStream
+     * @param tree
+     * @throws FileNotFoundException
+     */
     public HuffmanEncoder(final BufferedReader reader,
             final SymbolConverter converter,
             final BitOutputStream bitOutputStream, final HuffmanTree tree)
@@ -44,8 +52,7 @@ public class HuffmanEncoder {
     }
 
     /**
-     * Encode the text file defined in this class' BufferedReader into bytes,
-     * ready for writing to file.
+     * Encode the text file defined in this class' BufferedReader into bytes.
      *
      * @see BitOutputStream
      */
@@ -53,10 +60,12 @@ public class HuffmanEncoder {
 
         try {
             if (this.tree != null) {
+                //write the metadata header to the file.
                 this.stream.writeMetadata(this.treeBytes, treeSymbolsRep, (byte) this.treeRepEmptyBits);
             }
             String line = reader.readLine();
             while (line != null) {
+                //while there are lines in the file, encode each character
                 for (int i = 0; i < line.length(); i++) {
                     final char c = line.charAt(i);
                     writeHuffmanCodeInBits(c);
@@ -69,7 +78,6 @@ public class HuffmanEncoder {
             }
             this.stream.flush();
             this.stream.close();
-       //     logger.log(Level.INFO, "Total " + this.stream.getCount() + " bytes written.");
         } catch (IOException ex) {
             logger.log(Level.SEVERE, null, ex);
         }
@@ -77,8 +85,7 @@ public class HuffmanEncoder {
 
     private void writeHuffmanCodeInBits(final Character c) {
         final String encodedChar = converter.characterToHuffmanCode(c);
-        // String msg = "Encoding "+c+" as "+encodedChar;
-        // logger.log(Level.INFO, msg);
+
         this.stream.writeHuffmanCode(encodedChar);
     }
 
@@ -89,6 +96,10 @@ public class HuffmanEncoder {
         }
     }
 
+    /**
+     * Return the number of empty bits in the final byte at EOF.
+     * @return number of empty bits in final byte.
+     */
     public int getExtraBits() {
         return stream.getEndExtraBits();
     }

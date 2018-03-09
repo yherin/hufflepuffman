@@ -39,6 +39,9 @@ public class BitOutputStream extends FileOutputStream {
 
     }
 
+    /**
+     * Set this BitOutputStream's file channel for IO.
+     */
     public final void setFileChannel() {
         this.fc = this.getChannel();
     }
@@ -76,26 +79,6 @@ public class BitOutputStream extends FileOutputStream {
             Logger.getLogger(BitOutputStream.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
-
-    }
-
-    /**
-     * Not yet in use. Seems to cause NPE. Needs more debugging.
-     */
-    private void writeNumberOfEmptyEOFBitsToMetaData() {
-        try {
-            final long pos = this.fc.position();
-            this.fc.position(0x5); //5th byte contains this data
-         //   logger.log(Level.INFO, "Trying to write {0} to byte at index {1}", new Object[]{this.endExtraBits, 0x5});
-            ByteBuffer bits = ByteBuffer.allocate(1);
-            assert this.endExtraBits < 8;
-            bits.put((byte) this.endExtraBits);
-            bits.flip();
-            this.fc.write(bits);
-            this.fc.position(pos);
-        } catch (IOException ex) {
-            Logger.getLogger(BitOutputStream.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }
 
@@ -165,10 +148,7 @@ public class BitOutputStream extends FileOutputStream {
 
         try {
             if (n > 0 && n < 8) {
-         //       String message = "" + (8 - n) + " bits to be written in final byte.";
-         //       logger.log(Level.INFO, message);
                 endExtraBits = (byte) fillFinalByte();
-//                writeNumberOfEmptyEOFBitsToMetaData();
 
             } else {
                 forceWriteBuffer();
@@ -180,6 +160,10 @@ public class BitOutputStream extends FileOutputStream {
         }
     }
 
+    /**
+     * Get the number of bytes written by this OutputStream.
+     * @return number of bytes written.
+     */
     public long getCount() {
         return count;
     }
@@ -201,10 +185,18 @@ public class BitOutputStream extends FileOutputStream {
         return endExtraBits;
     }
 
+    /**
+     * Get the number of empty bits at EOF.
+     * @return the empty bits in the final byte.
+     */
     public int getEndExtraBits() {
         return endExtraBits;
     }
 
+    /**
+     * Get the size of the metadata in the file.
+     * @return the size of the binary metadata in bytes.
+     */
     public int getMetadataBytes() {
         return metadataBytes;
     }

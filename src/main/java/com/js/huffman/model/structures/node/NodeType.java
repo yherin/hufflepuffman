@@ -5,5 +5,19 @@ package com.js.huffman.model.structures.node;
  * @author jack
  */
 public enum NodeType {
-    LEAF, BRANCH, UNPLACED
+
+    /**
+     * Leaf node.
+     */
+    LEAF, 
+
+    /**
+     * Branch node.
+     */
+    BRANCH, 
+
+    /**
+     * Node not yet in the tree.
+     */
+    UNPLACED
 }

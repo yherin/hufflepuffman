@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.model.process;
 
 import com.js.huffman.io.Metadata;
@@ -31,22 +26,23 @@ public class DecodingTreeBuilder implements TreeBuilder {
     private int symbolsIndex;
     private Node root;
 
+    /**
+     * Create a new DecodingTreeBuilder, which can build HuffmanTree objects
+     * based on metadata.
+     * @param data
+     */
     public DecodingTreeBuilder(final Metadata data) {
         this.nodeKeyIndex = 0;
         this.symbolsIndex = 0;
         this.data = data;
         this.decoded_symbols = convertSymbolsToUTF8();
-        //LOG.log(Level.INFO, "Number of symbols: {0}", this.decoded_symbols.length());
-        //LOG.log(Level.INFO, (this.decoded_symbols));
         this.nodeKeys = convertBitsToNodeKeys();
-        //LOG.log(Level.INFO, (Arrays.toString(this.nodeKeys)));
-        //    this.root = new ReconstructedNode(NodeKey.FAKE);
-        //    go(root, nodeKeys, decoded_symbols, 0, 0);
     }
     
     /**
      * Build the tree from Metadata.
-     * @return the @Node at the root of this tree.
+     * @return the built HuffmanTree object.
+     * @see HuffmanTree
      */
     @Override
     public HuffmanTree buildTree() {
@@ -61,7 +57,6 @@ public class DecodingTreeBuilder implements TreeBuilder {
         ReconstructedNode right = build();
         node.setRight(right);
         node.setRoot();
-        //LOG.log(Level.INFO, "Reconstructured tree");
         return node;
     }
 

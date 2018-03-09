@@ -115,7 +115,7 @@ public class HuffmanHashMapTest {
     public void testKeyArraySimple() {
         HuffmanHashMap<String, Integer> map = new HuffmanHashMap<>();
         map.put("10", 10);
-        Object[] keys = map.keyArray();
+        Object[] keys = map.entryArray();
         assertEquals(1, keys.length);
         EntryImpl en = (EntryImpl) keys[0];
         assertEquals(10, en.getValue());
@@ -130,7 +130,7 @@ public class HuffmanHashMapTest {
             int n = rand.nextInt();
             map.put(Integer.toString(n), n);
         }
-        Object[] keys = map.keyArray();
+        Object[] keys = map.entryArray();
         assertEquals(q, keys.length);
         for (int i = 0; i < q; i++) {
             EntryImpl en = (EntryImpl) keys[i];

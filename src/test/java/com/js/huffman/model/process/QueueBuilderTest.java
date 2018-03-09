@@ -21,7 +21,7 @@ public class QueueBuilderTest {
 
     HuffmanHashMap<Character, Integer> map;
     NodeHeap q;
-    QueueBuilder qb;
+    NodeHeapBuilder qb;
 
     @Before
     public void setup() {
@@ -32,7 +32,7 @@ public class QueueBuilderTest {
         map.put('d', 90);
         map.put('e', 1);
         map.put('f', 6);
-        qb = new QueueBuilder();
+        qb = new NodeHeapBuilder();
         q = qb.buildAndReturnQueue(map);
 
     }
@@ -44,7 +44,7 @@ public class QueueBuilderTest {
 
     @Test
     public void allKeyValuePairsInQueue() {
-        final EntryImpl[] entries = map.keyArray();
+        final EntryImpl[] entries = map.entryArray();
         for (EntryImpl entry : entries) {
             inQueue((Character) entry.getKey(), (Integer) entry.getValue());
         }

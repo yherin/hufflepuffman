@@ -21,6 +21,14 @@ public class HuffmanTree {
     private final byte[] treeByteRep;
     private final byte emptyBitsTreeByteRep;
 
+    /**
+     * Create a new HuffmanTree.
+     * @param root
+     * @param codes
+     * @param treeSymbolsRep
+     * @param treeByteRep
+     * @param emptyBitsTreeByteRep
+     */
     public HuffmanTree(final Node root, final HuffmanHashMap<Character, String> codes, final String treeSymbolsRep, final byte[] treeByteRep, final byte emptyBitsTreeByteRep) {
         this.root = root;
         this.head = root;
@@ -37,9 +45,7 @@ public class HuffmanTree {
      * @return true if after moving the head points a leaf node. Else false.
      */
     public boolean descend(NodeKey key) {
-        //  logger.log(Level.INFO, "Descend: "+key);
         navigateByKey(key);
-        //  logger.log(Level.INFO, "Head: "+this.head);
         if (this.head.isLeaf()) {
             return true;
         }
@@ -50,7 +56,12 @@ public class HuffmanTree {
         }
     }
 
-    public Character getSymbol() {
+    /**
+     * Return the symbol at the current position of the head. After this method has returned,
+     * the head will point to root.
+     * @return the symbol associated with the currently selected head node.
+     */
+    public Character getSymbolAtHead() {
         Character symbol = this.head.getSymbol();
         this.head = this.root;
         assert (symbol != null);
@@ -67,27 +78,51 @@ public class HuffmanTree {
         }
     }
 
+    /**
+     * Return the root node of the tree.
+     * @return root
+     */
     public Node getRoot() {
         return root;
     }
 
+    /**
+     * Return String representation
+     * @return string rep.
+     */
     @Override
     public String toString() {
         return codes.toString();
     }
 
+    /**
+     * Return the Map associated with this tree.
+     * @return map
+     */
     public HuffmanHashMap<Character, String> getCodes() {
         return codes;
     }
 
+    /**
+     * Return the symbols in the tree as a String
+     * @return symbol represenation.
+     */
     public String getTreeSymbolsString() {
         return treeSymbolsRep;
     }
 
+    /**
+     * Return the byte array represenation of this HuffmanTree.
+     * @return byte representation
+     */
     public byte[] getTreeByteRep() {
         return treeByteRep;
     }
 
+    /**
+     * Return the number of empty bits in the final byte of the tree representation.
+     * @return empty bits.
+     */
     public byte getEmptyBitsTreeByteRep() {
         return emptyBitsTreeByteRep;
     }

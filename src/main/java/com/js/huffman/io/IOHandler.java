@@ -10,7 +10,7 @@ import com.js.huffman.model.count.HuffmanEncoder;
 import com.js.huffman.model.count.SymbolReader;
 import com.js.huffman.model.process.DecodingTreeBuilder;
 import com.js.huffman.model.process.EncodingTreeBuilder;
-import com.js.huffman.model.process.QueueBuilder;
+import com.js.huffman.model.process.NodeHeapBuilder;
 import com.js.huffman.model.structures.map.HuffmanHashMap;
 import com.js.huffman.model.structures.node.heap.NodeHeap;
 import com.js.huffman.model.structures.node.tree.HuffmanTree;
@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 public class IOHandler {
 
     //Proccessing
-    private final QueueBuilder queueBuilder;
+    private final NodeHeapBuilder queueBuilder;
     private SymbolConverter converter;
     private HuffmanEncoder encoder;
     private HuffmanDecoder decoder;
@@ -52,8 +52,11 @@ public class IOHandler {
     private File binaryInputFile;
     private int extraBits;
 
+    /**
+     * Create a new IOHandler, which handles IO!
+     */
     public IOHandler() {
-        queueBuilder = new QueueBuilder();
+        queueBuilder = new NodeHeapBuilder();
         inputHandler = new InputFileHandler();
         outputHandler = new OutputFileHandler();
 
@@ -106,14 +109,14 @@ public class IOHandler {
         try {
             this.bitInputStream = new BitInputStream((this.binaryInputFile));
         } catch (FileNotFoundException ex) {
-           Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IOHandler.class.getName()).log(Level.SEVERE, null, ex);
             throw new UnsupportedOperationException("failed to init binary input file");
 
         }
     }
 
     /**
-     * Write the data held within the encoded huffman tree to the currently set
+     * Write the data held within the encoded Huffman tree to the currently set
      * output file. All files and IO utilities must be initialised.
      */
     public void writeBinaryOutput() {
@@ -146,9 +149,9 @@ public class IOHandler {
     }
 
     /**
-     * Encodes the c
+     * Encodes the currently set file to a Huffman Tree.
      */
-    public void encodeToBinary() {
+    public void encodeTree() {
         HuffmanHashMap<Character, Integer> map = read();
         NodeHeap nodes = queueBuilder.buildAndReturnQueue(map);
         EncodingTreeBuilder etb = new EncodingTreeBuilder(nodes);
@@ -194,40 +197,70 @@ public class IOHandler {
         this.inputHandler.setFile(path);
     }
 
+    /**
+     * Set the binary output file.
+     *
+     * @param path
+     */
     public void setBinaryOutputFile(String path) {
         this.binaryOutputFile = new File(path);
     }
 
+    /**
+     * Set the binary input file.
+     *
+     * @param path
+     */
     public void setBinaryInputFile(final String path) {
         this.binaryInputFile = new File(path);
     }
 
     /**
-     * Fetch a new BufferedReader using the currently set input file.
-     *
-     * @return
+    * Get the built Huffman Tree associated with this IOHandler.
+    * @return built Huffman tree.
      */
     public HuffmanTree getEncoded_tree() {
         return encoded_tree;
     }
 
+    /**
+    * Get the reconstructed. Huffman Tree associated with this IOHandler.
+     *
+     * @return reconstructed Huffman tree.
+     */
     public HuffmanTree getDecoded_tree() {
         return decoded_tree;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getEncodedMetaDataBytes() {
         return this.bitOutputStream.getMetadataBytes();
     }
 
+    /**
+     * Fetch the binary metadata associated with this IOHandler.
+     * @return
+     */
     public Metadata fetchMetadata() {
         Metadata md = this.bitInputStream.getData();
         return md;
     }
 
+    /**
+     * Returns the original file that was compressed.
+     * @return the original file.
+     */
     public File getOriginalFile() {
         return this.inputHandler.getFile();
     }
 
+    /**
+     * Returns the decompressed version of the original file.
+     * @return the decompressed file.
+     */
     public File getDecompressedFile() {
         return this.outputHandler.getFile();
     }

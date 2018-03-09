@@ -150,14 +150,27 @@ public class BitInputStream extends FileInputStream {
         this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
     }
 
+    /**
+     * Sets the quantity of 'empty bits' in the final byte.
+     * These empty bits are then ignored by the BitInputStream.
+     * @param emptyBits
+     */
     public void setEmptyBits(int emptyBits) {
         this.emptyBits = emptyBits;
     }
 
+    /**
+     * Set the FileChannel for IO.
+     */
     public final void setFileChannel() {
         this.fc = this.getChannel();
     }
 
+    /**
+     * Fetch the metadata associated with this BitInputStream
+     * @return metadata
+     * @see Metadata
+     */
     public Metadata getData() {
         return data;
     }

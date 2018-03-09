@@ -33,7 +33,7 @@ public class IOHandlerTest {
 
         instance.initialiseTextInput();
         File binaryOutputFile = new File(binaryOut);
-        instance.encodeToBinary();
+        instance.encodeTree();
         binaryOutputFile.delete();
         binaryOutputFile.createNewFile();
         assertTrue("File should be empty before writing: " + binaryOutputFile.length(), binaryOutputFile.length() == 0);

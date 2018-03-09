@@ -16,12 +16,21 @@ public class HuffmanDecompressionPerfTester extends HuffmanDecompression {
     private static final Logger LOG = Logger.getLogger(HuffmanCompressionPerfTester.class.getName());
     private List<String> results;
 
+    /**
+     * Create a compression performance tester.
+     * @param inputFilepath
+     * @param outputFilepath
+     * @param iterations
+     */
     public HuffmanDecompressionPerfTester(String inputFilepath, String outputFilepath, int iterations) {
         super(inputFilepath, outputFilepath);
         this.iterations = iterations;
         this.results = new ArrayList<>();
     }
 
+    /**
+     * Run the performance test.
+     */
     @Override
     public void run() {
         doDecompression();
@@ -48,6 +57,10 @@ public class HuffmanDecompressionPerfTester extends HuffmanDecompression {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getResults() {
         return results;
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.js.huffman.model.count;
 
 import com.js.huffman.io.BitInputStream;
@@ -16,6 +11,7 @@ import java.util.logging.Logger;
 
 /**
  * Class for decoding binary and into data structure
+ *
  * @author jack
  */
 public class HuffmanDecoder {
@@ -29,10 +25,14 @@ public class HuffmanDecoder {
 
     /**
      * Create a new HuffmanDecoder object.
-     * @param  writer                A @BufferedWriter object, containing the text output file.
-     * @param  tree                  A @HuffmanTree object, containing the codes used by this decoder.
-     * @param  extraBits             The number of extra bits in the final byte to be ignored by this decoder.
-     * @param  bitInputStream        A @BitInputStream object, containing the binary input file.
+     *
+     * @param writer A @BufferedWriter object, containing the text output file.
+     * @param tree A @HuffmanTree object, containing the codes used by this
+     * decoder.
+     * @param extraBits The number of extra bits in the final byte to be ignored
+     * by this decoder.
+     * @param bitInputStream A @BitInputStream object, containing the binary
+     * input file.
      * @throws FileNotFoundException Thrown on unexepected file errors.
      */
     public HuffmanDecoder(BufferedWriter writer, HuffmanTree tree, int extraBits, BitInputStream bitInputStream) throws FileNotFoundException {
@@ -46,26 +46,25 @@ public class HuffmanDecoder {
 
     /**
      * Decode the binary file, writing to the output file specified in the
-     * @BufferedWriter given in this class' constructor. The method is too long
-     * and will be refactored later.
+     * @BufferedWriter given in this class' constructor.
      */
     public void decode() {
         boolean decode = true;
         while (decode) {
             this.bitPos = 0;
             NodeKey[] singleByte = this.stream.readByte();
+            // if readByte returned null, we reached EOF.
             if (singleByte != null) {
+                //iterate through the bits in the read byte.
                 while (this.bitPos < 8) {
                     NodeKey bit = singleByte[bitPos];
-                    //   logger.log(Level.INFO, "bit: "+bit);
                     if (bit != NodeKey.FAKE) {
+                        //move down the tree to decode the bit sequence.
                         traverseHuffmanTree(bit);
-
                         if (this.decodeSuccessful) {
+                            //decode and write the symbol.
                             try {
-                                char c = this.tree.getSymbol();
-                                //       String msg = "Writing "+c+" to decoded file.";
-                                //    logger.log(Level.INFO, msg);
+                                char c = this.tree.getSymbolAtHead();
                                 this.writer.write(c);
                                 this.decodeSuccessful = false;
                             } catch (IOException ex) {
@@ -73,9 +72,11 @@ public class HuffmanDecoder {
                             }
                         }
                     }
+                    //go to the next bit
                     this.bitPos++;
                 }
             } else {
+                //EOF.
                 try {
                     writer.flush();
                     writer.close();

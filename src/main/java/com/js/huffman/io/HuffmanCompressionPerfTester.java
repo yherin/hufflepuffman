@@ -10,25 +10,33 @@ import java.util.logging.Logger;
  *
  * @author jack
  */
-public class HuffmanCompressionPerfTester extends HuffmanCompression {
+public final class HuffmanCompressionPerfTester extends HuffmanCompression {
 
     private final int iterations;
-    private static final Logger LOG = Logger.getLogger(HuffmanCompressionPerfTester.class.getName());
     private final List<String> results;
 
+    /**
+     * Create a compression performance tester.
+     * @param inputFilepath
+     * @param outputFilepath
+     * @param iterations
+     */
     public HuffmanCompressionPerfTester(String inputFilepath, String outputFilepath, int iterations) {
         super(inputFilepath, outputFilepath);
         this.iterations = iterations;
         this.results = new ArrayList<>();
     }
 
+    /**
+     * Run the performance test.
+     */
     @Override
-    public void run() {
+    public final void run() {
         doCompression();
     }
 
     @Override
-    protected void doCompression() {
+    protected final void doCompression() {
         long totalBuildTime = 0L;
         for (int i = 0; i < iterations; i++) {
             io.setTextInputFile(inputFilepath);
@@ -36,7 +44,7 @@ public class HuffmanCompressionPerfTester extends HuffmanCompression {
             io.initialiseTextInput();
 
             long buildDataStart = System.nanoTime();
-            io.encodeToBinary();
+            io.encodeTree();
             io.initialiseBitOutput();
             io.writeBinaryOutput();
             long buildDataEnd = System.nanoTime();
@@ -54,6 +62,10 @@ public class HuffmanCompressionPerfTester extends HuffmanCompression {
 
     }
 
+    /**
+     * Get the results of this performance tester.
+     * @return the results.
+     */
     public List<String> getResults() {
         return results;
     }
