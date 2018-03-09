@@ -10,7 +10,7 @@ Read more: https://en.wikipedia.org/wiki/Huffman_coding
 
 ## Usage
 
-Basic GUI where you can specify a file to compress or decompress. Only _absolute_ file paths are accepted. The program outputs in the following way: compressed binary gets `.huff` file extension. Decompressed files get  `originalFileNamedecomp.extension`.
+Basic GUI where you can specify a file to compress or decompress. Only _absolute_ file paths are accepted. The program outputs in the following way: compressed binary gets `.huff` file extension. Decompressed files get  `originalFileName-decomp.extension`.
 
 ## Status
 - To inspect the compressed binary, use `hexdump inputFileName.huff`
@@ -28,7 +28,11 @@ Basic GUI where you can specify a file to compress or decompress. Only _absolute
 
 [JavaDoc](https://htmlpreview.github.io/?https://github.com/yherin/hufflepuffman/blob/master/documentation/apidocs/index.html)
 
-[Specs](documentation/specification.md)
+[Implementation and test document](documentation/huffman-impl.pdf)
+
+[Latest PIT report](http://htmlpreview.github.io/?https://github.com/yherin/hufflepuffman/blob/master/documentation/PIT/201802240111/index.html)
+
+[Initial and rough specs](documentation/specification.md)
 
 [Algorithm complexity](documentation/complexity.md)
 
@@ -46,6 +50,5 @@ Basic GUI where you can specify a file to compress or decompress. Only _absolute
 
 [Working hours log](documentation/weekly-reports/log.md)
 
-[Implementation and test document](documentation/huffman-impl.pdf)
 
-[Latest PIT report](http://htmlpreview.github.io/?https://github.com/yherin/hufflepuffman/blob/master/documentation/PIT/201802240111/index.html)
+
