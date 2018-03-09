@@ -85,12 +85,13 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.8</version>
                 <configuration>
-                    <targetClasses>
-                        <param>com.js.huffman.model.*</param>
-                        <param>com.js.huffman.io.*</param>
-                    </targetClasses>
+                    <excludedClasses> 
+                        <param>com.js.huffman.FXMLController.*</param>
+                        <param>com.js.huffman.MainApp.*</param>
+                    </excludedClasses>
                     <excludedTestClasses>
                         <param>com.js.huffman.perf.*</param>
+                        <param>com.js.huffman.ui.*</param>
                     </excludedTestClasses>
                 </configuration>
             </plugin>
